@@ -269,7 +269,7 @@
     .hero-mascot-wrap {
       position: relative;
       display: inline-block;
-      background: radial-gradient(circle at 50% 55%, #1A1A2E 0%, #0C0D0F 65%, transparent 100%);
+      background: radial-gradient(circle at 50% 60%, #1E1040 0%, #0A0510 55%, rgba(10,5,16,0) 100%);
       border-radius: 50%;
       width: 280px;
       height: 280px;
@@ -277,6 +277,11 @@
       animation: mascotEntrance 1s cubic-bezier(0.34,1.2,0.64,1) 0.3s forwards,
                  mascotFloat 5s ease-in-out 1.3s infinite;
       box-shadow: 0 0 60px rgba(var(--accent-rgb),0.22), 0 0 120px rgba(var(--accent-rgb),0.08);
+    }
+
+
+    [data-theme="light"] .hero-mascot-wrap {
+      background: radial-gradient(circle at 50% 60%, #C8B89A 0%, #E8D9C0 50%, rgba(232,217,192,0) 100%);
     }
 
     .hero-mascot {
@@ -347,6 +352,27 @@
     .char-card.scarlet .char-mech-img { object-position: center 10%; transform: scale(1.1); }
     .char-card:hover .char-mech-img { opacity: 1; transform: scale(1.0); transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94); }
 
+
+    /* Subscriber Zero 섹션: 항상 다크 팔레트 (배경이 어두우므로) */
+    #games .game-status,
+    #games .game-title-sup,
+    #games .game-title-en,
+    #games .game-title-kr,
+    #games .game-desc,
+    #games .game-chip,
+    #games .game-inspired,
+    #games .btn-ghost,
+    #games .btn-fill { color: inherit; }
+
+    [data-theme="light"] #games .game-title-en { color: #F0EEE8; }
+    [data-theme="light"] #games .game-title-kr { color: rgba(240,238,232,0.7); }
+    [data-theme="light"] #games .game-title-sup { color: var(--accent); }
+    [data-theme="light"] #games .game-desc { color: rgba(240,238,232,0.75); }
+    [data-theme="light"] #games .game-chip { color: rgba(240,238,232,0.6); border-color: rgba(240,238,232,0.25); }
+    [data-theme="light"] #games .game-inspired { color: rgba(240,238,232,0.4); }
+    [data-theme="light"] #games .game-inspired a { color: rgba(240,238,232,0.55); }
+    [data-theme="light"] #games .btn-ghost { color: #F0EEE8; border-color: rgba(240,238,232,0.4); }
+
     /* ── Character art zone ── */
     .char-art {
       position: relative;
@@ -374,10 +400,15 @@
       transform: scale(1.05);
     }
 
-    /* AURORA-B: face is center of image, use center positioning */
+
+    /* VOID 메크: 캐릭터 배경과 통일된 딥 퍼플 */
+    .char-card.void .char-art { background: #0D0818; }
+    .char-card.void .char-mech-img { background: #0D0818; }
+
+    /* AURORA-B: scale down + position face at top third */
     .char-card.aurora .char-body-img {
-      object-position: center 22%;
-      transform: scale(1.45);
+      object-position: 50% 18%;
+      transform: scale(1.2);
     }
 
     /* SCARLET-B: extreme close-up face — center it at same vertical level */
@@ -389,7 +420,7 @@
     /* Hover states */
     .char-card:hover .char-body-img         { transform: scale(1.06) translateY(-4px); }
     .char-card.void:hover .char-body-img    { transform: scale(1.10) translateY(-4px); }
-    .char-card.aurora:hover .char-body-img  { transform: scale(1.5) translateY(-2%); }
+    .char-card.aurora:hover .char-body-img  { transform: scale(1.25) translateY(-2%); }
     .char-card.scarlet:hover .char-body-img { transform: scale(1.10) translateY(-4px); }
 
     .char-art-fade {
@@ -454,15 +485,7 @@
     }
 
     /* ── Game showcase bg image ── */
-    .game-stage-photo {
-      position: absolute;
-      inset: 0;
-      background: url('assets/main_menu_bg.png') center 40%/cover no-repeat;
-      opacity: 0.28;
-      transition: opacity 0.5s;
-    }
-    .game-stage:hover .game-stage-photo { opacity: 0.34; }
-    [data-theme="light"] .game-stage-photo { opacity: 0.08; }
+
 
 
     /* Wishlist flip buttons */
@@ -562,13 +585,19 @@
     }
 
     .nav-logo img.logo-horiz {
-      height: 44px;
+      height: 36px;
       width: auto;
       object-fit: contain;
       display: block;
       transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;
       opacity: 0.95;
+      background: transparent;
     }
+    /* 다크모드: Logo_Black_Horizontal — screen blend로 흰 배경 제거 */
+    :not([data-theme]) .nav-logo img.logo-horiz { mix-blend-mode: screen; }
+    [data-theme="dark"]  .nav-logo img.logo-horiz { mix-blend-mode: screen; }
+    /* 라이트모드: Logo_White_Horizontal — blend 없이 그대로 */
+    [data-theme="light"] .nav-logo img.logo-horiz { mix-blend-mode: normal; }
 
     .nav-logo:hover img.logo-horiz {
       transform: scale(1.03);
@@ -640,7 +669,7 @@
       transform: translate(-50%, 40%);
       opacity: 0;
       white-space: nowrap;
-      font-size: 12px;
+      font-size: 10px;
       letter-spacing: 0.1em;
       color: var(--accent);
     }
@@ -843,17 +872,17 @@
     .studio-wrap { position: relative; z-index: 1; }
 
     [data-theme="light"] .studio-mech-bg {
-      opacity: 0.07;
-      filter: saturate(0.2) brightness(0.5) contrast(1.1);
+      opacity: 0.14;
+      filter: saturate(0.35) brightness(0.6) contrast(1.05);
     }
 
     .studio-wrap {
       max-width: var(--max-w);
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 5fr 4fr;
-      gap: 64px;
-      align-items: center;
+      grid-template-columns: 4fr 5fr;
+      gap: 48px;
+      align-items: start;
     }
 
     .studio-stats {
@@ -871,23 +900,28 @@
 
     .stat-cell {
       background: var(--bg-2);
-      padding: 36px 32px;
+      padding: 40px 28px;
+      min-width: 0;
+    }
+    .stat-cell:last-child {
+      min-width: 0;
     }
 
     .stat-n {
       font-family: var(--f-display);
-      font-size: 60px;
+      font-size: clamp(44px, 4.5vw, 68px);
       line-height: 1;
       color: var(--accent);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .stat-label {
       font-family: var(--f-ui);
       font-size: 12px;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--txt-2);
+      line-height: 1.5;
     }
 
 
@@ -958,38 +992,30 @@
        GAME SHOWCASE
     ============================================ */
     #games {
-      background: var(--bg-0);
       padding: 0;
       overflow: hidden;
     }
 
     .game-stage {
       position: relative;
-      background: var(--bg-0);
+      background: #080C14;
       min-height: 88vh;
       display: flex;
       align-items: flex-end;
       overflow: hidden;
     }
 
+    /* 배경 이미지 — 다크/라이트 모드 통일 */
     .game-stage-bg {
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse 60% 70% at 80% 35%, rgba(76,201,240,0.07) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 60% at 20% 70%, rgba(131,56,236,0.06) 0%, transparent 55%);
+      background: url('assets/main_menu_bg.png') center 40%/cover no-repeat;
+      opacity: 0.55;
+      transition: opacity 0.5s;
     }
 
-    .game-stage-grid {
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--line-0) 1px, transparent 1px),
-        linear-gradient(90deg, var(--line-0) 1px, transparent 1px);
-      background-size: 56px 56px;
-      opacity: 0.25;
-    }
-    [data-theme="light"] .game-stage-grid { opacity: 0.4; }
+    /* 격자 제거 */
+    .game-stage-grid { display: none; }
 
     .game-stage-content {
       position: relative;
@@ -1234,6 +1260,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
+      padding-top: 0;
       overflow: hidden;
     }
 
@@ -1257,7 +1284,7 @@
     .world-header {
       position: relative;
       z-index: 2;
-      padding: 80px var(--pad-x) 56px;
+      padding: 16px var(--pad-x) 20px;
       max-width: var(--max-w);
       margin: 0 auto;
       width: 100%;
@@ -1311,11 +1338,11 @@
     .zone-enemy-art {
       width: 100%;
       aspect-ratio: 3/4;
-      object-fit: cover;
-      object-position: top;
+      object-fit: contain;
+      object-position: center bottom;
       margin-bottom: 20px;
       display: block;
-      filter: saturate(0.8) brightness(0.9);
+      filter: saturate(0.85) brightness(0.95);
       transition: filter 0.4s, transform 0.4s;
     }
     .zone-card:hover .zone-enemy-art {
@@ -1914,6 +1941,30 @@
       footer { flex-direction: column; gap: 10px; }
       .footer-top { flex-direction: column; align-items: flex-start; gap: 12px; }
       .world-zones { grid-template-columns: 1fr 1fr; }
+
+      /* 모바일: 게임 배경 이미지를 우측 중앙에 크게 노출 */
+      .game-stage {
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+      .game-stage-bg {
+        background-position: 70% 40%;
+        opacity: 0.7;
+      }
+      /* 좌→하 그라디언트로 교체: 하단 텍스트 가독성 보장 */
+      .game-stage > div[style*="linear-gradient"] {
+        background: linear-gradient(to top,
+          rgba(8,12,20,0.95) 0%,
+          rgba(8,12,20,0.65) 45%,
+          rgba(8,12,20,0.10) 100%) !important;
+      }
+      .game-stage-content {
+        padding: 40px 24px 56px;
+        max-width: 100%;
+      }
+      .game-title-en { font-size: clamp(52px, 14vw, 80px); }
     }
 
     /* ── Motion accessibility ── */
@@ -2048,7 +2099,7 @@
           <div class="stat-label">Cards Designed</div>
         </div>
         <div class="stat-cell">
-          <div class="stat-n" style="font-size:clamp(28px,3.5vw,52px);line-height:1;white-space:nowrap;">05<span style="color:var(--txt-2);font-size:0.6em;margin:0 0.15em">&amp;</span>10<span style="font-size:0.45em;vertical-align:super;color:var(--txt-1)">+</span></div>
+          <div class="stat-n">10<span style="font-size:0.5em;vertical-align:super;color:var(--txt-1)">+</span></div>
           <div class="stat-label">Zones &amp; Bosses</div>
         </div>
       </div>
@@ -2101,8 +2152,7 @@
   <section id="games">
     <div class="game-stage">
       <div class="game-stage-bg"></div>
-      <div class="game-stage-photo"></div>
-      <div class="game-stage-grid"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(8,12,20,0.88) 0%, rgba(8,12,20,0.55) 50%, rgba(8,12,20,0.20) 100%);z-index:1;pointer-events:none;"></div>
       <div class="game-stage-content reveal">
         <div class="game-status">
           <span class="status-pulse"></span>
@@ -2256,35 +2306,35 @@
     </div>
     <div class="world-zones reveal">
       <div class="zone-card" style="--zone-color: #B8860B;">
-        <img src="assets/zone1_wasteland_enforcer.png" alt="Zone 1 enemy" class="zone-enemy-art">
+        <img src="assets/zone_enemies/zone1_wasteland_enforcer.png" alt="Zone 1 enemy" class="zone-enemy-art">
         <p class="zone-num">ZONE 01</p>
         <h3 class="zone-name">The Wasteland Signal</h3>
         <p class="zone-flavor">A graveyard of dead broadcasts. The first streamers who entered never made it past here. Their setups are still running.</p>
         <p class="zone-enemy-name">Wasteland Enforcer</p>
       </div>
       <div class="zone-card" style="--zone-color: #2D8B55;">
-        <img src="assets/zone2_resonance_beast.png" alt="Zone 2 enemy" class="zone-enemy-art">
+        <img src="assets/zone_enemies/zone2_resonance_beast.png" alt="Zone 2 enemy" class="zone-enemy-art">
         <p class="zone-num">ZONE 02</p>
         <h3 class="zone-name">The Cursed Forest Feed</h3>
         <p class="zone-flavor">The trees here move between frames. The chat logs show timestamps that don't exist. Something is routing the signal through the roots.</p>
         <p class="zone-enemy-name">Resonance Beast</p>
       </div>
       <div class="zone-card" style="--zone-color: #8338EC;">
-        <img src="assets/zone3_void_stalker.png" alt="Zone 3 enemy" class="zone-enemy-art">
+        <img src="assets/zone_enemies/zone3_void_stalker.png" alt="Zone 3 enemy" class="zone-enemy-art">
         <p class="zone-num">ZONE 03</p>
         <h3 class="zone-name">The Abyss Channel</h3>
         <p class="zone-flavor">Pressure starts behaving differently here. Viewers stop sending messages and start sending something else. The Stalker has been watching you since Zone 1.</p>
         <p class="zone-enemy-name">Void Stalker</p>
       </div>
       <div class="zone-card" style="--zone-color: #E63946;">
-        <img src="assets/zone4_void_herald.png" alt="Zone 4 enemy" class="zone-enemy-art">
+        <img src="assets/zone_enemies/zone4_void_herald.png" alt="Zone 4 enemy" class="zone-enemy-art">
         <p class="zone-num">ZONE 04</p>
         <h3 class="zone-name">The Corrupted Archive</h3>
         <p class="zone-flavor">V40's last broadcast originated here. The timestamp loops. Every streamer who watches the clip sees something different in the background. Nobody talks about what.</p>
         <p class="zone-enemy-name">Void Herald</p>
       </div>
-      <div class="zone-card" style="--zone-color: #FFD700;">
-        <img src="assets/zone5_broadcast_fragment.png" alt="Zone 5 enemy" class="zone-enemy-art">
+      <div class="zone-card" style="--zone-color: #C8922A;">
+        <img src="assets/zone_enemies/zone5_broadcast_fragment.png" alt="Zone 5 enemy" class="zone-enemy-art">
         <p class="zone-num">ZONE 05</p>
         <h3 class="zone-name">The Final Broadcast</h3>
         <p class="zone-flavor">The chat here is filled with names you recognize. Streamers who came before you. They are still typing. They never stopped.</p>
@@ -2299,7 +2349,7 @@
   <section id="founder">
     <div class="founder-wrap">
       <div class="founder-img reveal">
-        <img src="assets/headshot.JPG" alt="JJ Park" style="width:100%;height:100%;object-fit:cover;object-position:top center;">
+        <img src="assets/headshot.png" alt="JJ Park" style="width:100%;height:100%;object-fit:cover;object-position:top center;">
       </div>
       <div class="reveal">
         <span class="eyebrow">The Founder</span>
@@ -2347,7 +2397,7 @@
         <!-- Entry 001 -->
         <a href="#" class="devlog-card">
           <div class="entry-thumb">
-            <img src="assets/SCARLET-B.png" alt="Scarlet action">
+            <img src="assets/aurora_mech.png" alt="Aurora mech" style="object-position: center top;">
             <div class="entry-thumb-overlay"></div>
           </div>
           <div class="entry-num">001</div>
@@ -2443,7 +2493,8 @@
         <span class="eyebrow">Get in Touch</span>
         <h2 class="display-lg">Let's Talk</h2>
         <p class="body-copy" style="margin-top:20px">For press inquiries, collaboration proposals, or genuine conversation about games - I read every message personally.</p>
-        <a href="mailto:jaejunpark0314@gmail.com" class="contact-email"><span class="__cf_email__" data-cfemail="a1cbc0c4cbd4cfd1c0d3ca91929095e1c6ccc0c8cd8fc2cecc">[email&#160;protected]</span></a>
+        <p style="font-family:var(--f-ui);font-size:12px;color:var(--txt-2);margin-top:10px;letter-spacing:0.04em;">Information shared by email is used only to respond to your inquiry and is never sold or shared.</p>
+        <a href="mailto:jaejunpark0314@gmail.com" class="contact-email">jaejunpark0314@gmail.com</a>
         <div class="link-list">
           <a href="https://twitter.com/parkdeomes" class="link-item" target="_blank" rel="noopener">
             <span class="link-name">Twitter / X</span>
@@ -2477,27 +2528,54 @@
     </div>
   </section>
 
+  <!-- PRIVACY POLICY MODAL -->
+  <div id="privacy-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:9999;align-items:center;justify-content:center;padding:24px;" onclick="if(event.target===this)this.style.display='none'">
+    <div style="background:var(--bg-1);border:1px solid var(--line-1);max-width:640px;width:100%;max-height:80vh;overflow-y:auto;padding:48px;position:relative;">
+      <button onclick="document.getElementById('privacy-modal').style.display='none'" style="position:absolute;top:20px;right:24px;background:none;border:none;color:var(--txt-2);font-size:22px;cursor:pointer;line-height:1;">&times;</button>
+      <p style="font-family:var(--f-ui);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;">Legal</p>
+      <h2 style="font-family:var(--f-display);font-size:32px;color:var(--txt-0);margin-bottom:32px;">Privacy Policy</h2>
+      <p style="font-family:var(--f-ui);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--txt-2);margin-bottom:24px;">Last updated: March 2026 &nbsp;&middot;&nbsp; PARKDEOMES LLC</p>
+
+      <h3 style="font-family:var(--f-ui);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--txt-0);margin-bottom:10px;">Information We Collect</h3>
+      <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:24px;">We collect limited personal information, such as your name and email address, only when you voluntarily contact us through email. This site does not use contact forms, analytics services, advertising trackers, or cookies beyond what is necessary for basic site functionality.</p>
+
+      <h3 style="font-family:var(--f-ui);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--txt-0);margin-bottom:10px;">How We Use It</h3>
+      <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:24px;">Information submitted through email contact is used solely to respond to your inquiry. We do not sell, rent, or share your personal information with third parties.</p>
+
+      <h3 style="font-family:var(--f-ui);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--txt-0);margin-bottom:10px;">Children</h3>
+      <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:24px;">This website is intended for general audiences. We do not knowingly collect personal information from children under 13. If you believe a child has submitted information to us, please contact us and we will promptly delete it.</p>
+
+      <h3 style="font-family:var(--f-ui);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--txt-0);margin-bottom:10px;">Third-Party References</h3>
+      <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:24px;">All trademarks and game titles referenced on this site are the property of their respective owners and are used solely to describe prior professional experience. This site is not affiliated with or endorsed by any third-party trademark holder.</p>
+
+      <h3 style="font-family:var(--f-ui);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--txt-0);margin-bottom:10px;">Contact</h3>
+      <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:0;">Questions about this policy? Contact us at <a href="mailto:jaejunpark0314@gmail.com" style="color:var(--accent);">jaejunpark0314@gmail.com</a></p>
+    </div>
+  </div>
+
   <!-- ============================================
        FOOTER
   ============================================ -->
   <footer>
     <div class="footer-top">
       <a href="#" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
-        <img src="assets/Mouse_transparent.png" alt="PARK-DEOMES STUDIOS" style="height:40px;width:40px;object-fit:contain;mix-blend-mode:screen;">
+        <img src="assets/Mouse_transparent.png" alt="PARK-DEOMES STUDIOS" style="height:60px;width:60px;object-fit:contain;">
         <span class="footer-brand">PARK-DEOMES STUDIOS &nbsp;&middot;&nbsp; &copy; 2026 PARKDEOMES LLC</span>
       </a>
       <div class="footer-links">
         <a href="https://www.linkedin.com/in/jjpark1/" class="footer-link" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://twitter.com/parkdeomes" class="footer-link" target="_blank" rel="noopener">Twitter</a>
         <a href="mailto:jaejunpark0314@gmail.com" class="footer-link">Email</a>
+        <a href="#privacy" class="footer-link" onclick="document.getElementById('privacy-modal').style.display='flex';return false;">Privacy Policy</a>
       </div>
     </div>
     <p class="footer-studio-line">Independent game studio founded by JJ Park.</p>
     <p class="footer-legal">
       PARKDEOMES LLC, doing business as PARK-DEOMES STUDIOS. &nbsp;
-      All trademarks and game titles mentioned on this site belong to their respective owners and are used only to describe prior professional experience. &nbsp;
-      Visual concepts and art materials were created using AI-assisted workflows. All creative direction and final selection were performed by the author. &nbsp;
-      Proprietary internal materials from prior employers are not reproduced on this site.
+      All trademarks, game titles, and brand names mentioned on this site are the property of their respective owners and are referenced solely to describe prior professional experience. &nbsp;
+      Visual concepts and art materials were produced using AI-assisted workflows; all creative direction and final selection were performed by the author. &nbsp;
+      Proprietary internal materials from prior employers are not reproduced on this site. &nbsp;
+      This website is intended for general audiences and does not knowingly collect personal information from children under 13.
     </p>
   </footer>
 
@@ -2505,149 +2583,68 @@
        SCRIPTS
   ============================================ -->
   <script>
-    // NAV scroll state
     const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('solid', window.scrollY > 64);
-    }, { passive: true });
-
-    // REVEAL on scroll
+    window.addEventListener('scroll', () => { nav.classList.toggle('solid', window.scrollY > 64); }, { passive: true });
     const reveals = document.querySelectorAll('.reveal');
     const ro = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('up');
-          ro.unobserve(e.target);
-        }
-      });
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('up'); ro.unobserve(e.target); } });
     }, { threshold: 0.08, rootMargin: '0px 0px -48px 0px' });
     reveals.forEach(el => ro.observe(el));
-
-    // HERO CANVAS — broadcast signal particles
     const canvas = document.getElementById('hero-canvas');
     const ctx = canvas.getContext('2d');
     const isDark = () => document.documentElement.getAttribute('data-theme') !== 'light';
-
     const COLORS_DARK  = [[200,146,42],[232,184,75],[168,181,196],[232,192,184]];
     const COLORS_LIGHT = [[160,110,26],[200,146,42],[107,122,141],[168,140,120]];
     let W, H, pts;
-
-    function resize() {
-      W = canvas.width  = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-      init();
-    }
-
-    function init() {
-      const n = Math.floor((W * H) / 16000);
-      pts = Array.from({ length: n }, () => mkPt());
-    }
-
+    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; init(); }
+    function init() { const n = Math.floor((W*H)/16000); pts = Array.from({length:n},()=>mkPt()); }
     function mkPt() {
       const colors = isDark() ? COLORS_DARK : COLORS_LIGHT;
-      const c = colors[Math.floor(Math.random() * colors.length)];
-      return {
-        x: Math.random() * W,
-        y: H + Math.random() * 40,
-        vx: (Math.random() - 0.5) * 0.28,
-        vy: -(Math.random() * 0.45 + 0.08),
-        r:  Math.random() * 1.4 + 0.2,
-        a:  Math.random() * 0.45 + 0.08,
-        c:  c,
-        life: 0,
-        maxLife: 0.65 + Math.random() * 0.35,
-      };
+      const c = colors[Math.floor(Math.random()*colors.length)];
+      return {x:Math.random()*W,y:H+Math.random()*40,vx:(Math.random()-0.5)*0.28,vy:-(Math.random()*0.45+0.08),r:Math.random()*1.4+0.2,a:Math.random()*0.45+0.08,c:c,life:0,maxLife:0.65+Math.random()*0.35};
     }
-
     function frame() {
-      ctx.clearRect(0, 0, W, H);
-
-      ctx.strokeStyle = 'rgba(30,43,62,0.35)';
-      ctx.lineWidth = 0.4;
-      const step = 60;
-      for (let x = 0; x < W; x += step) {
-        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
-      }
-      for (let y = 0; y < H; y += step) {
-        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
-      }
-
-      const ri = isDark() ? 200 : 160, gi = isDark() ? 146 : 110, bi = isDark() ? 42 : 26;
-      const grd = ctx.createRadialGradient(W*0.5, H*0.55, 0, W*0.5, H*0.55, H*0.7);
-      grd.addColorStop(0,   `rgba(${ri},${gi},${bi},0.07)`);
-      grd.addColorStop(0.4, `rgba(${ri},${gi},${bi},0.03)`);
-      grd.addColorStop(1,   'rgba(0,0,0,0)');
-      ctx.fillStyle = grd;
-      ctx.fillRect(0, 0, W, H);
-
-      pts.forEach((p, i) => {
-        p.life += 0.006;
-        if (p.life >= p.maxLife || p.y < -12) { pts[i] = mkPt(); return; }
-        const t = p.life / p.maxLife;
-        const fade = Math.sin(t * Math.PI) * p.a;
-        const [r, g, b] = p.c;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${r},${g},${b},${fade})`;
-        ctx.fill();
-
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(p.x + p.vx * 10, p.y + p.vy * 10);
-        ctx.strokeStyle = `rgba(${r},${g},${b},${fade * 0.28})`;
-        ctx.lineWidth = p.r * 0.6;
-        ctx.stroke();
-
-        p.x += p.vx;
-        p.y += p.vy;
+      ctx.clearRect(0,0,W,H);
+      ctx.strokeStyle='rgba(30,43,62,0.35)'; ctx.lineWidth=0.4;
+      const step=60;
+      for(let x=0;x<W;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+      for(let y=0;y<H;y+=step){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+      const ri=isDark()?200:160,gi=isDark()?146:110,bi=isDark()?42:26;
+      const grd=ctx.createRadialGradient(W*0.5,H*0.55,0,W*0.5,H*0.55,H*0.7);
+      grd.addColorStop(0,`rgba(${ri},${gi},${bi},0.07)`);grd.addColorStop(0.4,`rgba(${ri},${gi},${bi},0.03)`);grd.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=grd;ctx.fillRect(0,0,W,H);
+      pts.forEach((p,i)=>{
+        p.life+=0.006;
+        if(p.life>=p.maxLife||p.y<-12){pts[i]=mkPt();return;}
+        const t=p.life/p.maxLife,fade=Math.sin(t*Math.PI)*p.a,[r,g,b]=p.c;
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(${r},${g},${b},${fade})`;ctx.fill();
+        ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x+p.vx*10,p.y+p.vy*10);
+        ctx.strokeStyle=`rgba(${r},${g},${b},${fade*0.28})`;ctx.lineWidth=p.r*0.6;ctx.stroke();
+        p.x+=p.vx;p.y+=p.vy;
       });
-
       requestAnimationFrame(frame);
     }
-
-    window.addEventListener('resize', resize, { passive: true });
-    resize();
-    frame();
-
-    // THEME TOGGLE
+    window.addEventListener('resize', resize, {passive:true});
+    resize(); frame();
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon   = document.getElementById('theme-icon');
     const root        = document.documentElement;
-
     function applyTheme(mode) {
-      if (mode === 'light') {
-        root.setAttribute('data-theme', 'light');
-        themeIcon.innerHTML = '&#9788;';
-        localStorage.setItem('pd-theme', 'light');
-      } else {
-        root.removeAttribute('data-theme');
-        themeIcon.innerHTML = '&#9790;';
-        localStorage.setItem('pd-theme', 'dark');
-      }
+      if (mode==='light') { root.setAttribute('data-theme','light'); themeIcon.innerHTML='&#9788;'; localStorage.setItem('pd-theme','light'); }
+      else { root.removeAttribute('data-theme'); themeIcon.innerHTML='&#9790;'; localStorage.setItem('pd-theme','dark'); }
     }
-
     const saved = localStorage.getItem('pd-theme');
-    if (saved) {
-      applyTheme(saved);
-    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-      applyTheme('light');
-    }
-
+    if (saved) { applyTheme(saved); }
+    else if (window.matchMedia('(prefers-color-scheme: light)').matches) { applyTheme('light'); }
     themeToggle.addEventListener('click', () => {
-      applyTheme(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+      applyTheme(root.getAttribute('data-theme')==='light' ? 'dark' : 'light');
     });
-
-    // SMOOTH SCROLL
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       const href = a.getAttribute('href');
-      if (href === '#') return;
+      if (href==='#') return;
       a.addEventListener('click', e => {
         const target = document.querySelector(href);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        if (target) { e.preventDefault(); target.scrollIntoView({behavior:'smooth',block:'start'}); }
       });
     });
   </script>
