@@ -316,8 +316,8 @@
     .hero-bg-room:nth-child(3) { animation-delay: -12s; }
     @keyframes heroSlide {
       0%   { opacity: 0; }
-      8%   { opacity: 0.38; }
-      33%  { opacity: 0.38; }
+      8%   { opacity: 0.50; }
+      33%  { opacity: 0.50; }
       41%  { opacity: 0; }
       100% { opacity: 0; }
     }
@@ -421,7 +421,7 @@
     .game-stage-photo {
       position: absolute;
       inset: 0;
-      background: url('assets/main_menu_bg.png') center 40%/cover no-repeat;
+      background: url('assets/VOID-C.png') center 30%/cover no-repeat;
       opacity: 0.28;
       transition: opacity 0.5s;
     }
@@ -469,10 +469,11 @@
 
 
     /* Logo dark/light switching */
-    .logo-dark-mode  { display: block; }
-    .logo-light-mode { display: none;  }
-    [data-theme="light"] .logo-dark-mode  { display: none;  }
-    [data-theme="light"] .logo-light-mode { display: block; }
+    .logo-horiz { display: none !important; }
+    .logo-dark-mode  { display: block !important; }
+    .logo-light-mode { display: none  !important; }
+    [data-theme="light"] .logo-dark-mode  { display: none  !important; }
+    [data-theme="light"] .logo-light-mode { display: block !important; }
 
     /* Theme toggle */
     #theme-toggle {
@@ -547,7 +548,7 @@
     .nav-links {
       list-style: none;
       display: flex;
-      gap: 40px;
+      gap: 28px;
     }
 
     .nav-links a {
@@ -1176,8 +1177,8 @@
     .world-stage-bg {
       position: absolute;
       inset: 0;
-      background: url('assets/main_menu_bg.png') center/cover no-repeat;
-      opacity: 0.15;
+      background: url('assets/AURORA-C.png') center/cover no-repeat;
+      opacity: 0.18;
     }
 
     .world-stage-vignette {
@@ -1693,7 +1694,7 @@
       background: linear-gradient(135deg, var(--accent-dim), rgba(var(--accent-rgb),0.04));
       border: 1px solid rgba(var(--accent-rgb),0.22);
       padding: 36px;
-      text-align: center;
+      text-align: left;
     }
 
     .wishlist-box p {
@@ -1792,6 +1793,45 @@
     /* ============================================
        RESPONSIVE
     ============================================ */
+    /* Nav priority classes — all hidden by default, shown per breakpoint */
+    .nav-p2, .nav-p3, .nav-p4, .nav-p5, .nav-p6 { display: none; }
+
+    /* 7 items: all visible ≥ 1200px */
+    @media (min-width: 1200px) {
+      .nav-p2, .nav-p3, .nav-p4, .nav-p5, .nav-p6 { display: list-item; }
+      .nav-links { gap: 28px; }
+    }
+
+    /* 6 items: hide Press (p6) at 1100–1199px */
+    @media (min-width: 1100px) and (max-width: 1199px) {
+      .nav-p2, .nav-p3, .nav-p4, .nav-p5 { display: list-item; }
+      .nav-links { gap: 22px; }
+    }
+
+    /* 5 items: hide Studio (p5) at 960–1099px */
+    @media (min-width: 960px) and (max-width: 1099px) {
+      .nav-p2, .nav-p3, .nav-p4 { display: list-item; }
+      .nav-links { gap: 18px; }
+    }
+
+    /* 4 items: hide World (p4) at 840–959px */
+    @media (min-width: 840px) and (max-width: 959px) {
+      .nav-p2, .nav-p3 { display: list-item; }
+      .nav-links { gap: 16px; }
+    }
+
+    /* 3 items: hide Status (p3) at 720–839px */
+    @media (min-width: 720px) and (max-width: 839px) {
+      .nav-p2 { display: list-item; }
+      .nav-links { gap: 16px; }
+    }
+
+    /* 2 items: Games + Contact only, hide WISHLIST at < 720px */
+    @media (max-width: 719px) {
+      .nav-links { gap: 14px; }
+      .nav-cta { display: none; }
+    }
+
     @media (max-width: 1024px) {
       :root { --pad-x: 40px; --pad-y: 96px; }
       .studio-wrap,
@@ -1800,15 +1840,17 @@
       .chars-grid,
       .devlog-grid { grid-template-columns: 1fr; }
       .style-wrap { grid-template-columns: 1fr; }
+      .dev-status-grid { grid-template-columns: repeat(3, 1fr); }
     }
 
     @media (max-width: 768px) {
       :root { --pad-x: 24px; --pad-y: 72px; }
-      .nav-links { display: none; }
       .hero-title { font-size: 80px; }
       .game-stage-content { padding: 48px 24px; }
       .devlog-header { flex-direction: column; align-items: flex-start; gap: 24px; }
-      footer { flex-direction: column; gap: 10px; text-align: center; }
+      footer { flex-direction: column; gap: 10px; }
+      .footer-top { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .world-zones { grid-template-columns: 1fr 1fr; }
     }
 
     /* ── Motion accessibility ── */
@@ -1863,13 +1905,13 @@
       <img src="assets/logo-light.png" alt="PARK-DEOMES STUDIOS" class="logo-horiz logo-light-mode">
     </a>
     <ul class="nav-links">
-      <li><a href="#games">Games</a></li>
-      <li><a href="#dev-status">Status</a></li>
-      <li><a href="#world">World</a></li>
-      <li><a href="#founder">Studio</a></li>
-      <li><a href="#devlog">Devlog</a></li>
-      <li><a href="#contact">Press</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li class="nav-p1"><a href="#games">Games</a></li>
+      <li class="nav-p3"><a href="#dev-status">Status</a></li>
+      <li class="nav-p4"><a href="#world">World</a></li>
+      <li class="nav-p5"><a href="#founder">Studio</a></li>
+      <li class="nav-p2"><a href="#devlog">Devlog</a></li>
+      <li class="nav-p6"><a href="#contact">Press</a></li>
+      <li class="nav-p1"><a href="#contact">Contact</a></li>
     </ul>
     <a href="https://store.steampowered.com" class="nav-cta" target="_blank" rel="noopener">
       <span class="cta-default">Wishlist</span>
@@ -2038,7 +2080,7 @@
         <!-- VOID -->
         <div class="char-card void">
           <div class="char-art">
-            <img src="assets/VOID-A.png" alt="VOID" class="char-body-img">
+            <img src="assets/VOID-B.png" alt="VOID" class="char-body-img">
             <div class="char-art-fade"></div>
           </div>
           <div class="char-header">
@@ -2069,7 +2111,7 @@
         <!-- AURORA -->
         <div class="char-card aurora">
           <div class="char-art">
-            <img src="assets/AURORA-A.png" alt="AURORA" class="char-body-img">
+            <img src="assets/AURORA-B.png" alt="AURORA" class="char-body-img">
             <div class="char-art-fade"></div>
           </div>
           <div class="char-header">
@@ -2100,7 +2142,7 @@
         <!-- SCARLET -->
         <div class="char-card scarlet">
           <div class="char-art">
-            <img src="assets/SCARLET-A.png" alt="SCARLET" class="char-body-img">
+            <img src="assets/SCARLET-B.png" alt="SCARLET" class="char-body-img">
             <div class="char-art-fade"></div>
           </div>
           <div class="char-header">
@@ -2147,35 +2189,35 @@
     </div>
     <div class="world-zones reveal">
       <div class="zone-card" style="--zone-color: #B8860B;">
-        <img src="assets/zone_enemies/zone1_wasteland_enforcer.png" alt="Zone 1 enemy" class="zone-enemy-art">
+        <img src="assets/zone1_wasteland_enforcer.png" alt="Zone 1 enemy" class="zone-enemy-art">
         <p class="zone-num">ZONE 01</p>
         <h3 class="zone-name">The Wasteland Signal</h3>
         <p class="zone-flavor">A graveyard of dead broadcasts. The first streamers who entered never made it past here. Their setups are still running.</p>
         <p class="zone-enemy-name">Wasteland Enforcer</p>
       </div>
       <div class="zone-card" style="--zone-color: #2D8B55;">
-        <img src="assets/zone_enemies/zone2_resonance_beast.png" alt="Zone 2 enemy" class="zone-enemy-art">
+        <img src="assets/zone2_resonance_beast.png" alt="Zone 2 enemy" class="zone-enemy-art">
         <p class="zone-num">ZONE 02</p>
         <h3 class="zone-name">The Cursed Forest Feed</h3>
         <p class="zone-flavor">The trees here move between frames. The chat logs show timestamps that don't exist. Something is routing the signal through the roots.</p>
         <p class="zone-enemy-name">Resonance Beast</p>
       </div>
       <div class="zone-card" style="--zone-color: #8338EC;">
-        <img src="assets/zone_enemies/zone3_void_stalker.png" alt="Zone 3 enemy" class="zone-enemy-art">
+        <img src="assets/zone3_void_stalker.png" alt="Zone 3 enemy" class="zone-enemy-art">
         <p class="zone-num">ZONE 03</p>
         <h3 class="zone-name">The Abyss Channel</h3>
         <p class="zone-flavor">Pressure starts behaving differently here. Viewers stop sending messages and start sending something else. The Stalker has been watching you since Zone 1.</p>
         <p class="zone-enemy-name">Void Stalker</p>
       </div>
       <div class="zone-card" style="--zone-color: #E63946;">
-        <img src="assets/zone_enemies/zone4_void_herald.png" alt="Zone 4 enemy" class="zone-enemy-art">
+        <img src="assets/zone4_void_herald.png" alt="Zone 4 enemy" class="zone-enemy-art">
         <p class="zone-num">ZONE 04</p>
         <h3 class="zone-name">The Corrupted Archive</h3>
         <p class="zone-flavor">V40's last broadcast originated here. The timestamp loops. Every streamer who watches the clip sees something different in the background. Nobody talks about what.</p>
         <p class="zone-enemy-name">Void Herald</p>
       </div>
       <div class="zone-card" style="--zone-color: #FFD700;">
-        <img src="assets/zone_enemies/zone5_broadcast_fragment.png" alt="Zone 5 enemy" class="zone-enemy-art">
+        <img src="assets/zone5_broadcast_fragment.png" alt="Zone 5 enemy" class="zone-enemy-art">
         <p class="zone-num">ZONE 05</p>
         <h3 class="zone-name">The Final Broadcast</h3>
         <p class="zone-flavor">The chat here is filled with names you recognize. Streamers who came before you. They are still typing. They never stopped.</p>
@@ -2238,7 +2280,7 @@
         <!-- Entry 001 -->
         <a href="#" class="devlog-card">
           <div class="entry-thumb">
-            <img src="assets/card_concept.png" alt="Card concepts">
+            <img src="assets/SCARLET-C.png" alt="Scarlet action">
             <div class="entry-thumb-overlay"></div>
           </div>
           <div class="entry-num">001</div>
@@ -2256,7 +2298,7 @@
         <!-- Entry 002 -->
         <a href="#" class="devlog-card">
           <div class="entry-thumb">
-            <img src="assets/concept_artworks.png" alt="Concept artworks">
+            <img src="assets/FERRO-C.png" alt="Ferro in the dungeon">
             <div class="entry-thumb-overlay"></div>
           </div>
           <div class="entry-num">002</div>
@@ -2274,7 +2316,7 @@
         <!-- Entry 003 -->
         <a href="#" class="devlog-card">
           <div class="entry-thumb">
-            <img src="assets/aurora_room.png" alt="Aurora room">
+            <img src="assets/LUMEN-C.png" alt="Lumen with lantern">
             <div class="entry-thumb-overlay"></div>
           </div>
           <div class="entry-num">003</div>
@@ -2357,7 +2399,7 @@
           <a href="mailto:jaejunpark0314@gmail.com" class="btn btn-outline">Request Press Kit</a>
         </div>
         <div class="wishlist-box">
-          <span class="eyebrow" style="justify-content:center; display:flex;">JJ Park's: Subscriber Zero</span>
+          <span class="eyebrow">JJ Park's: Subscriber Zero</span>
           <p>Currently in active development. Wishlisting on Steam helps signal to the platform algorithm that this game deserves to exist - and keeps you notified at launch.</p>
           <a href="https://store.steampowered.com" class="btn btn-fill btn-flip" target="_blank" rel="noopener">
             <span class="cta-default">Wishlist on Steam</span>
@@ -2374,12 +2416,12 @@
   <footer>
     <div class="footer-top">
       <a href="#" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
-        <img src="assets/logo-dark.png" alt="PARK-DEOMES STUDIOS" class="logo-dark-mode" style="height:34px;width:auto;object-fit:contain;display:block;">
-        <img src="assets/logo-light.png" alt="PARK-DEOMES STUDIOS" class="logo-light-mode" style="height:34px;width:auto;object-fit:contain;display:block;">
+        <img src="assets/logo-dark.png" alt="PARK-DEOMES STUDIOS" class="logo-dark-mode" style="height:34px;width:auto;object-fit:contain;">
+        <img src="assets/logo-light.png" alt="PARK-DEOMES STUDIOS" class="logo-light-mode" style="height:34px;width:auto;object-fit:contain;">
         <span class="footer-brand">PARK-DEOMES STUDIOS &nbsp;&middot;&nbsp; &copy; 2026 PARKDEOMES LLC</span>
       </a>
       <div class="footer-links">
-        <a href="https://linkedin.com/in/jaejunpark" class="footer-link" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/jjpark1/" class="footer-link" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://twitter.com/parkdeomes" class="footer-link" target="_blank" rel="noopener">Twitter</a>
         <a href="mailto:jaejunpark0314@gmail.com" class="footer-link">Email</a>
       </div>
