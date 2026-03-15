@@ -2929,7 +2929,7 @@
         <h2 class="display-lg">Let's Talk</h2>
         <p class="body-copy" style="margin-top:20px">For press inquiries, collaboration proposals, or genuine conversation about games - I read every message personally.</p>
         <p style="font-family:var(--f-ui);font-size:12px;color:var(--txt-2);margin-top:10px;letter-spacing:0.04em;">Information shared by email is used only to respond to your inquiry and is never sold or shared.</p>
-        <a href="mailto:jaejunpark0314@gmail.com" class="contact-email"><span class="__cf_email__" data-cfemail="1a707b7f706f746a7b68712a292b2e5a7d777b737634797577">[email&#160;protected]</span></a>
+        <a data-email="jaejunpark0314" data-domain="gmail.com" class="contact-email js-email">[SEND EMAIL]</a>
         <div class="link-list">
           <a href="https://twitter.com/parkdeomes" class="link-item" target="_blank" rel="noopener">
             <span class="link-name">Twitter / X</span>
@@ -2949,7 +2949,7 @@
         <div class="press-box">
           <h3>Press &amp; Media</h3>
           <p>Looking for screenshots, key art, game descriptions, or a direct conversation with the developer? Press materials available on request. Response within 48 hours.</p>
-          <a href="mailto:jaejunpark0314@gmail.com" class="btn btn-outline">Request Press Kit</a>
+          <a data-email="jaejunpark0314" data-domain="gmail.com" class="btn btn-outline js-email">Request Press Kit</a>
         </div>
         <div class="wishlist-box">
           <span class="eyebrow">JJ Park's: Subscriber Zero</span>
@@ -2984,7 +2984,7 @@
       <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:24px;">All trademarks and game titles referenced on this site are the property of their respective owners and are used solely to describe prior professional experience. This site is not affiliated with or endorsed by any third-party trademark holder.</p>
 
       <h3 style="font-family:var(--f-ui);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--txt-0);margin-bottom:10px;">Contact</h3>
-      <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:0;">Questions about this policy? Please contact us at <a href="mailto:jaejunpark0314@gmail.com" style="color:var(--accent);"><span class="__cf_email__" data-cfemail="cea4afaba4bba0beafbca5fefdfffa8ea9a3afa7a2e0ada1a3">[email&#160;protected]</span></a>.</p>
+      <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:0;">Questions about this policy? Please contact us at <a data-email="jaejunpark0314" data-domain="gmail.com" style="color:var(--accent);" class="js-email">jaejunpark0314@gmail.com</a>.</p>
     </div>
   </div>
 
@@ -3000,7 +3000,7 @@
       <div class="footer-links">
         <a href="https://www.linkedin.com/in/jjpark1/" class="footer-link" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://twitter.com/parkdeomes" class="footer-link" target="_blank" rel="noopener">Twitter</a>
-        <a href="mailto:jaejunpark0314@gmail.com" class="footer-link">Email</a>
+        <a data-email="jaejunpark0314" data-domain="gmail.com" class="footer-link js-email">Email</a>
         <a href="#privacy" class="footer-link" onclick="document.getElementById('privacy-modal').style.display='flex';return false;">Privacy Policy</a>
       </div>
     </div>
@@ -3114,6 +3114,16 @@
         }
       }, { passive: true });
     });
+
+    // EMAIL: Cloudflare 난독화 우회 — JS로 동적 복원
+    document.querySelectorAll('.js-email').forEach(el => {
+      const user   = el.getAttribute('data-email');
+      const domain = el.getAttribute('data-domain');
+      if (user && domain) {
+        el.href = 'mai' + 'lto:' + user + '@' + domain;
+      }
+    });
+
 
     // BGM PLAYER
     const audio     = document.getElementById('battle-music');
