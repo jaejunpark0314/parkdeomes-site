@@ -1,0 +1,2547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JJ Park's: Subscriber Zero | PARK-DEOMES STUDIOS</title>
+  <meta name="description" content="PARKDEOMES is an independent game studio founded by JJ Park, a product marketing leader behind global AAA launches including Civilization and NBA 2K. Currently developing JJ Park's: Subscriber Zero.">
+  <meta property="og:title" content="PARK-DEOMES STUDIOS">
+  <meta property="og:description" content="Independent game studio. Currently developing Subscriber Zero.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://parkdeomes.com">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="icon" href="assets/mouse.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/mouse.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Barlow:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================
+       RESET & ROOT
+    ============================================ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ── Mascot-derived brand palette ── */
+    :root {
+      /* Mascot core colors */
+      --m-gray:       #A8B5C4;   /* body */
+      --m-gray-dk:    #6B7A8D;   /* outline */
+      --m-gray-lt:    #D4DCE6;   /* ear highlight */
+      --m-gold:       #C8922A;   /* horn / bell base */
+      --m-gold-lt:    #E8B84B;   /* horn tip shine */
+      --m-gold-dim:   rgba(200,146,42,0.12);
+      --m-pink:       #E8C0B8;   /* inner ear */
+      --m-pink-lt:    #F5DDD8;
+      --m-cream:      #F0E8D8;   /* tiny fang / paw */
+
+      /* Dark mode (default) — deep navy-black, SZ atmosphere */
+      --bg-0:    #080C14;   /* deepest: almost black with navy undertone */
+      --bg-1:    #0D1220;   /* primary background */
+      --bg-2:    #131929;   /* panels */
+      --bg-3:    #1B2235;   /* raised panels */
+      --bg-4:    #222C40;   /* hover states */
+      --line-0:  #1E2B3E;   /* subtle border */
+      --line-1:  #2E4058;   /* active border */
+      --txt-0:   #EAF0F6;   /* primary text — cool white */
+      --txt-1:   #7A92A8;   /* secondary text */
+      --txt-2:   #3E5468;   /* muted / disabled */
+
+      /* Brand accent = mascot gold (FIXED across all modes) */
+      --accent:      #C8922A;
+      --accent-lt:   #E8B84B;
+      --accent-dim:  rgba(200,146,42,0.13);
+      --accent-rgb:  200,146,42;
+
+      /* Game character colors (unchanged) */
+      --void:        #C77DFF;
+      --void-dk:     #7B2FBE;
+      --void-dim:    rgba(199,125,255,0.07);
+      --aurora:      #90E0EF;
+      --aurora-dk:   #00B4D8;
+      --aurora-dim:  rgba(144,224,239,0.07);
+      --scarlet:     #FF6B6B;
+      --scarlet-dk:  #E63946;
+      --scarlet-dim: rgba(255,107,107,0.07);
+      --pressure:    #8338EC;
+
+      --f-display:  'Bebas Neue', sans-serif;
+      --f-barlow:   'Barlow', sans-serif;
+      --mascot-gold: var(--m-gold);
+      --mascot-gold-lt: #E8B84B;
+      --f-ui:       'Syne', sans-serif;
+      --f-body:     'DM Mono', monospace;
+
+      --max-w: 1200px;
+      --pad-x: 64px;
+      --pad-y: 128px;
+    }
+
+
+    /* Light mode */
+    [data-theme="light"] {
+      /* Light mode — logo's cream-white + logo's deep navy text */
+      --bg-0:    #F6F4F0;   /* cream white (matches logo background feel) */
+      --bg-1:    #EEEAE3;   /* warm off-white */
+      --bg-2:    #E5E0D6;   /* card surfaces */
+      --bg-3:    #D9D3C6;   /* raised elements */
+      --bg-4:    #CCC5B4;   /* hover states */
+      --line-0:  #CCC5B8;   /* subtle borders */
+      --line-1:  #A8A090;   /* active borders */
+      --txt-0:   #1E2B4A;   /* logo's deep navy — primary text */
+      --txt-1:   #4A5A78;   /* mid navy — secondary text */
+      --txt-2:   #7A8AA0;   /* muted navy */
+
+      /* Gold IDENTICAL to dark mode — the brand anchor */
+      --accent:      #C8922A;
+      --accent-lt:   #E8B84B;
+      --accent-dim:  rgba(200,146,42,0.12);
+      --accent-rgb:  200,146,42;
+    }
+
+
+    /* DM Mono — metadata, labels, stats, code-like elements */
+    .hero-badge,
+    .hero-byline,
+    .stat-n,
+    .stat-label,
+    .dev-cell-label,
+    .dev-cell-value,
+    .dev-status-note,
+    .timeline-co,
+    .timeline-detail,
+    .char-row-label,
+    .char-row-val,
+    .game-status,
+    .zone-num,
+    .zone-enemy-name,
+    .entry-date,
+    .footer-legal,
+    .footer-note { font-family: var(--f-body); }
+
+    html { scroll-behavior: smooth; font-size: 17px; }
+
+    body {
+      background: var(--bg-0);
+      color: var(--txt-0);
+      font-family: var(--f-barlow);
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    ::selection { background: #C8922A; color: #fff; }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--bg-0); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+    /* ============================================
+       UTILITY
+    ============================================ */
+    .eyebrow {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .display-xl {
+      font-family: var(--f-display);
+      font-size: clamp(56px, 8vw, 112px);
+      line-height: 0.9;
+      color: var(--txt-0);
+    }
+
+    .display-lg {
+      font-family: var(--f-display);
+      font-size: clamp(40px, 5vw, 72px);
+      line-height: 0.93;
+      color: var(--txt-0);
+    }
+
+    .body-copy {
+      font-family: var(--f-barlow);
+      font-size: 15px;
+      color: var(--txt-1);
+      line-height: 1.9;
+      max-width: 680px;
+    }
+
+    .body-copy p + p { margin-top: 18px; }
+
+    strong { color: var(--txt-0); font-weight: 500; }
+    em { font-style: italic; color: var(--txt-1); }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--line-0);
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-block;
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 13px 30px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      border: none;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-fill {
+      background: var(--accent);
+      color: var(--bg-0);
+    }
+    .btn-fill:hover { background: var(--accent-lt); }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--line-1);
+      color: var(--txt-1);
+    }
+    .btn-outline:hover {
+      border-color: var(--void);
+      color: var(--txt-0);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: none;
+      color: var(--txt-2);
+      padding-left: 0;
+      padding-right: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-ghost:hover { color: var(--void); transform: none; }
+    .btn-ghost .arrow {
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+      position: relative;
+      display: inline-block;
+      transition: width 0.2s;
+    }
+    .btn-ghost:hover .arrow { width: 36px; }
+    .btn-ghost .arrow::after {
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: -4px;
+      width: 8px;
+      height: 8px;
+      border-right: 1px solid currentColor;
+      border-top: 1px solid currentColor;
+      transform: rotate(45deg);
+    }
+
+
+
+    .hero-byline {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--txt-2);
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.95s forwards;
+    }
+    .hero-byline strong { color: var(--accent); font-weight: 700; }
+    .hero-byline em { font-style: normal; color: var(--txt-2); }
+
+    /* MASCOT */
+    .hero-mascot-wrap {
+      position: relative;
+      display: inline-block;
+      background: transparent;
+      width: 280px;
+      height: 280px;
+      opacity: 0;
+      animation: mascotEntrance 1s cubic-bezier(0.34,1.2,0.64,1) 0.3s forwards,
+                 mascotFloat 5s ease-in-out 1.3s infinite;
+      box-shadow: 0 0 60px rgba(var(--accent-rgb),0.18), 0 0 120px rgba(var(--accent-rgb),0.06);
+    }
+
+    .hero-mascot {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      cursor: default;
+      display: block;
+    }
+
+    .mascot-float {
+      animation: mascotEntrance 1s cubic-bezier(0.34,1.2,0.64,1) 0.3s forwards,
+                 mascotFloat 5s ease-in-out 1.3s infinite;
+    }
+
+    @keyframes mascotEntrance {
+      0%   { opacity: 0; transform: translateY(32px) scale(0.88); }
+      100% { opacity: 1; transform: translateY(0px) scale(1); }
+    }
+
+    @keyframes mascotFloat {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-14px); }
+    }
+
+
+    /* ── Hero room slideshow ── */
+    .hero-bg-room {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      animation: heroSlide 18s ease-in-out infinite;
+    }
+    .hero-bg-room:nth-child(1) { animation-delay: 0s; }
+    .hero-bg-room:nth-child(2) { animation-delay: -6s; }
+    .hero-bg-room:nth-child(3) { animation-delay: -12s; }
+    @keyframes heroSlide {
+      0%   { opacity: 0; }
+      8%   { opacity: 0.38; }
+      33%  { opacity: 0.38; }
+      41%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
+    [data-theme="light"] .hero-bg-room { opacity: 0 !important; animation: none; }
+
+    /* ── Character art zone ── */
+    .char-art {
+      position: relative;
+      height: 340px;
+      overflow: hidden;
+      margin: -48px -40px 32px;
+      background: var(--bg-0);
+    }
+    .char-card.aurora .char-art { background: #080e1c; }
+    .char-card.scarlet .char-art { background: #120808; }
+
+    .char-body-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .char-card.aurora .char-body-img {
+      object-fit: contain;
+      object-position: top center;
+      mix-blend-mode: luminosity;
+      opacity: 0.92;
+    }
+    .char-card:hover .char-body-img { transform: scale(1.06) translateY(-6px); }
+
+    .char-art-fade {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 100px;
+      background: linear-gradient(to top, var(--bg-2), transparent);
+      pointer-events: none;
+    }
+
+    /* ── Character header with portrait ── */
+    .char-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 6px;
+    }
+    .char-face {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      border: 2px solid var(--accent);
+      flex-shrink: 0;
+      background: var(--bg-0);
+    }
+    .char-card.aurora .char-face { border-color: var(--aurora); }
+    .char-card.scarlet .char-face { border-color: var(--scarlet); }
+    .char-name-wrap { display: flex; flex-direction: column; gap: 2px; }
+
+    /* ── Devlog thumbnails ── */
+    .entry-thumb {
+      width: calc(100% + 76px);
+      margin: -44px -38px 28px;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      position: relative;
+    }
+    .entry-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.5s ease;
+      filter: saturate(0.85) brightness(0.88);
+    }
+    .devlog-card:hover .entry-thumb img {
+      transform: scale(1.05);
+      filter: saturate(1) brightness(0.95);
+    }
+    .entry-thumb-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 60px;
+      background: linear-gradient(to top, var(--bg-2), transparent);
+    }
+
+    /* ── Game showcase bg image ── */
+    .game-stage-photo {
+      position: absolute;
+      inset: 0;
+      background: url('assets/main_menu_bg.png') center 40%/cover no-repeat;
+      opacity: 0.28;
+      transition: opacity 0.5s;
+    }
+    .game-stage:hover .game-stage-photo { opacity: 0.34; }
+    [data-theme="light"] .game-stage-photo { opacity: 0.08; }
+
+
+    /* Wishlist flip buttons */
+    .btn-flip {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-flip .cta-default,
+    .btn-flip .cta-hover {
+      display: block;
+      transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1), opacity 0.22s ease;
+    }
+    .btn-flip .cta-hover {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, 40%);
+      opacity: 0;
+      white-space: nowrap;
+      font-size: 0.9em;
+      letter-spacing: 0.12em;
+    }
+    .btn-flip:hover .cta-default {
+      transform: translateY(-180%);
+      opacity: 0;
+    }
+    .btn-flip:hover .cta-hover {
+      transform: translate(-50%, -50%);
+      opacity: 1;
+    }
+
+    /* REVEAL ANIMATION */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.up { opacity: 1; transform: translateY(0); }
+
+
+
+    /* Logo dark/light switching */
+    .logo-dark-mode  { display: block; }
+    .logo-light-mode { display: none;  }
+    [data-theme="light"] .logo-dark-mode  { display: none;  }
+    [data-theme="light"] .logo-light-mode { display: block; }
+
+    /* Theme toggle */
+    #theme-toggle {
+      background: transparent;
+      border: 1px solid var(--line-1);
+      color: var(--txt-1);
+      width: 38px;
+      height: 38px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      flex-shrink: 0;
+      font-size: 16px;
+      border-radius: 0;
+    }
+    #theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    /* ============================================
+       NAVIGATION
+    ============================================ */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px var(--pad-x);
+      transition: background 0.4s ease, padding 0.4s ease, backdrop-filter 0.4s ease, border-bottom 0.4s ease;
+    }
+
+    #nav.solid {
+      background: color-mix(in srgb, var(--bg-0) 94%, transparent);
+      backdrop-filter: blur(20px) saturate(1.2);
+      padding-top: 18px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line-0);
+    }
+
+    .nav-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo img.logo-horiz {
+      height: 44px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s;
+      opacity: 0.95;
+    }
+
+    .nav-logo:hover img.logo-horiz {
+      transform: scale(1.03);
+      opacity: 1;
+    }
+
+
+    .nav-logo-dot { display: none; }
+    .nav-logo-text { display: none; }
+    .nav-logo-top  { display: none; }
+    .nav-logo-sub  { display: none; }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+    }
+
+    .nav-links a {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--txt-2);
+      text-decoration: none;
+      transition: color 0.2s;
+      position: relative;
+      padding-bottom: 3px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover { color: var(--txt-0); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid rgba(var(--accent-rgb),0.35);
+      padding: 8px 20px;
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      transition: border-color 0.25s, background 0.25s, color 0.25s;
+    }
+    .nav-cta .cta-default,
+    .nav-cta .cta-hover {
+      display: block;
+      transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1), opacity 0.22s ease;
+    }
+    .nav-cta .cta-hover {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, 40%);
+      opacity: 0;
+      white-space: nowrap;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+    }
+    .nav-cta:hover {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+    }
+    .nav-cta:hover .cta-default {
+      transform: translateY(-180%);
+      opacity: 0;
+    }
+    .nav-cta:hover .cta-hover {
+      transform: translate(-50%, -50%);
+      opacity: 1;
+    }
+
+    /* ============================================
+       HERO
+    ============================================ */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 720px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    [data-theme="light"] #hero { background: var(--bg-0); }
+    [data-theme="light"] #hero-canvas { opacity: 0.4; }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding: 0 24px;
+    }
+
+    .hero-badge {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--txt-2);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero-badge::before,
+    .hero-badge::after {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+
+    .hero-title {
+      font-family: var(--f-display);
+      font-size: clamp(88px, 14vw, 200px);
+      line-height: 0.88;
+      letter-spacing: 0.01em;
+      color: var(--txt-0);
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.4s forwards;
+    }
+
+    .hero-tagline {
+      font-family: var(--f-body);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--txt-1);
+      max-width: 460px;
+      letter-spacing: 0.03em;
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.65s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 12px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.85s forwards;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.4s forwards;
+    }
+
+    .hero-scroll span {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--txt-2);
+    }
+
+    .scroll-track {
+      width: 1px;
+      height: 44px;
+      background: linear-gradient(to bottom, var(--line-1), transparent);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-track::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--void);
+      animation: scrollDown 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollDown {
+      0%   { top: -100%; }
+      80%  { top: 100%; }
+      100% { top: 100%; }
+    }
+
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 32px 0;
+      background: var(--bg-1);
+      border-top: 1px solid var(--line-0);
+      border-bottom: 1px solid var(--line-0);
+    }
+
+    .divider-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+
+    .divider-line {
+      width: 60px;
+      height: 1px;
+      background: var(--line-1);
+    }
+
+    /* ============================================
+       STUDIO INTRO
+    ============================================ */
+    #studio {
+      background: var(--bg-1);
+      padding: var(--pad-y) var(--pad-x);
+      border-top: 1px solid var(--line-0);
+    }
+
+    .studio-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 5fr 4fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .studio-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--line-0);
+    }
+
+    .stat-cell {
+      background: var(--bg-2);
+      padding: 36px 32px;
+    }
+
+    .stat-n {
+      font-family: var(--f-display);
+      font-size: 60px;
+      line-height: 1;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--txt-2);
+    }
+
+
+    /* ── Development Status ── */
+    #dev-status {
+      background: var(--bg-0);
+      padding: calc(var(--pad-y) * 0.65) var(--pad-x);
+      border-top: 1px solid var(--line-0);
+    }
+
+    .dev-status-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .dev-status-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .dev-cell {
+      background: var(--bg-2);
+      border: 1px solid var(--line-0);
+      border-radius: 2px;
+      padding: 28px 24px;
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    .dev-cell:hover {
+      background: var(--bg-3);
+      border-color: var(--line-1);
+    }
+
+    .dev-cell-label {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--txt-2);
+      margin-bottom: 8px;
+    }
+
+    .dev-cell-value {
+      font-family: var(--f-ui);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--txt-0);
+      line-height: 1.3;
+    }
+
+    .dev-cell-value.highlight { color: var(--accent); }
+
+    .dev-status-note {
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--txt-2);
+      font-style: italic;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 1024px) { .dev-status-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 768px)  { .dev-status-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ============================================
+       GAME SHOWCASE
+    ============================================ */
+    #games {
+      background: var(--bg-0);
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .game-stage {
+      position: relative;
+      min-height: 88vh;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+
+    .game-stage-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 80% 35%, rgba(76,201,240,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 60% at 20% 70%, rgba(131,56,236,0.06) 0%, transparent 55%),
+        var(--bg-0);
+    }
+
+    .game-stage-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--line-0) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line-0) 1px, transparent 1px);
+      background-size: 56px 56px;
+      opacity: 0.25;
+    }
+    [data-theme="light"] .game-stage-grid { opacity: 0.4; }
+
+    .game-stage-content {
+      position: relative;
+      z-index: 2;
+      padding: 80px var(--pad-x) 80px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .game-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-lt);
+      border: 1px solid rgba(var(--accent-rgb),0.35);
+      padding: 6px 16px;
+      margin-bottom: 36px;
+    }
+
+    .status-pulse {
+      width: 5px;
+      height: 5px;
+      background: var(--accent-lt);
+      border-radius: 50%;
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+
+
+    .game-title-sup {
+      font-family: var(--f-ui);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .game-title-en {
+      font-family: var(--f-display);
+      font-size: clamp(72px, 11vw, 160px);
+      line-height: 0.87;
+      color: var(--txt-0);
+      margin-bottom: 6px;
+    }
+
+    .game-title-kr {
+      font-family: var(--f-display);
+      font-size: clamp(24px, 3vw, 48px);
+      color: var(--txt-2);
+      margin-bottom: 28px;
+    }
+
+    .game-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .chip {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--txt-2);
+      border: 1px solid var(--line-0);
+      padding: 4px 14px;
+    }
+
+    .game-desc {
+      font-family: var(--f-barlow);
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--txt-1);
+      line-height: 1.85;
+      max-width: 540px;
+      margin-bottom: 40px;
+    }
+
+    /* ============================================
+       CHARACTERS
+    ============================================ */
+    #characters {
+      background: var(--bg-1);
+      padding: var(--pad-y) var(--pad-x);
+      border-top: 1px solid var(--line-0);
+    }
+
+    .chars-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .chars-header {
+      margin-bottom: 60px;
+    }
+
+    .chars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--line-0);
+      width: 100%;
+    }
+
+    .char-card {
+      --accent: var(--void);
+      --accent-dim: var(--void-dim);
+      background: var(--bg-2);
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, background 0.3s ease;
+      cursor: default;
+    }
+
+    .char-card.aurora { --accent: var(--aurora); --accent-dim: var(--aurora-dim); }
+    .char-card.scarlet { --accent: var(--scarlet); --accent-dim: var(--scarlet-dim); }
+
+    .char-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .char-card:hover::before { transform: scaleX(1); }
+
+    .char-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 100% 60% at 50% 100%, var(--accent-dim), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .char-card:hover::after { opacity: 1; }
+    .char-card:hover { transform: translateY(-5px); background: var(--bg-3); }
+
+    .char-glyph {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--f-display);
+      font-size: 18px;
+      color: var(--accent);
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .char-name {
+      font-family: var(--f-display);
+      font-size: 52px;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .char-type {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--txt-2);
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .char-rule {
+      width: 28px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.4;
+      margin-bottom: 22px;
+    }
+
+    .char-desc {
+      font-family: var(--f-barlow);
+      font-size: 14px;
+      color: var(--txt-1);
+      line-height: 1.85;
+      position: relative;
+      z-index: 1;
+    }
+
+    .char-data {
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .char-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .char-row-label {
+      font-family: var(--f-ui);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--txt-2);
+    }
+
+    .char-row-val { color: var(--accent); }
+
+
+    /* ── World section ── */
+    #world {
+      background: var(--bg-0);
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .world-stage {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+
+    .world-stage-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/main_menu_bg.png') center/cover no-repeat;
+      opacity: 0.15;
+    }
+
+    .world-stage-vignette {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 100% 60% at 50% 0%, transparent 30%, var(--bg-0) 100%),
+        linear-gradient(to top, var(--bg-0) 0%, transparent 50%),
+        linear-gradient(to right, var(--bg-0) 0%, transparent 30%),
+        linear-gradient(to left, var(--bg-0) 0%, transparent 30%);
+    }
+
+    .world-header {
+      position: relative;
+      z-index: 2;
+      padding: 80px var(--pad-x) 56px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .world-lore {
+      font-family: var(--f-barlow);
+      font-size: 15px;
+      font-style: italic;
+      color: var(--txt-1);
+      line-height: 1.9;
+      max-width: 540px;
+      margin-top: 20px;
+      border-left: 2px solid var(--accent);
+      padding-left: 20px;
+    }
+
+    .world-zones {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+      background: var(--line-0);
+      border-top: 1px solid var(--line-0);
+    }
+
+    .zone-card {
+      background: var(--bg-1);
+      padding: 36px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+      cursor: default;
+    }
+
+    .zone-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--zone-color, var(--line-1));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .zone-card:hover::before { transform: scaleX(1); }
+    .zone-card:hover { background: var(--bg-2); }
+
+    .zone-enemy-art {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top;
+      margin-bottom: 20px;
+      display: block;
+      filter: saturate(0.8) brightness(0.9);
+      transition: filter 0.4s, transform 0.4s;
+    }
+    .zone-card:hover .zone-enemy-art {
+      filter: saturate(1) brightness(1);
+      transform: scale(1.03);
+    }
+
+    .zone-num {
+      font-family: var(--f-display);
+      font-size: 12px;
+      letter-spacing: 0.24em;
+      color: var(--zone-color, var(--line-1));
+      margin-bottom: 8px;
+    }
+
+    .zone-name {
+      font-family: var(--f-ui);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--txt-0);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .zone-flavor {
+      font-family: var(--f-barlow);
+      font-size: 13px;
+      color: var(--txt-2);
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    .zone-enemy-name {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--zone-color, var(--line-1));
+      margin-top: 14px;
+    }
+
+    @media (max-width: 1024px) {
+      .world-zones { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .world-zones { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ============================================
+       FOUNDER
+    ============================================ */
+    #founder {
+      background: var(--bg-0);
+      padding: var(--pad-y) var(--pad-x);
+      border-top: 1px solid var(--line-0);
+    }
+
+    .founder-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 3fr 5fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .founder-img {
+      aspect-ratio: 3/4;
+      background: var(--bg-2);
+      border: 1px solid var(--line-0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .founder-img-placeholder {
+      font-family: var(--f-display);
+      font-size: 96px;
+      color: var(--line-1);
+      user-select: none;
+      letter-spacing: -4px;
+    }
+
+    .founder-img-cap {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 24px 20px 16px;
+      background: linear-gradient(to top, rgba(10,10,18,0.9), transparent);
+      font-family: var(--f-ui);
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--txt-2);
+      text-align: center;
+    }
+
+    .founder-name {
+      font-family: var(--f-display);
+      font-size: clamp(44px, 5vw, 72px);
+      color: var(--txt-0);
+      margin-bottom: 6px;
+    }
+
+    .founder-role {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 44px;
+    }
+
+    .founder-bio { margin-bottom: 44px; }
+
+    .timeline {
+      border: 1px solid var(--line-0);
+    }
+
+    .timeline-row {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding: 22px 26px;
+      border-bottom: 1px solid var(--line-0);
+      transition: background 0.2s;
+    }
+
+    .timeline-row:last-child { border-bottom: none; }
+    .timeline-row:hover { background: var(--bg-2); }
+
+    .timeline-co {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--txt-2);
+      min-width: 90px;
+      text-transform: uppercase;
+    }
+
+    .timeline-role {
+      font-family: var(--f-ui);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--txt-0);
+    }
+
+    .timeline-detail {
+      font-size: 12px;
+      color: var(--txt-2);
+      margin-top: 2px;
+    }
+
+    /* ============================================
+       DEVLOG
+    ============================================ */
+    #devlog {
+      background: var(--bg-1);
+      padding: var(--pad-y) var(--pad-x);
+      border-top: 1px solid var(--line-0);
+    }
+
+    .devlog-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .devlog-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 60px;
+    }
+
+    .devlog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--line-0);
+      width: 100%;
+    }
+
+    .devlog-card {
+      background: var(--bg-2);
+      padding: 44px 38px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.3s;
+    }
+
+    .devlog-card:hover { background: var(--bg-3); }
+
+    .entry-num {
+      font-family: var(--f-display);
+      font-size: 88px;
+      line-height: 1;
+      color: var(--line-0);
+      margin-bottom: 28px;
+      transition: color 0.3s;
+    }
+
+    .devlog-card:hover .entry-num { color: var(--line-1); }
+
+    .entry-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .entry-date {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--txt-2);
+    }
+
+    .entry-tag {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(var(--accent-rgb),0.3);
+      padding: 2px 9px;
+    }
+
+    .entry-title {
+      font-family: var(--f-ui);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--txt-0);
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .entry-excerpt {
+      font-family: var(--f-barlow);
+      font-size: 14px;
+      color: var(--txt-1);
+      line-height: 1.85;
+      flex-grow: 1;
+    }
+
+    .entry-read {
+      margin-top: 28px;
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--txt-2);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.2s;
+    }
+
+    .devlog-card:hover .entry-read { color: var(--accent); }
+
+    .entry-arrow {
+      width: 22px;
+      height: 1px;
+      background: currentColor;
+      position: relative;
+      transition: width 0.2s;
+    }
+
+    .devlog-card:hover .entry-arrow { width: 30px; }
+
+    .entry-arrow::after {
+      content: '';
+      position: absolute;
+      right: 0; top: -4px;
+      width: 7px; height: 7px;
+      border-right: 1px solid currentColor;
+      border-top: 1px solid currentColor;
+      transform: rotate(45deg);
+    }
+
+    /* ============================================
+       WRITING STYLE SECTION (Gladwell ref)
+    ============================================ */
+    #style-ref {
+      background: var(--bg-0);
+      padding: var(--pad-y) var(--pad-x);
+      border-top: 1px solid var(--line-0);
+    }
+
+    .style-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .style-quote {
+      font-family: var(--f-body);
+      font-size: 14px;
+      font-style: italic;
+      color: var(--txt-1);
+      line-height: 1.9;
+      padding: 28px;
+      border-left: 2px solid var(--void);
+      background: var(--bg-2);
+    }
+
+    .style-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .style-card {
+      background: var(--bg-2);
+      border: 1px solid var(--line-0);
+      padding: 24px;
+    }
+
+    .style-card-title {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--void);
+      margin-bottom: 10px;
+    }
+
+    .style-card-body {
+      font-size: 12px;
+      color: var(--txt-1);
+      line-height: 1.8;
+    }
+
+    /* ============================================
+       CONTACT
+    ============================================ */
+    #contact {
+      background: var(--bg-1);
+      padding: var(--pad-y) var(--pad-x);
+      border-top: 1px solid var(--line-0);
+    }
+
+    .contact-wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 5fr 4fr;
+      gap: 64px;
+    }
+
+    .contact-email {
+      font-family: var(--f-display);
+      font-size: clamp(28px, 3.5vw, 46px);
+      color: var(--accent);
+      text-decoration: none;
+      display: block;
+      margin: 28px 0;
+      transition: color 0.2s;
+    }
+
+    .contact-email:hover { color: #d49aff; }
+
+    .link-list {
+      border: 1px solid var(--line-0);
+    }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--line-0);
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .link-item:last-child { border-bottom: none; }
+    .link-item:hover { background: var(--bg-2); }
+
+    .link-name {
+      font-family: var(--f-ui);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--txt-0);
+    }
+
+    .link-handle {
+      font-size: 12px;
+      color: var(--txt-2);
+    }
+
+    .contact-right {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .press-box {
+      background: var(--bg-2);
+      border: 1px solid var(--line-0);
+      padding: 36px;
+    }
+
+    .press-box h3 {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    .press-box p {
+      font-size: 13px;
+      color: var(--txt-1);
+      line-height: 1.85;
+      margin-bottom: 24px;
+    }
+
+    .wishlist-box {
+      background: linear-gradient(135deg, var(--accent-dim), rgba(var(--accent-rgb),0.04));
+      border: 1px solid rgba(var(--accent-rgb),0.22);
+      padding: 36px;
+      text-align: center;
+    }
+
+    .wishlist-box p {
+      font-size: 13px;
+      color: var(--txt-1);
+      line-height: 1.85;
+      margin-bottom: 24px;
+    }
+
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .footer-link {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--txt-2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover { color: var(--accent); }
+
+    .footer-studio-line {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      color: var(--txt-2);
+      margin-bottom: 4px;
+    }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    footer {
+      background: var(--bg-0);
+      border-top: 1px solid var(--line-0);
+      padding: 32px var(--pad-x) 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .footer-top {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-legal {
+      font-size: 12px;
+      color: var(--txt-2);
+      line-height: 1.85;
+      max-width: 860px;
+    }
+
+    .footer-brand {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--txt-2);
+    }
+
+    .footer-note {
+      font-size: 12px;
+      color: var(--txt-2);
+    }
+
+    /* ============================================
+       KEYFRAMES
+    ============================================ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.75); }
+    }
+
+    /* ============================================
+       RESPONSIVE
+    ============================================ */
+    @media (max-width: 1024px) {
+      :root { --pad-x: 40px; --pad-y: 96px; }
+      .studio-wrap,
+      .founder-wrap,
+      .contact-wrap { grid-template-columns: 1fr; gap: 56px; }
+      .chars-grid,
+      .devlog-grid { grid-template-columns: 1fr; }
+      .style-wrap { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --pad-x: 24px; --pad-y: 72px; }
+      .nav-links { display: none; }
+      .hero-title { font-size: 80px; }
+      .game-stage-content { padding: 48px 24px; }
+      .devlog-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+      footer { flex-direction: column; gap: 10px; text-align: center; }
+    }
+
+    /* ── Motion accessibility ── */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      /* Specifically stop infinite loops */
+      .mascot-float,
+      .hero-bg-room,
+      .scroll-track::after,
+      .status-pulse {
+        animation: none !important;
+      }
+
+      /* Keep reveals but make them instant */
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+
+      /* Hero mascot: show immediately */
+      .hero-mascot-wrap,
+      .hero-badge,
+      .hero-title,
+      .hero-tagline,
+      .hero-byline,
+      .hero-actions,
+      .hero-scroll {
+        opacity: 1 !important;
+        animation: none !important;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+       NAV
+  ============================================ -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">
+      <img src="assets/logo-dark.png"  alt="PARK-DEOMES STUDIOS" class="logo-horiz logo-dark-mode">
+      <img src="assets/logo-light.png" alt="PARK-DEOMES STUDIOS" class="logo-horiz logo-light-mode">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#games">Games</a></li>
+      <li><a href="#dev-status">Status</a></li>
+      <li><a href="#world">World</a></li>
+      <li><a href="#founder">Studio</a></li>
+      <li><a href="#devlog">Devlog</a></li>
+      <li><a href="#contact">Press</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="https://store.steampowered.com" class="nav-cta" target="_blank" rel="noopener">
+      <span class="cta-default">Wishlist</span>
+      <span class="cta-hover">Coming Soon &mdash; 2026 Q2</span>
+    </a>
+    <button id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">
+      <span id="theme-icon">&#9790;</span>
+    </button>
+  </nav>
+
+  <!-- ============================================
+       HERO
+  ============================================ -->
+  <section id="hero">
+    <div class="hero-bg-room" style="background-image:url('assets/void_room.png')"></div>
+    <div class="hero-bg-room" style="background-image:url('assets/aurora_room.png')"></div>
+    <div class="hero-bg-room" style="background-image:url('assets/scarlet_room.png')"></div>
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-inner">
+      <div class="hero-mascot-wrap"><img src="assets/mouse.png" alt="PARK-DEOMES STUDIOS mascot" class="hero-mascot"></div>
+      <span class="hero-badge">Independent Game Studio &nbsp;&middot;&nbsp; Est. 2026</span>
+      <h1 class="hero-title" style="font-size:clamp(56px,9vw,128px);">PARK-DEOMES<br><span style="font-size:0.48em;font-family:var(--f-barlow);font-weight:900;letter-spacing:0.32em;color:var(--txt-2);">STUDIOS</span></h1>
+      <p class="hero-tagline">Built by a marketing leader behind AAA launches. Now building something original.</p>
+      <p class="hero-byline">Founded by <strong>JJ Park</strong> &mdash; Product Marketing Leader &nbsp;(<em>Civilization, NBA 2K</em>)</p>
+      <div class="hero-actions">
+        <a href="#games" class="btn btn-fill">See Our Work</a>
+        <a href="#devlog" class="btn btn-outline">Read the Devlog</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-track"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <div class="section-divider" aria-hidden="true">
+    <div class="divider-line"></div>
+    <div class="divider-dot"></div>
+    <div class="divider-dot" style="opacity:0.8"></div>
+    <div class="divider-dot"></div>
+    <div class="divider-line"></div>
+  </div>
+
+  <!-- ============================================
+       STUDIO INTRO
+  ============================================ -->
+  <section id="studio">
+    <div class="studio-wrap">
+      <div class="reveal">
+        <span class="eyebrow">Who We Are</span>
+        <h2 class="display-lg" style="margin-bottom:28px">A Studio of One.<br>Building Worlds.</h2>
+        <div class="body-copy">
+          <p>PARKDEOMES is an independent game development studio founded by JJ Park, a product marketing leader who has contributed to global launches of multiple AAA titles including Civilization and NBA 2K.</p>
+          <p>The studio focuses on building original games through small, testable prototypes and iterative design. Rather than starting with large production pipelines, PARKDEOMES explores gameplay ideas through rapid experimentation, validating systems and player decisions before expanding development.</p>
+          <p>The current project, <strong>JJ Park's: Subscriber Zero</strong>, is a deckbuilding roguelike set inside Korean streaming culture, exploring narrative-driven strategy systems and player choice. Currently experimenting with AI-assisted workflows and rapid prototyping tools to accelerate early development.</p>
+          <p>PARKDEOMES is a small independent studio and may collaborate with external artists, composers, and developers as projects evolve.</p>
+        </div>
+      </div>
+      <div class="studio-stats reveal">
+        <div class="stat-cell">
+          <div class="stat-n">01</div>
+          <div class="stat-label">Title in Development</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-n">03</div>
+          <div class="stat-label">Playable Characters</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-n">277</div>
+          <div class="stat-label">Cards Designed</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-n">05</div>
+          <div class="stat-label">Zones &amp; Bosses</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       DEVELOPMENT STATUS
+  ============================================ -->
+  <section id="dev-status">
+    <div class="dev-status-wrap">
+      <div class="reveal">
+        <span class="eyebrow">Development Status</span>
+        <h2 class="display-lg" style="margin-bottom:0">Where We Are<br>Right Now.</h2>
+      </div>
+      <div class="dev-status-grid reveal">
+        <div class="dev-cell">
+          <p class="dev-cell-label">Project</p>
+          <p class="dev-cell-value">JJ Park's:<br>Subscriber Zero</p>
+        </div>
+        <div class="dev-cell">
+          <p class="dev-cell-label">Stage</p>
+          <p class="dev-cell-value highlight">Early Prototype</p>
+        </div>
+        <div class="dev-cell">
+          <p class="dev-cell-label">Engine</p>
+          <p class="dev-cell-value">Godot 4</p>
+        </div>
+        <div class="dev-cell">
+          <p class="dev-cell-label">Platform</p>
+          <p class="dev-cell-value">PC via Steam</p>
+        </div>
+        <div class="dev-cell">
+          <p class="dev-cell-label">Team</p>
+          <p class="dev-cell-value">Solo-led + External Collaborators</p>
+        </div>
+        <div class="dev-cell">
+          <p class="dev-cell-label">Next Milestone</p>
+          <p class="dev-cell-value highlight">Vertical Slice Prototype</p>
+        </div>
+      </div>
+      <p class="dev-status-note reveal">A playable prototype is currently in development, focused on validating the core gameplay loop and combat pacing. Early prototype footage will be shared during development milestones. The initial release target is PC via Steam, with potential expansion to console platforms depending on development progress.</p>
+    </div>
+  </section>
+
+  <!-- ============================================
+       GAME SHOWCASE
+  ============================================ -->
+  <section id="games">
+    <div class="game-stage">
+      <div class="game-stage-photo"></div>
+      <div class="game-stage-bg"></div>
+      <div class="game-stage-grid"></div>
+      <div class="game-stage-content reveal">
+        <div class="game-status">
+          <span class="status-pulse"></span>
+          Active Development
+        </div>
+        <p class="game-title-sup">JJ PARK'S:</p>
+        <h2 class="game-title-en">SUBSCRIBER<br>ZERO</h2>
+        <p class="game-title-kr">박재준의 구독자 제로</p>
+        <div class="game-chips">
+          <span class="chip">Deckbuilding Roguelike</span>
+          <span class="chip">Korean Streaming Culture</span>
+          <span class="chip">PC / Steam</span>
+          <span class="chip">Single Player</span>
+        </div>
+        <p class="game-desc">A narrative-driven deckbuilding roguelike set inside Korean streaming culture. Three streamers. Five zones. One broadcaster who logged off and never came back. Build your deck, manage your audience pressure, and find out what happened to V40.</p>
+        <p class="game-desc" style="font-size:12px;margin-top:10px;color:var(--txt-2);">Inspired by <em>Slay the Spire</em>, <em>Darkest Dungeon</em>, and <em>Inscryption</em>.</p>
+        <div class="hero-actions">
+          <a href="#characters" class="btn btn-fill">Meet the Characters</a>
+          <a href="https://store.steampowered.com" class="btn btn-outline btn-flip" target="_blank" rel="noopener">
+            <span class="cta-default">Wishlist on Steam</span>
+            <span class="cta-hover">Coming Soon &mdash; 2026 Q2</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CHARACTERS
+  ============================================ -->
+  <section id="characters">
+    <div class="chars-wrap">
+      <div class="chars-header reveal">
+        <span class="eyebrow">Playable Characters</span>
+        <h2 class="display-lg">Choose Your<br>Broadcast Style</h2>
+      </div>
+      <div class="chars-grid reveal">
+
+        <!-- VOID -->
+        <div class="char-card void">
+          <div class="char-art">
+            <img src="assets/VOID-A.png" alt="VOID" class="char-body-img">
+            <div class="char-art-fade"></div>
+          </div>
+          <div class="char-header">
+            <img src="assets/void_portrait.png" alt="VOID portrait" class="char-face">
+            <div class="char-name-wrap">
+              <h3 class="char-name">VOID</h3>
+              <p class="char-type">The Stealth Assassin</p>
+            </div>
+          </div>
+          <div class="char-rule"></div>
+          <p class="char-desc">Accumulates Hollow stacks in silence. Strikes from stealth. Says nothing, lands everything harder. The kind of streamer whose fans watch a 10-second clip on loop for three days trying to figure out what just happened.</p>
+          <div class="char-data">
+            <div class="char-row">
+              <span class="char-row-label">HP</span>
+              <span class="char-row-val">68</span>
+            </div>
+            <div class="char-row">
+              <span class="char-row-label">Resource</span>
+              <span class="char-row-val">Hollow (max 10)</span>
+            </div>
+            <div class="char-row">
+              <span class="char-row-label">Difficulty</span>
+              <span class="char-row-val">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- AURORA -->
+        <div class="char-card aurora">
+          <div class="char-art">
+            <img src="assets/AURORA-A.png" alt="AURORA" class="char-body-img">
+            <div class="char-art-fade"></div>
+          </div>
+          <div class="char-header">
+            <img src="assets/aurora_portrait.png" alt="AURORA portrait" class="char-face">
+            <div class="char-name-wrap">
+              <h3 class="char-name">AURORA</h3>
+              <p class="char-type">The Iron Resonant</p>
+            </div>
+          </div>
+          <div class="char-rule"></div>
+          <p class="char-desc">Builds Ironclad to convert into Wave. Plays defense until the moment defense becomes a weapon. The streamer whose comment section turns into a live physics lecture. Her fans are called Arcadians.</p>
+          <div class="char-data">
+            <div class="char-row">
+              <span class="char-row-label">HP</span>
+              <span class="char-row-val">84</span>
+            </div>
+            <div class="char-row">
+              <span class="char-row-label">Resource</span>
+              <span class="char-row-val">Wave (max 15)</span>
+            </div>
+            <div class="char-row">
+              <span class="char-row-label">Difficulty</span>
+              <span class="char-row-val">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCARLET -->
+        <div class="char-card scarlet">
+          <div class="char-art">
+            <img src="assets/SCARLET-A.png" alt="SCARLET" class="char-body-img">
+            <div class="char-art-fade"></div>
+          </div>
+          <div class="char-header">
+            <img src="assets/scarlet_portrait.png" alt="SCARLET portrait" class="char-face">
+            <div class="char-name-wrap">
+              <h3 class="char-name">SCARLET</h3>
+              <p class="char-type">The Rage Engine</p>
+            </div>
+          </div>
+          <div class="char-rule"></div>
+          <p class="char-desc">Gets stronger by taking damage. Converts Rage into pure offense. The most dangerous streamer on the platform - not because she plans, but because she never needs to. Her fans are called Seungbaki.</p>
+          <div class="char-data">
+            <div class="char-row">
+              <span class="char-row-label">HP</span>
+              <span class="char-row-val">76</span>
+            </div>
+            <div class="char-row">
+              <span class="char-row-label">Resource</span>
+              <span class="char-row-val">Rage (max 20)</span>
+            </div>
+            <div class="char-row">
+              <span class="char-row-label">Difficulty</span>
+              <span class="char-row-val">&#9733;&#9733;&#9734;&#9734;&#9734;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================
+       THE WORLD
+  ============================================ -->
+  <section id="world">
+    <div class="world-stage">
+      <div class="world-stage-bg"></div>
+      <div class="world-stage-vignette"></div>
+      <div class="world-header reveal">
+        <span class="eyebrow">The Broadcast Zones</span>
+        <h2 class="display-lg">Five Zones.<br>No Signal.<br>No Way Back.</h2>
+        <p class="world-lore">Somewhere between Zone 1 and Zone 5, the legendary player V40 logged off and never returned. Every streamer who enters knows this. They enter anyway. The chat is always watching.</p>
+      </div>
+    </div>
+    <div class="world-zones reveal">
+      <div class="zone-card" style="--zone-color: #B8860B;">
+        <img src="assets/zone_enemies/zone1_wasteland_enforcer.png" alt="Zone 1 enemy" class="zone-enemy-art">
+        <p class="zone-num">ZONE 01</p>
+        <h3 class="zone-name">The Wasteland Signal</h3>
+        <p class="zone-flavor">A graveyard of dead broadcasts. The first streamers who entered never made it past here. Their setups are still running.</p>
+        <p class="zone-enemy-name">Wasteland Enforcer</p>
+      </div>
+      <div class="zone-card" style="--zone-color: #2D8B55;">
+        <img src="assets/zone_enemies/zone2_resonance_beast.png" alt="Zone 2 enemy" class="zone-enemy-art">
+        <p class="zone-num">ZONE 02</p>
+        <h3 class="zone-name">The Cursed Forest Feed</h3>
+        <p class="zone-flavor">The trees here move between frames. The chat logs show timestamps that don't exist. Something is routing the signal through the roots.</p>
+        <p class="zone-enemy-name">Resonance Beast</p>
+      </div>
+      <div class="zone-card" style="--zone-color: #8338EC;">
+        <img src="assets/zone_enemies/zone3_void_stalker.png" alt="Zone 3 enemy" class="zone-enemy-art">
+        <p class="zone-num">ZONE 03</p>
+        <h3 class="zone-name">The Abyss Channel</h3>
+        <p class="zone-flavor">Pressure starts behaving differently here. Viewers stop sending messages and start sending something else. The Stalker has been watching you since Zone 1.</p>
+        <p class="zone-enemy-name">Void Stalker</p>
+      </div>
+      <div class="zone-card" style="--zone-color: #E63946;">
+        <img src="assets/zone_enemies/zone4_void_herald.png" alt="Zone 4 enemy" class="zone-enemy-art">
+        <p class="zone-num">ZONE 04</p>
+        <h3 class="zone-name">The Corrupted Archive</h3>
+        <p class="zone-flavor">V40's last broadcast originated here. The timestamp loops. Every streamer who watches the clip sees something different in the background. Nobody talks about what.</p>
+        <p class="zone-enemy-name">Void Herald</p>
+      </div>
+      <div class="zone-card" style="--zone-color: #FFD700;">
+        <img src="assets/zone_enemies/zone5_broadcast_fragment.png" alt="Zone 5 enemy" class="zone-enemy-art">
+        <p class="zone-num">ZONE 05</p>
+        <h3 class="zone-name">The Final Broadcast</h3>
+        <p class="zone-flavor">The chat here is filled with names you recognize. Streamers who came before you. They are still typing. They never stopped.</p>
+        <p class="zone-enemy-name">Broadcast Fragment</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOUNDER
+  ============================================ -->
+  <section id="founder">
+    <div class="founder-wrap">
+      <div class="founder-img reveal">
+        <img src="assets/headshot.jpg" alt="JJ Park" style="width:100%;height:100%;object-fit:cover;object-position:top center;">
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">The Founder</span>
+        <h2 class="founder-name">JJ PARK</h2>
+        <p class="founder-role">Founder &amp; Solo Developer</p>
+        <div class="founder-bio body-copy">
+          <p>Built by a marketing leader behind multiple AAA game launches, now exploring original game development through small, focused prototypes. At <strong>2K Games</strong>, I contributed to global campaigns for titles including <em>Civilization</em>, <em>NBA 2K</em>, and <em>LEGO 2K Drive</em>, learning how games find audiences and why some games that deserved to matter never did.</p>
+          <p>The goal is to build small, testable systems first, validating gameplay ideas through rapid iteration before expanding into full production. The project combines hands-on development with experience from global AAA launches, bringing both creative and market perspectives into the design process.</p>
+          <p>Publishing partnerships may be explored once the core prototype milestone is reached. More development updates will be shared as the project progresses.</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-row">
+            <span class="timeline-co">2K Games</span>
+            <div>
+              <p class="timeline-role">Marketing</p>
+              <p class="timeline-detail">Civilization, NBA 2K, LEGO 2K Drive</p>
+            </div>
+          </div>
+          <div class="timeline-row">
+            <span class="timeline-co">2026 -</span>
+            <div>
+              <p class="timeline-role">Founder &amp; Developer</p>
+              <p class="timeline-detail">PARK-DEOMES STUDIOS</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       DEVLOG
+  ============================================ -->
+  <section id="devlog">
+    <div class="devlog-wrap">
+      <div class="devlog-header reveal">
+        <div>
+          <span class="eyebrow">Development Diary</span>
+          <h2 class="display-lg">The Devlog</h2>
+        </div>
+        <a href="#" class="btn btn-outline">All Entries</a>
+      </div>
+      <div class="devlog-grid reveal">
+
+        <!-- Entry 001 -->
+        <a href="#" class="devlog-card">
+          <div class="entry-thumb">
+            <img src="assets/card_concept.png" alt="Card concepts">
+            <div class="entry-thumb-overlay"></div>
+          </div>
+          <div class="entry-num">001</div>
+          <div class="entry-meta">
+            <span class="entry-date">March 2026</span>
+            <span class="entry-tag">Origins</span>
+          </div>
+          <h3 class="entry-title">The Wrong Question</h3>
+          <p class="entry-excerpt">Every game designer I have ever spoken to started from the same place. They had a mechanic. I had spent six months building a deckbuilder before I realized I was asking the wrong question entirely - "what does this game do?" instead of the one that actually mattered.</p>
+          <div class="entry-read">
+            Read Entry <span class="entry-arrow"></span>
+          </div>
+        </a>
+
+        <!-- Entry 002 -->
+        <a href="#" class="devlog-card">
+          <div class="entry-thumb">
+            <img src="assets/concept_artworks.png" alt="Concept artworks">
+            <div class="entry-thumb-overlay"></div>
+          </div>
+          <div class="entry-num">002</div>
+          <div class="entry-meta">
+            <span class="entry-date">February 2026</span>
+            <span class="entry-tag">Design</span>
+          </div>
+          <h3 class="entry-title">Three Streamers Walk Into a Dungeon</h3>
+          <p class="entry-excerpt">When I started designing the three playable characters, I made a mistake so obvious I am almost embarrassed to write it here. I designed three builds. I thought I was designing three people. There is a difference, and it took three months to see it.</p>
+          <div class="entry-read">
+            Read Entry <span class="entry-arrow"></span>
+          </div>
+        </a>
+
+        <!-- Entry 003 -->
+        <a href="#" class="devlog-card">
+          <div class="entry-thumb">
+            <img src="assets/aurora_room.png" alt="Aurora room">
+            <div class="entry-thumb-overlay"></div>
+          </div>
+          <div class="entry-num">003</div>
+          <div class="entry-meta">
+            <span class="entry-date">January 2026</span>
+            <span class="entry-tag">Systems</span>
+          </div>
+          <h3 class="entry-title">What the Pressure Meter Is Actually For</h3>
+          <p class="entry-excerpt">There is a moment in every playtest where I watch someone discover the Broadcast Pressure system and I know immediately whether the game is working. It has nothing to do with whether they win or lose. It is something much more specific than that.</p>
+          <div class="entry-read">
+            Read Entry <span class="entry-arrow"></span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       WRITING STYLE REFERENCE SECTION
+  ============================================ -->
+  <section id="style-ref">
+    <div class="style-wrap">
+      <div class="reveal">
+        <span class="eyebrow">Writing Philosophy</span>
+        <h2 class="display-lg" style="margin-bottom:28px">Devlog<br>Craft Notes</h2>
+        <p class="body-copy" style="font-size:13px;">Each entry is written in the tradition of long-form narrative nonfiction - a specific scene before any thesis, human stories before data, puzzles left unresolved. Inspired by Malcolm Gladwell's approach to making the niche feel universal.</p>
+        <blockquote class="style-quote" style="margin-top:28px">"Being interesting is more important than being complete. The best arguments are imperfect, because the perfect argument is too obvious."<br><br>- Malcolm Gladwell</blockquote>
+      </div>
+      <div class="style-grid reveal">
+        <div class="style-card">
+          <p class="style-card-title">Cold Opens</p>
+          <p class="style-card-body">Every entry opens with a scene, not a summary. A specific moment, a specific person, before any thesis is stated. The reader should not know what the entry is about until three paragraphs in.</p>
+        </div>
+        <div class="style-card">
+          <p class="style-card-title">Small to Big</p>
+          <p class="style-card-body">One bug report becomes a theory about player psychology. One playtester's confusion reveals something universal about how humans navigate systems under pressure.</p>
+        </div>
+        <div class="style-card">
+          <p class="style-card-title">The Unresolved</p>
+          <p class="style-card-body">Design problems that have not been solved are more interesting than solutions. Sharing the open question invites the reader into the work rather than positioning them as audience for the finished product.</p>
+        </div>
+        <div class="style-card">
+          <p class="style-card-title">Named People</p>
+          <p class="style-card-body">Playtesters have names. They have specific reactions. "A player was confused by the energy system" is forgettable. "Sarah dropped the controller and said nothing for four seconds" is not.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CONTACT
+  ============================================ -->
+  <section id="contact">
+    <div class="contact-wrap">
+      <div class="reveal">
+        <span class="eyebrow">Get in Touch</span>
+        <h2 class="display-lg">Let's Talk</h2>
+        <p class="body-copy" style="margin-top:20px">For press inquiries, collaboration proposals, or genuine conversation about games - I read every message personally.</p>
+        <a href="/cdn-cgi/l/email-protection#f49c9198989bb48495869f90919b999187da979b99" class="contact-email"><span class="__cf_email__" data-cfemail="c9a1aca5a5a689b9a8bba2adaca6a4acbae7aaa6a4">[email&#160;protected]</span></a>
+        <div class="link-list">
+          <a href="https://twitter.com/parkdeomes" class="link-item" target="_blank" rel="noopener">
+            <span class="link-name">Twitter / X</span>
+            <span class="link-handle">@parkdeomes</span>
+          </a>
+          <a href="https://discord.gg/parkdeomes" class="link-item" target="_blank" rel="noopener">
+            <span class="link-name">Discord</span>
+            <span class="link-handle">Join the Community</span>
+          </a>
+          <a href="https://github.com/jaejunpark0314" class="link-item" target="_blank" rel="noopener">
+            <span class="link-name">GitHub</span>
+            <span class="link-handle">jaejunpark0314</span>
+          </a>
+          <a href="https://store.steampowered.com" class="link-item" target="_blank" rel="noopener">
+            <span class="link-name">Steam</span>
+            <span class="link-handle">Subscriber Zero</span>
+          </a>
+        </div>
+      </div>
+      <div class="contact-right reveal">
+        <div class="press-box">
+          <h3>Press &amp; Media</h3>
+          <p>Looking for screenshots, key art, game descriptions, or a direct conversation with the developer? Press materials available on request. Response within 48 hours.</p>
+          <a href="/cdn-cgi/l/email-protection#e19193849292a19180938a85848e8c8492cf828e8c" class="btn btn-outline">Request Press Kit</a>
+        </div>
+        <div class="wishlist-box">
+          <span class="eyebrow" style="justify-content:center; display:flex;">JJ Park's: Subscriber Zero</span>
+          <p>Currently in active development. Wishlisting on Steam helps signal to the platform algorithm that this game deserves to exist - and keeps you notified at launch.</p>
+          <a href="https://store.steampowered.com" class="btn btn-fill btn-flip" target="_blank" rel="noopener">
+            <span class="cta-default">Wishlist on Steam</span>
+            <span class="cta-hover">Coming Soon &mdash; 2026 Q2</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+  ============================================ -->
+  <footer>
+    <div class="footer-top">
+      <a href="#" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+        <img src="assets/logo-dark.png" alt="PARK-DEOMES STUDIOS" class="logo-dark-mode" style="height:34px;width:auto;object-fit:contain;display:block;">
+        <img src="assets/logo-light.png" alt="PARK-DEOMES STUDIOS" class="logo-light-mode" style="height:34px;width:auto;object-fit:contain;display:block;">
+        <span class="footer-brand">PARK-DEOMES STUDIOS &nbsp;&middot;&nbsp; &copy; 2026 PARKDEOMES LLC</span>
+      </a>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/jaejunpark" class="footer-link" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://twitter.com/parkdeomes" class="footer-link" target="_blank" rel="noopener">Twitter</a>
+        <a href="mailto:hello@parkdeomes.com" class="footer-link">Email</a>
+      </div>
+    </div>
+    <p class="footer-studio-line">Independent game studio founded by JJ Park.</p>
+    <p class="footer-legal">
+      PARKDEOMES LLC, doing business as PARK-DEOMES STUDIOS. &nbsp;
+      All trademarks and game titles mentioned on this site belong to their respective owners and are used only to describe prior professional experience. &nbsp;
+      Visual concepts and art materials were created using AI-assisted workflows. All creative direction and final selection were performed by the author. &nbsp;
+      Proprietary internal materials from prior employers are not reproduced on this site.
+    </p>
+  </footer>
+
+  <!-- ============================================
+       SCRIPTS
+  ============================================ -->
+  <script>
+    // NAV scroll state
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('solid', window.scrollY > 64);
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // REVEAL on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const ro = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('up');
+          ro.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -48px 0px' });
+    reveals.forEach(el => ro.observe(el));
+
+    // HERO CANVAS - broadcast signal particles
+    const canvas = document.getElementById('hero-canvas');
+    const ctx = canvas.getContext('2d');
+
+    const isDark = () => document.documentElement.getAttribute('data-theme') !== 'light';
+    const COLORS_DARK = [
+      [200, 146,  42],  // mascot gold
+      [232, 184,  75],  // gold light
+      [168, 181, 196],  // mascot gray
+      [232, 192, 184],  // mascot pink
+    ];
+    const COLORS_LIGHT = [
+      [160, 110,  26],  // gold dark
+      [200, 146,  42],  // gold base
+      [107, 122, 141],  // gray dark
+      [168, 140, 120],  // warm brown
+    ];
+    const COLORS = COLORS_DARK;
+
+    let W, H, pts;
+
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+      init();
+    }
+
+    function init() {
+      const n = Math.floor((W * H) / 16000);
+      pts = Array.from({ length: n }, () => mkPt());
+    }
+
+    function mkPt() {
+      const c = COLORS[Math.floor(Math.random() * COLORS.length)];
+      return {
+        x:  Math.random() * W,
+        y:  H + Math.random() * 40,
+        vx: (Math.random() - 0.5) * 0.28,
+        vy: -(Math.random() * 0.45 + 0.08),
+        r:  Math.random() * 1.4 + 0.2,
+        a:  Math.random() * 0.45 + 0.08,
+        c:  c,
+        life: 0,
+        maxLife: 0.65 + Math.random() * 0.35,
+      };
+    }
+
+    function frame() {
+      ctx.clearRect(0, 0, W, H);
+
+      // Subtle grid
+      ctx.strokeStyle = 'rgba(30,43,62,0.35)';
+      ctx.lineWidth = 0.4;
+      const step = 60;
+      for (let x = 0; x < W; x += step) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+      }
+      for (let y = 0; y < H; y += step) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      }
+
+      // Radial glow center
+      const grd = ctx.createRadialGradient(W * 0.5, H * 0.55, 0, W * 0.5, H * 0.55, H * 0.7);
+      const r = isDark() ? 200 : 160, g = isDark() ? 146 : 110, b = isDark() ? 42 : 26;
+      grd.addColorStop(0,   `rgba(${r},${g},${b},0.07)`);
+      grd.addColorStop(0.4, `rgba(${r},${g},${b},0.03)`);
+      grd.addColorStop(1,   'rgba(0,0,0,0)');
+      ctx.fillStyle = grd;
+      ctx.fillRect(0, 0, W, H);
+
+      pts.forEach((p, i) => {
+        p.life += 0.006;
+        if (p.life >= p.maxLife || p.y < -12) {
+          pts[i] = mkPt(); return;
+        }
+        const t = p.life / p.maxLife;
+        const fade = Math.sin(t * Math.PI) * p.a;
+        const [r, g, b] = p.c;
+
+        // Particle dot
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${r},${g},${b},${fade})`;
+        ctx.fill();
+
+        // Short trail
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.x + p.vx * 10, p.y + p.vy * 10);
+        ctx.strokeStyle = `rgba(${r},${g},${b},${fade * 0.28})`;
+        ctx.lineWidth = p.r * 0.6;
+        ctx.stroke();
+
+        p.x += p.vx;
+        p.y += p.vy;
+      });
+
+      requestAnimationFrame(frame);
+    }
+
+    window.addEventListener('resize', resize, { passive: true });
+    resize();
+    frame();
+
+    // THEME TOGGLE
+    const themeToggle  = document.getElementById('theme-toggle');
+    const themeIcon    = document.getElementById('theme-icon');
+    const root         = document.documentElement;
+
+    function applyTheme(mode) {
+      if (mode === 'light') {
+        root.setAttribute('data-theme', 'light');
+        themeIcon.innerHTML = '&#9788;'; // sun
+        localStorage.setItem('pd-theme', 'light');
+      } else {
+        root.removeAttribute('data-theme');
+        themeIcon.innerHTML = '&#9790;'; // moon
+        localStorage.setItem('pd-theme', 'dark');
+      }
+    }
+
+    // Restore saved preference
+    const saved = localStorage.getItem('pd-theme');
+    if (saved) applyTheme(saved);
+    else if (window.matchMedia('(prefers-color-scheme: light)').matches) applyTheme('light');
+
+    themeToggle.addEventListener('click', () => {
+      const isLight = root.getAttribute('data-theme') === 'light';
+      applyTheme(isLight ? 'dark' : 'light');
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      const href = a.getAttribute('href');
+      if (href === '#') return;
+      a.addEventListener('click', e => {
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
