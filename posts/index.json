@@ -4,8 +4,19 @@
     "file": "/posts/001-the-wrong-question.md",
     "title": "The Wrong Question",
     "date": "March 2026",
+    "published": "2026-03-15",
     "tag": "Origins",
     "excerpt": "I spent years asking the wrong question. The right one was simpler, and scarier.",
     "image": "/assets/VOID-C.png"
+  },
+  {
+    "num": "002",
+    "file": "/posts/002-subscriber-zero.md",
+    "title": "Subscriber Zero",
+    "date": "March 2026",
+    "published": "2026-03-15",
+    "tag": "World",
+    "excerpt": "I asked an AI to name my game. It worked. That should probably bother me more than it does.",
+    "image": "/assets/SCARLET-C.png"
   }
 ]
