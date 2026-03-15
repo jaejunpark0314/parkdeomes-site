@@ -6,7 +6,7 @@
   <title>JJ Park's: Subscriber Zero | PARK-DEOMES STUDIOS</title>
   <meta name="description" content="PARKDEOMES is an independent game studio founded by JJ Park, a product marketing leader behind global AAA launches including Civilization and NBA 2K. Currently developing JJ Park's: Subscriber Zero.">
   <meta property="og:title" content="PARK-DEOMES STUDIOS">
-  <meta property="og:description" content="Independent game studio. Currently developing Subscriber Zero.">
+  <meta property="og:description" content="Independent game studio. Currently developing JJ Park's: Subscriber Zero.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://parkdeomes.com">
   <meta name="twitter:card" content="summary_large_image">
@@ -331,8 +331,13 @@
       margin: -48px -40px 32px;
       background: var(--bg-0);
     }
-    .char-card.aurora .char-art { background: #080e1c; }
+    .char-card.aurora .char-art { background: #0a1020; }
     .char-card.scarlet .char-art { background: #120808; }
+    .char-card.scarlet .char-body-img {
+      object-fit: cover;
+      object-position: center top;
+      transform: scale(1.12) translateX(-3%);
+    }
 
     .char-body-img {
       width: 100%;
@@ -343,12 +348,17 @@
       transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
     }
     .char-card.aurora .char-body-img {
-      object-fit: contain;
+      object-fit: cover;
       object-position: top center;
-      mix-blend-mode: luminosity;
-      opacity: 0.92;
+      transform: scale(1.18) translateY(4%);
+      opacity: 1;
+    }
+    .char-card.aurora .char-art {
+      background: #F5F4F2;
     }
     .char-card:hover .char-body-img { transform: scale(1.06) translateY(-6px); }
+    .char-card.aurora:hover .char-body-img { transform: scale(1.25) translateY(2%); }
+    .char-card.scarlet:hover .char-body-img { transform: scale(1.18) translateX(-3%) translateY(-4%); }
 
     .char-art-fade {
       position: absolute;
@@ -567,14 +577,16 @@
 
     .nav-cta {
       font-family: var(--f-ui);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.10em;
       text-transform: uppercase;
       color: var(--accent);
       text-decoration: none;
       border: 1px solid rgba(var(--accent-rgb),0.35);
-      padding: 8px 20px;
+      padding: 8px 24px;
+      min-width: 160px;
+      text-align: center;
       position: relative;
       overflow: hidden;
       display: inline-block;
@@ -1583,6 +1595,13 @@
       line-height: 1.8;
     }
 
+
+    .link-soon {
+      color: var(--accent) !important;
+      opacity: 0.75;
+      font-style: italic;
+    }
+
     /* ============================================
        CONTACT
     ============================================ */
@@ -1610,7 +1629,7 @@
       transition: color 0.2s;
     }
 
-    .contact-email:hover { color: #d49aff; }
+    .contact-email:hover { color: var(--accent-lt); }
 
     .link-list {
       border: 1px solid var(--line-0);
@@ -1854,7 +1873,7 @@
     </ul>
     <a href="https://store.steampowered.com" class="nav-cta" target="_blank" rel="noopener">
       <span class="cta-default">Wishlist</span>
-      <span class="cta-hover">Coming Soon &mdash; 2026 Q2</span>
+      <span class="cta-hover">Available Q2 2026</span>
     </a>
     <button id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">
       <span id="theme-icon">&#9790;</span>
@@ -1998,7 +2017,7 @@
           <a href="#characters" class="btn btn-fill">Meet the Characters</a>
           <a href="https://store.steampowered.com" class="btn btn-outline btn-flip" target="_blank" rel="noopener">
             <span class="cta-default">Wishlist on Steam</span>
-            <span class="cta-hover">Coming Soon &mdash; 2026 Q2</span>
+            <span class="cta-hover">Available Q2 2026</span>
           </a>
         </div>
       </div>
@@ -2282,8 +2301,8 @@
       <div class="reveal">
         <span class="eyebrow">Writing Philosophy</span>
         <h2 class="display-lg" style="margin-bottom:28px">Devlog<br>Craft Notes</h2>
-        <p class="body-copy" style="font-size:13px;">Each entry is written in the tradition of long-form narrative nonfiction - a specific scene before any thesis, human stories before data, puzzles left unresolved. Inspired by Malcolm Gladwell's approach to making the niche feel universal.</p>
-        <blockquote class="style-quote" style="margin-top:28px">"Being interesting is more important than being complete. The best arguments are imperfect, because the perfect argument is too obvious."<br><br>- Malcolm Gladwell</blockquote>
+        <p class="body-copy" style="font-size:13px;">Each entry is written in the tradition of long-form narrative nonfiction - a specific scene before any thesis, human stories before data, puzzles left unresolved. The goal is to document the thinking, not just the output.</p>
+        <blockquote class="style-quote" style="margin-top:28px">"A devlog isn't a changelog. It's the part of the process that never makes it into the game."<br><br>&mdash; JJ Park, PARKDEOMES</blockquote>
       </div>
       <div class="style-grid reveal">
         <div class="style-card">
@@ -2315,23 +2334,19 @@
         <span class="eyebrow">Get in Touch</span>
         <h2 class="display-lg">Let's Talk</h2>
         <p class="body-copy" style="margin-top:20px">For press inquiries, collaboration proposals, or genuine conversation about games - I read every message personally.</p>
-        <a href="/cdn-cgi/l/email-protection#f49c9198989bb48495869f90919b999187da979b99" class="contact-email"><span class="__cf_email__" data-cfemail="c9a1aca5a5a689b9a8bba2adaca6a4acbae7aaa6a4">[email&#160;protected]</span></a>
+        <a href="mailto:jaejunpark0314@gmail.com" class="contact-email">jaejunpark0314@gmail.com</a>
         <div class="link-list">
           <a href="https://twitter.com/parkdeomes" class="link-item" target="_blank" rel="noopener">
             <span class="link-name">Twitter / X</span>
-            <span class="link-handle">@parkdeomes</span>
+            <span class="link-handle link-soon">Available Q2 2026</span>
           </a>
           <a href="https://discord.gg/parkdeomes" class="link-item" target="_blank" rel="noopener">
             <span class="link-name">Discord</span>
-            <span class="link-handle">Join the Community</span>
-          </a>
-          <a href="https://github.com/jaejunpark0314" class="link-item" target="_blank" rel="noopener">
-            <span class="link-name">GitHub</span>
-            <span class="link-handle">jaejunpark0314</span>
+            <span class="link-handle link-soon">Available Q2 2026</span>
           </a>
           <a href="https://store.steampowered.com" class="link-item" target="_blank" rel="noopener">
             <span class="link-name">Steam</span>
-            <span class="link-handle">Subscriber Zero</span>
+            <span class="link-handle link-soon">Available Q2 2026</span>
           </a>
         </div>
       </div>
@@ -2339,14 +2354,14 @@
         <div class="press-box">
           <h3>Press &amp; Media</h3>
           <p>Looking for screenshots, key art, game descriptions, or a direct conversation with the developer? Press materials available on request. Response within 48 hours.</p>
-          <a href="/cdn-cgi/l/email-protection#e19193849292a19180938a85848e8c8492cf828e8c" class="btn btn-outline">Request Press Kit</a>
+          <a href="mailto:jaejunpark0314@gmail.com" class="btn btn-outline">Request Press Kit</a>
         </div>
         <div class="wishlist-box">
           <span class="eyebrow" style="justify-content:center; display:flex;">JJ Park's: Subscriber Zero</span>
           <p>Currently in active development. Wishlisting on Steam helps signal to the platform algorithm that this game deserves to exist - and keeps you notified at launch.</p>
           <a href="https://store.steampowered.com" class="btn btn-fill btn-flip" target="_blank" rel="noopener">
             <span class="cta-default">Wishlist on Steam</span>
-            <span class="cta-hover">Coming Soon &mdash; 2026 Q2</span>
+            <span class="cta-hover">Available Q2 2026</span>
           </a>
         </div>
       </div>
@@ -2366,7 +2381,7 @@
       <div class="footer-links">
         <a href="https://linkedin.com/in/jaejunpark" class="footer-link" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://twitter.com/parkdeomes" class="footer-link" target="_blank" rel="noopener">Twitter</a>
-        <a href="mailto:hello@parkdeomes.com" class="footer-link">Email</a>
+        <a href="mailto:jaejunpark0314@gmail.com" class="footer-link">Email</a>
       </div>
     </div>
     <p class="footer-studio-line">Independent game studio founded by JJ Park.</p>
