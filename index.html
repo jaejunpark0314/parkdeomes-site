@@ -2999,8 +2999,10 @@
     const reveals = document.querySelectorAll('.reveal');
     const ro = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('up'); ro.unobserve(e.target); } });
-    }, { threshold: 0.08, rootMargin: '0px 0px -48px 0px' });
+    }, { threshold: 0.04, rootMargin: '0px 0px 0px 0px' });
     reveals.forEach(el => ro.observe(el));
+    // 모바일 iOS Safari 폴백: 1.8초 후 미노출 요소 강제 표시
+    setTimeout(() => { reveals.forEach(el => { if (!el.classList.contains('up')) el.classList.add('up'); }); }, 1800);
 
     const canvas = document.getElementById('hero-canvas');
     const ctx = canvas.getContext('2d');
