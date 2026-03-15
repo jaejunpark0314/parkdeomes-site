@@ -18,5 +18,15 @@
     "tag": "World",
     "excerpt": "I asked an AI to name my game. It worked. That should probably bother me more than it does.",
     "image": "/assets/SCARLET-C.png"
+  },
+  {
+    "num": "003",
+    "file": "/posts/003-66-34.md",
+    "title": "66% Slay the Spire, 34% Darkest Dungeon",
+    "date": "March 2026",
+    "published": "2026-03-15",
+    "tag": "Design",
+    "excerpt": "Two games. One ratio. And an ongoing argument with myself about whether I'm making the right call.",
+    "image": "/assets/AURORA-C.png"
   }
 ]

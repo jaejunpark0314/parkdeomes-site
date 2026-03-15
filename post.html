@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devlog | PARK-DEOMES STUDIOS</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Barlow:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-0:#080C14; --bg-1:#0D1220; --bg-2:#131929; --bg-3:#1B2235;
+      --line-0:#1E2B3E; --line-1:#2E4058;
+      --txt-0:#EAF0F6; --txt-1:#7A92A8; --txt-2:#3E5468;
+      --accent:#C8922A; --accent-lt:#E8B84B; --accent-dim:rgba(200,146,42,0.13); --accent-rgb:200,146,42;
+      --f-display:'Bebas Neue',sans-serif; --f-ui:'Syne',sans-serif; --f-barlow:'Barlow',sans-serif;
+    }
+    [data-theme="light"] {
+      --bg-0:#F6F4F0; --bg-1:#EEEBe4; --bg-2:#E4E0D8; --bg-3:#D8D4CC;
+      --line-0:#D0CBBB; --line-1:#B8B0A0;
+      --txt-0:#1E2B4A; --txt-1:#4A5A78; --txt-2:#8A96A8;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--f-barlow); background: var(--bg-0); color: var(--txt-0); -webkit-font-smoothing: antialiased; min-height: 100vh; }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 200; background: rgba(8,12,20,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line-0); padding: 0 64px; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo img { height: 32px; opacity: .9; }
+    .nav-logo img.logo-light { display: none; }
+    [data-theme="light"] .nav-logo img.logo-dark  { display: none; }
+    [data-theme="light"] .nav-logo img.logo-light { display: block; }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+    .nav-back { font-family: var(--f-ui); font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--txt-1); display: flex; align-items: center; gap: 8px; transition: color .2s; }
+    .nav-back:hover { color: var(--accent); }
+    .nav-back svg { transition: transform .2s; }
+    .nav-back:hover svg { transform: translateX(-3px); }
+    #theme-toggle { background: none; border: 1px solid var(--line-1); color: var(--txt-1); width: 36px; height: 36px; border-radius: 6px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: border-color .2s, color .2s; }
+    #theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* HERO IMAGE */
+    .post-hero { width: 100%; height: 380px; overflow: hidden; position: relative; }
+    .post-hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; filter: brightness(.55); }
+    .post-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 20%, var(--bg-0) 100%); }
+
+    /* ARTICLE */
+    .post-wrap { max-width: 720px; margin: 0 auto; padding: 0 24px 128px; }
+    .post-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; flex-wrap: wrap; }
+    .post-num { font-family: var(--f-display); font-size: 64px; color: var(--line-1); line-height: 1; margin-right: 8px; }
+    .post-date { font-family: var(--f-ui); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--txt-2); }
+    .post-tag { font-family: var(--f-ui); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(var(--accent-rgb),.3); padding: 2px 9px; border-radius: 100px; }
+    .post-ago { font-family: var(--f-ui); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--txt-2); opacity: .55; }
+
+    /* PROSE */
+    .post-body { font-size: 16px; font-weight: 300; line-height: 1.95; color: var(--txt-1); }
+    .post-body h1 { font-family: var(--f-display); font-size: clamp(40px,6vw,68px); color: var(--txt-0); line-height: 1.0; margin-bottom: 40px; letter-spacing: .02em; }
+    .post-body h2 { font-family: var(--f-ui); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin: 56px 0 20px; }
+    .post-body p { margin-bottom: 26px; }
+    .post-body p:last-child { margin-bottom: 0; }
+    .post-body hr { border: none; border-top: 1px solid var(--line-0); margin: 48px 0; }
+    .post-body strong { color: var(--txt-0); font-weight: 600; }
+    .post-body em { color: var(--txt-2); font-style: italic; }
+    .post-body blockquote { border-left: 2px solid var(--accent); margin: 36px 0; padding: 6px 0 6px 24px; color: var(--txt-2); font-style: italic; font-size: 15px; }
+    .post-body a { color: var(--accent); text-underline-offset: 3px; text-decoration: underline; text-decoration-color: rgba(var(--accent-rgb),.3); }
+    .post-footer-note { font-size: 11px; color: var(--txt-2); margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--line-0); font-family: var(--f-ui); letter-spacing: .06em; }
+
+    /* NAV BETWEEN POSTS */
+    .post-nav { display: flex; justify-content: space-between; align-items: center; padding: 40px 0; border-top: 1px solid var(--line-0); margin-top: 64px; gap: 16px; }
+    .post-nav-link { font-family: var(--f-ui); font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--txt-1); display: flex; align-items: center; gap: 8px; transition: color .2s; }
+    .post-nav-link:hover { color: var(--accent); }
+    .post-nav-link.all { color: var(--accent); border: 1px solid rgba(var(--accent-rgb),.3); padding: 8px 16px; border-radius: 100px; transition: background .2s; }
+    .post-nav-link.all:hover { background: var(--accent-dim); }
+
+    /* LOADING */
+    .loading { padding: 120px 0; text-align: center; color: var(--txt-2); font-family: var(--f-ui); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+
+    footer { border-top: 1px solid var(--line-0); padding: 24px 64px; display: flex; align-items: center; justify-content: space-between; }
+    .foot-copy { font-family: var(--f-ui); font-size: 11px; color: var(--txt-2); letter-spacing: .08em; }
+
+    @media (max-width: 768px) {
+      nav, footer { padding: 0 20px; }
+      nav { padding: 0 20px; height: 56px; }
+      footer { padding: 20px; }
+      .post-hero { height: 240px; }
+      .post-wrap { padding: 0 20px 80px; }
+      .post-body h1 { font-size: 38px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="assets/Logo_Black_Horizontal_Transparent.png" alt="PARK-DEOMES STUDIOS" class="logo-dark">
+      <img src="assets/Logo_White_Horizontal_Transparent.png" alt="PARK-DEOMES STUDIOS" class="logo-light">
+    </a>
+    <div class="nav-right">
+      <a href="devlog.html" class="nav-back">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        All Entries
+      </a>
+      <button id="theme-toggle" aria-label="Toggle theme"><span id="theme-icon">&#9790;</span></button>
+    </div>
+  </nav>
+
+  <div id="post-hero" class="post-hero" style="display:none">
+    <img id="hero-img" src="" alt="">
+    <div class="post-hero-overlay"></div>
+  </div>
+
+  <div class="post-wrap">
+    <div id="post-content" class="loading">Loading...</div>
+    <div class="post-nav" id="post-nav" style="display:none">
+      <a href="" id="nav-prev" class="post-nav-link" style="display:none">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Previous
+      </a>
+      <a href="devlog.html" class="post-nav-link all">All Entries</a>
+      <a href="" id="nav-next" class="post-nav-link" style="display:none">
+        Next
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <span class="foot-copy">© 2026 PARKDEOMES LLC · <a href="/" style="color:var(--accent)">parkdeomes.com</a></span>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+  <script>
+    // Theme
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    function applyTheme(mode) {
+      if (mode === 'light') { root.setAttribute('data-theme','light'); themeIcon.innerHTML='&#9788;'; localStorage.setItem('pd-theme','light'); }
+      else { root.removeAttribute('data-theme'); themeIcon.innerHTML='&#9790;'; localStorage.setItem('pd-theme','dark'); }
+    }
+    const saved = localStorage.getItem('pd-theme');
+    if (saved) applyTheme(saved);
+    else if (window.matchMedia('(prefers-color-scheme: light)').matches) applyTheme('light');
+    themeToggle.addEventListener('click', () => applyTheme(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light'));
+
+    // timeAgo
+    function timeAgo(dateStr) {
+      const d = new Date(dateStr);
+      if (isNaN(d)) return '';
+      const diff = Math.floor((new Date() - d) / 1000);
+      if (diff < 60) return 'Just now';
+      if (diff < 3600) return Math.floor(diff/60) + ' min ago';
+      if (diff < 86400) return Math.floor(diff/3600) + ' hr ago';
+      if (diff < 86400*2) return 'Yesterday';
+      if (diff < 86400*7) return Math.floor(diff/86400) + ' days ago';
+      if (diff < 86400*30) return Math.floor(diff/86400/7) + ' wk ago';
+      if (diff < 86400*365) return Math.floor(diff/86400/30) + ' mo ago';
+      return Math.floor(diff/86400/365) + ' yr ago';
+    }
+
+    async function loadPost() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      if (!id) { window.location.href = 'devlog.html'; return; }
+
+      const content = document.getElementById('post-content');
+      const heroWrap = document.getElementById('post-hero');
+      const heroImg = document.getElementById('hero-img');
+      const postNav = document.getElementById('post-nav');
+
+      try {
+        // Load index for meta + prev/next
+        const idxRes = await fetch('/posts/index.json?v=' + Date.now());
+        const posts = idxRes.ok ? await idxRes.json() : [];
+        const idx = posts.findIndex(p => p.file.includes(id));
+        const post = posts[idx];
+
+        if (post) {
+          // Hero image
+          if (post.image) {
+            heroImg.src = post.image;
+            heroImg.alt = post.title;
+            heroWrap.style.display = 'block';
+          }
+          // Page title
+          document.title = post.title + ' | PARK-DEOMES STUDIOS';
+
+          // Prev / Next
+          const prevPost = posts[idx + 1];
+          const nextPost = posts[idx - 1];
+          const navPrev = document.getElementById('nav-prev');
+          const navNext = document.getElementById('nav-next');
+          if (prevPost) {
+            navPrev.href = 'post.html?id=' + prevPost.file.replace('/posts/','').replace('.md','');
+            navPrev.style.display = 'flex';
+          }
+          if (nextPost) {
+            navNext.href = 'post.html?id=' + nextPost.file.replace('/posts/','').replace('.md','');
+            navNext.style.display = 'flex';
+          }
+          postNav.style.display = 'flex';
+        }
+
+        // Load md
+        const mdRes = await fetch('/posts/' + id + '.md?v=' + Date.now());
+        if (!mdRes.ok) throw new Error('not found');
+        let md = await mdRes.text();
+        md = md.replace(/^---[\s\S]*?---\n?/, '');
+
+        const ago = post && post.published ? timeAgo(post.published) : '';
+        const metaHtml = post ? `
+          <div class="post-meta">
+            <span class="post-num">${post.num}</span>
+            <span class="post-date">${post.date}</span>
+            <span class="post-tag">${post.tag}</span>
+            ${ago ? `<span class="post-ago">${ago}</span>` : ''}
+          </div>
+        ` : '';
+
+        content.className = 'post-body';
+        content.innerHTML = metaHtml + marked.parse(md);
+
+        // Wrap last italic p as footer note
+        const paras = content.querySelectorAll('p');
+        paras.forEach(p => {
+          if (p.textContent.trim().startsWith('All trademarks')) {
+            p.classList.add('post-footer-note');
+          }
+        });
+
+      } catch (e) {
+        content.className = 'loading';
+        content.innerHTML = 'Could not load entry.';
+      }
+    }
+
+    loadPost();
+  </script>
+</body>
+</html>

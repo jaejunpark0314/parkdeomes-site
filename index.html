@@ -3255,7 +3255,9 @@
         <p class="entry-excerpt">${post.excerpt}</p>
         <div class="entry-read">Read Entry <span class="entry-arrow"></span></div>
       `;
-      card.addEventListener('click', e => { e.preventDefault(); openPost(post); });
+      const slug = post.file.replace('/posts/','').replace('.md','');
+      card.href = 'post.html?id=' + slug;
+      card.addEventListener('click', e => { /* navigate */ });
       return card;
     }
 
@@ -3324,7 +3326,7 @@
     // "All Entries" button — for now scrolls to devlog section
     document.querySelector('.devlog-header .btn')?.addEventListener('click', e => {
       e.preventDefault();
-      document.getElementById('devlog')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.location.href = 'devlog.html';
     });
 
     loadDevlog();
