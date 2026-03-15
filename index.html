@@ -2831,62 +2831,8 @@
         </div>
         <a href="#" class="btn btn-outline">All Entries</a>
       </div>
-      <div class="devlog-grid reveal">
-
-        <!-- Entry 001 -->
-        <a href="#" class="devlog-card">
-          <div class="entry-thumb">
-            <img src="assets/aurora_mech.png" alt="Aurora mech" style="object-position: center top;">
-            <div class="entry-thumb-overlay"></div>
-          </div>
-          <div class="entry-num">001</div>
-          <div class="entry-meta">
-            <span class="entry-date">March 2026</span>
-            <span class="entry-tag">Origins</span>
-          </div>
-          <h3 class="entry-title">The Wrong Question</h3>
-          <p class="entry-excerpt">Every game designer I have ever spoken to started from the same place. They had a mechanic. I had spent six months building a deckbuilder before I realized I was asking the wrong question entirely - "what does this game do?" instead of the one that actually mattered.</p>
-          <div class="entry-read">
-            Read Entry <span class="entry-arrow"></span>
-          </div>
-        </a>
-
-        <!-- Entry 002 -->
-        <a href="#" class="devlog-card">
-          <div class="entry-thumb">
-            <img src="assets/card_concept.png" alt="Ferro in the dungeon">
-            <div class="entry-thumb-overlay"></div>
-          </div>
-          <div class="entry-num">002</div>
-          <div class="entry-meta">
-            <span class="entry-date">February 2026</span>
-            <span class="entry-tag">Design</span>
-          </div>
-          <h3 class="entry-title">Three Streamers Walk Into a Dungeon</h3>
-          <p class="entry-excerpt">When I started designing the three playable characters, I made a mistake so obvious I am almost embarrassed to write it here. I designed three builds. I thought I was designing three people. There is a difference, and it took three months to see it.</p>
-          <div class="entry-read">
-            Read Entry <span class="entry-arrow"></span>
-          </div>
-        </a>
-
-        <!-- Entry 003 -->
-        <a href="#" class="devlog-card">
-          <div class="entry-thumb">
-            <img src="assets/concept_artworks.png" alt="Lumen with lantern">
-            <div class="entry-thumb-overlay"></div>
-          </div>
-          <div class="entry-num">003</div>
-          <div class="entry-meta">
-            <span class="entry-date">January 2026</span>
-            <span class="entry-tag">Systems</span>
-          </div>
-          <h3 class="entry-title">What the Pressure Meter Is Actually For</h3>
-          <p class="entry-excerpt">There is a moment in every playtest where I watch someone discover the Broadcast Pressure system and I know immediately whether the game is working. It has nothing to do with whether they win or lose. It is something much more specific than that.</p>
-          <div class="entry-read">
-            Read Entry <span class="entry-arrow"></span>
-          </div>
-        </a>
-
+      <div id="devlog-grid" class="devlog-grid reveal">
+        <!-- dynamically rendered by devlog.js -->
       </div>
     </div>
   </section>
@@ -2967,6 +2913,30 @@
       </div>
     </div>
   </section>
+
+  <!-- DEVLOG POST MODAL -->
+  <div id="post-modal" style="display:none;position:fixed;inset:0;background:rgba(5,8,16,0.88);z-index:9998;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto;" onclick="if(event.target===this)closePost()">
+    <div id="post-modal-inner" style="background:var(--bg-1);border:1px solid var(--line-1);max-width:720px;width:100%;margin:40px auto;padding:64px 56px 80px;position:relative;">
+      <button onclick="closePost()" aria-label="Close" style="position:absolute;top:24px;right:28px;background:none;border:none;color:var(--txt-2);font-size:26px;cursor:pointer;line-height:1;font-family:var(--f-ui);">&times;</button>
+      <div id="post-modal-body"></div>
+    </div>
+  </div>
+
+  <style>
+    /* ── Post modal typography ── */
+    #post-modal-body { font-family: var(--f-barlow); color: var(--txt-1); line-height: 1.9; font-size: 15px; }
+    #post-modal-body h1 { font-family: var(--f-display); font-size: clamp(28px,5vw,44px); color: var(--txt-0); line-height: 1.1; margin: 0 0 32px; letter-spacing: 0.02em; }
+    #post-modal-body h2 { font-family: var(--f-ui); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin: 48px 0 18px; }
+    #post-modal-body p { margin: 0 0 22px; }
+    #post-modal-body hr { border: none; border-top: 1px solid var(--line-1); margin: 40px 0; }
+    #post-modal-body strong { color: var(--txt-0); font-weight: 600; }
+    #post-modal-body em { color: var(--txt-2); font-style: italic; }
+    #post-modal-body blockquote { border-left: 2px solid var(--accent); margin: 32px 0; padding: 4px 0 4px 24px; color: var(--txt-2); font-style: italic; }
+    #post-modal-body .post-meta { font-family: var(--f-ui); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--txt-2); margin-bottom: 40px; display: flex; gap: 16px; }
+    #post-modal-body .post-tag { color: var(--accent); }
+    #post-modal-body a { color: var(--accent); text-underline-offset: 3px; }
+    #post-modal-body .post-footer-note { font-size: 11px; color: var(--txt-2); margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line-0); }
+  </style>
 
   <!-- PRIVACY POLICY MODAL -->
   <div id="privacy-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:9999;align-items:center;justify-content:center;padding:24px;" onclick="if(event.target===this)this.style.display='none'">
@@ -3225,6 +3195,107 @@
 
       audio.addEventListener('ended', () => updatePlayIcon(false));
     }
+  <!-- marked.js for markdown rendering -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+
+  <script>
+    /* ============================================================
+       DEVLOG — fetch posts/index.json → render cards → modal read
+    ============================================================ */
+
+    const DEVLOG_GRID = document.getElementById('devlog-grid');
+
+    function buildCard(post) {
+      const card = document.createElement('a');
+      card.className = 'devlog-card';
+      card.href = '#';
+      card.setAttribute('data-file', post.file);
+      card.innerHTML = `
+        <div class="entry-thumb">
+          <img src="${post.image || 'assets/void-c.png'}" alt="${post.title}" style="object-fit:cover;width:100%;height:100%;">
+          <div class="entry-thumb-overlay"></div>
+        </div>
+        <div class="entry-num">${post.num}</div>
+        <div class="entry-meta">
+          <span class="entry-date">${post.date}</span>
+          <span class="entry-tag">${post.tag}</span>
+        </div>
+        <h3 class="entry-title">${post.title}</h3>
+        <p class="entry-excerpt">${post.excerpt}</p>
+        <div class="entry-read">Read Entry <span class="entry-arrow"></span></div>
+      `;
+      card.addEventListener('click', e => { e.preventDefault(); openPost(post); });
+      return card;
+    }
+
+    async function loadDevlog() {
+      if (!DEVLOG_GRID) return;
+      try {
+        const res = await fetch('posts/index.json?v=' + Date.now());
+        if (!res.ok) throw new Error('index.json not found');
+        const posts = await res.json();
+        DEVLOG_GRID.innerHTML = '';
+        posts.forEach(post => DEVLOG_GRID.appendChild(buildCard(post)));
+
+        // re-trigger reveal observer for newly added cards
+        DEVLOG_GRID.querySelectorAll('.devlog-card').forEach(el => {
+          el.classList.add('reveal');
+          ro.observe(el);
+        });
+      } catch (err) {
+        console.warn('[devlog] Could not load posts/index.json:', err.message);
+        DEVLOG_GRID.innerHTML = '<p style="font-family:var(--f-ui);font-size:12px;color:var(--txt-2);padding:40px 0;">No entries yet.</p>';
+      }
+    }
+
+    async function openPost(post) {
+      const modal    = document.getElementById('post-modal');
+      const body     = document.getElementById('post-modal-body');
+      body.innerHTML = '<p style="font-family:var(--f-ui);font-size:12px;color:var(--txt-2);padding:40px 0;letter-spacing:0.12em;">Loading...</p>';
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+
+      try {
+        const res = await fetch(post.file + '?v=' + Date.now());
+        if (!res.ok) throw new Error('post not found');
+        let md = await res.text();
+
+        // strip YAML frontmatter (--- ... ---)
+        md = md.replace(/^---[\s\S]*?---\n?/, '');
+
+        const html = marked.parse(md);
+        body.innerHTML = `
+          <div class="post-meta">
+            <span>${post.date}</span>
+            <span class="post-tag">${post.tag}</span>
+          </div>
+          ${html}
+        `;
+      } catch (err) {
+        body.innerHTML = '<p style="font-family:var(--f-ui);color:var(--txt-2);">Could not load entry.</p>';
+      }
+
+      // scroll modal to top
+      document.getElementById('post-modal').scrollTop = 0;
+    }
+
+    function closePost() {
+      document.getElementById('post-modal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    // close modal on Escape key
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closePost();
+    });
+
+    // "All Entries" button — for now scrolls to devlog section
+    document.querySelector('.devlog-header .btn')?.addEventListener('click', e => {
+      e.preventDefault();
+      document.getElementById('devlog')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    loadDevlog();
   </script>
 </body>
 </html>
