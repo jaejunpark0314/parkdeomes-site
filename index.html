@@ -121,6 +121,19 @@
     .footer-legal,
     .footer-note { font-family: var(--f-body); }
 
+
+    /* ── Custom scrollbar ── */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--bg-0); }
+    ::-webkit-scrollbar-thumb {
+      background: var(--line-1);
+      border-radius: 5px;
+      border: 2px solid var(--bg-0);
+    }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+    /* Firefox */
+    * { scrollbar-width: thin; scrollbar-color: var(--line-1) var(--bg-0); }
+
     html { scroll-behavior: smooth; font-size: 17px; }
 
     body {
@@ -1251,6 +1264,13 @@
 
 
 
+
+    /* World section: 다크/라이트 모드 무관하게 항상 밝은 텍스트 */
+    #world .eyebrow { color: var(--accent) !important; }
+    [data-theme="light"] #world .display-lg { color: #F0EEE8; }
+    [data-theme="light"] #world .world-lore { color: rgba(240,238,232,0.75); border-left-color: var(--accent); }
+    [data-theme="light"] #world .world-header { color: #F0EEE8; }
+
     /* ── World header layout: lore + music player side by side ── */
     .world-header-inner {
       display: flex;
@@ -1440,7 +1460,7 @@
 
     /* ── World section ── */
     #world {
-      background: var(--bg-0);
+      background: #080C14;
       padding: 0;
       overflow: hidden;
     }
@@ -1458,15 +1478,15 @@
       position: absolute;
       inset: 0;
       background: url('assets/VOID-C.png') center 25%/cover no-repeat;
-      opacity: 0.45;
+      opacity: 0.55;
     }
 
     .world-stage-vignette {
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(to bottom, var(--bg-0) 0%, transparent 20%, transparent 80%, var(--bg-0) 100%),
-        linear-gradient(to right, var(--bg-0) 0%, rgba(8,12,20,0.6) 40%, transparent 70%);
+        linear-gradient(to bottom, #080C14 0%, transparent 20%, transparent 78%, #080C14 100%),
+        linear-gradient(to right, rgba(8,12,20,0.92) 0%, rgba(8,12,20,0.6) 40%, transparent 70%);
     }
 
     .world-header {
@@ -1522,6 +1542,8 @@
       overflow: hidden;
       transition: background 0.3s;
       cursor: default;
+      display: flex;
+      flex-direction: column;
     }
 
     .zone-card::before {
@@ -1576,6 +1598,7 @@
       color: var(--txt-2);
       line-height: 1.8;
       font-style: italic;
+      flex-grow: 1;
     }
 
     .zone-enemy-name {
@@ -1585,8 +1608,17 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--zone-color, var(--line-1));
-      margin-top: 14px;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line-0);
     }
+
+
+    [data-theme="light"] .world-zones { background: #0A0E18; }
+    [data-theme="light"] .zone-card { background: #0D1220; }
+    [data-theme="light"] .zone-card:hover { background: #141828; }
+    [data-theme="light"] .zone-name { color: #E8E4DC; }
+    [data-theme="light"] .zone-flavor { color: rgba(220,215,205,0.65); }
 
     @media (max-width: 1024px) {
       .world-zones { grid-template-columns: repeat(3, 1fr); }
