@@ -16,7 +16,7 @@
   <link rel="apple-touch-icon" href="assets/Mouse_transparent.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Barlow:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Black+Han+Sans&family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Barlow:wght@400;700;900&display=swap" rel="stylesheet">
 
   <style>
     /* ============================================
@@ -133,6 +133,41 @@
     ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
     /* Firefox */
     * { scrollbar-width: thin; scrollbar-color: var(--line-1) var(--bg-0); }
+
+
+    @media (max-width: 768px) {
+      .hero-scroll { bottom: 80px; }
+      .hero-actions { margin-bottom: 0; padding-bottom: 0; }
+    }
+
+
+    /* 다크모드 히어로 텍스트 가독성 강화 — 다크모드 전용 */
+    :not([data-theme="light"]) .hero-title {
+      text-shadow:
+        0 0 40px rgba(8,12,20,0.9),
+        0 2px 8px rgba(8,12,20,0.95),
+        0 0 80px rgba(8,12,20,0.6);
+    }
+    :not([data-theme="light"]) .hero-tagline {
+      text-shadow:
+        0 1px 6px rgba(8,12,20,0.95),
+        0 0 20px rgba(8,12,20,0.8);
+    }
+    :not([data-theme="light"]) .hero-badge {
+      text-shadow: 0 1px 4px rgba(8,12,20,0.9);
+    }
+    :not([data-theme="light"]) .hero-byline {
+      text-shadow: 0 1px 6px rgba(8,12,20,0.95);
+    }
+    :not([data-theme="light"]) .hero-inner {
+      background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(8,12,20,0.45) 0%, transparent 100%);
+    }
+    /* 라이트모드: 완전 리셋 */
+    [data-theme="light"] .hero-title,
+    [data-theme="light"] .hero-tagline,
+    [data-theme="light"] .hero-badge,
+    [data-theme="light"] .hero-byline { text-shadow: none; }
+    [data-theme="light"] .hero-inner { background: none; }
 
     html { scroll-behavior: smooth; font-size: 17px; }
 
@@ -385,6 +420,37 @@
     [data-theme="light"] #games .game-inspired { color: rgba(240,238,232,0.4); }
     [data-theme="light"] #games .game-inspired a { color: rgba(240,238,232,0.55); }
     [data-theme="light"] #games .btn-ghost { color: #F0EEE8; border-color: rgba(240,238,232,0.4); }
+
+
+    /* ── Mobile char swipe dots ── */
+    .char-art-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+      gap: 6px;
+      z-index: 10;
+    }
+    .char-art-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+      transition: background 0.2s;
+    }
+    .char-art-dot.active { background: rgba(255,255,255,0.9); }
+    @media (hover: none) and (pointer: coarse) {
+      .char-art-dots { display: flex; }
+      /* 모바일에서는 hover 대신 .mech-active 클래스로 전환 */
+      .char-card.mech-active .char-mech-img { opacity: 1; }
+      .char-card.mech-active .char-body-img { opacity: 0; }
+      /* 기본 hover 비활성화 (touch에서 sticky hover 방지) */
+      .char-card:hover .char-mech-img { opacity: 0; }
+      .char-card:hover .char-body-img { opacity: 1; }
+      .char-card.mech-active .char-mech-img { opacity: 1 !important; }
+      .char-card.mech-active .char-body-img { opacity: 0 !important; }
+    }
 
     /* ── Character art zone ── */
     .char-art {
@@ -882,6 +948,16 @@
       filter: saturate(0.6) brightness(1.15) contrast(1.05);
       z-index: 0;
     }
+    @media (max-width: 768px) {
+      .studio-mech-bg {
+        right: auto;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 90%;
+        width: auto;
+        opacity: 0.12;
+      }
+    }
     .studio-wrap { position: relative; z-index: 1; }
 
     [data-theme="light"] .studio-mech-bg {
@@ -999,7 +1075,20 @@
     }
 
     @media (max-width: 1024px) { .dev-status-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 768px)  { .dev-status-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) {
+      .dev-status-grid-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 4px;
+      }
+      .dev-status-grid-wrap::-webkit-scrollbar { display: none; }
+      .dev-status-grid {
+        grid-template-columns: repeat(6, minmax(140px, 1fr));
+        gap: 10px;
+        margin-top: 24px;
+      }
+    }
 
     /* ============================================
        GAME SHOWCASE
@@ -1081,10 +1170,11 @@
     }
 
     .game-title-kr {
-      font-family: var(--f-display);
-      font-size: clamp(24px, 3vw, 48px);
+      font-family: 'Black Han Sans', var(--f-display);
+      font-size: clamp(22px, 2.8vw, 44px);
       color: var(--txt-2);
       margin-bottom: 28px;
+      letter-spacing: 0.05em;
     }
 
     .game-chips {
@@ -2351,6 +2441,7 @@
         <span class="eyebrow">Development Status</span>
         <h2 class="display-lg" style="margin-bottom:0">Where We Are<br>Right Now.</h2>
       </div>
+      <div class="dev-status-grid-wrap">
       <div class="dev-status-grid reveal">
         <div class="dev-cell">
           <p class="dev-cell-label">Project</p>
@@ -2376,6 +2467,7 @@
           <p class="dev-cell-label">Next Milestone</p>
           <p class="dev-cell-value highlight">Vertical Slice Prototype</p>
         </div>
+      </div>
       </div>
       <p class="dev-status-note reveal">A playable prototype is currently in development, focused on validating the core gameplay loop and combat pacing. Early prototype footage will be shared during development milestones. The initial release target is PC via Steam. Console platform expansion is being explored depending on development progress.</p>
     </div>
@@ -2431,6 +2523,7 @@
           <div class="char-art">
             <img src="assets/VOID-B.png" alt="VOID" class="char-body-img">
             <img src="assets/void_mech.png" alt="VOID mech" class="char-mech-img">
+            <div class="char-art-dots"><div class="char-art-dot active"></div><div class="char-art-dot"></div></div>
             <div class="char-art-fade"></div>
           </div>
           <div class="char-header">
@@ -2463,6 +2556,7 @@
           <div class="char-art">
             <img src="assets/AURORA-B.png" alt="AURORA" class="char-body-img">
             <img src="assets/aurora_mech.png" alt="AURORA mech" class="char-mech-img">
+            <div class="char-art-dots"><div class="char-art-dot active"></div><div class="char-art-dot"></div></div>
             <div class="char-art-fade"></div>
           </div>
           <div class="char-header">
@@ -2495,6 +2589,7 @@
           <div class="char-art">
             <img src="assets/SCARLET-B.png" alt="SCARLET" class="char-body-img">
             <img src="assets/scarlet_mech.png" alt="SCARLET mech" class="char-mech-img">
+            <div class="char-art-dots"><div class="char-art-dot active"></div><div class="char-art-dot"></div></div>
             <div class="char-art-fade"></div>
           </div>
           <div class="char-header">
@@ -2566,7 +2661,7 @@
                 </button>
                 <input type="range" class="music-volume" id="music-volume" min="0" max="1" step="0.02" value="0.6" aria-label="볼륨">
               </div>
-              <audio id="battle-music" preload="none" loop>
+              <audio id="battle-music" preload="metadata" loop>
                 <source src="assets/battle_music.wav" type="audio/wav">
               </audio>
             </div>
@@ -2766,7 +2861,7 @@
         <h2 class="display-lg">Let's Talk</h2>
         <p class="body-copy" style="margin-top:20px">For press inquiries, collaboration proposals, or genuine conversation about games - I read every message personally.</p>
         <p style="font-family:var(--f-ui);font-size:12px;color:var(--txt-2);margin-top:10px;letter-spacing:0.04em;">Information shared by email is used only to respond to your inquiry and is never sold or shared.</p>
-        <a href="mailto:jaejunpark0314@gmail.com" class="contact-email">jaejunpark0314@gmail.com</a>
+        <a href="mailto:jaejunpark0314@gmail.com" class="contact-email"><span class="__cf_email__" data-cfemail="1a707b7f706f746a7b68712a292b2e5a7d777b737634797577">[email&#160;protected]</span></a>
         <div class="link-list">
           <a href="https://twitter.com/parkdeomes" class="link-item" target="_blank" rel="noopener">
             <span class="link-name">Twitter / X</span>
@@ -2821,7 +2916,7 @@
       <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:24px;">All trademarks and game titles referenced on this site are the property of their respective owners and are used solely to describe prior professional experience. This site is not affiliated with or endorsed by any third-party trademark holder.</p>
 
       <h3 style="font-family:var(--f-ui);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--txt-0);margin-bottom:10px;">Contact</h3>
-      <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:0;">Questions about this policy? Please contact us at <a href="mailto:jaejunpark0314@gmail.com" style="color:var(--accent);">jaejunpark0314@gmail.com</a>.</p>
+      <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:0;">Questions about this policy? Please contact us at <a href="mailto:jaejunpark0314@gmail.com" style="color:var(--accent);"><span class="__cf_email__" data-cfemail="cea4afaba4bba0beafbca5fefdfffa8ea9a3afa7a2e0ada1a3">[email&#160;protected]</span></a>.</p>
     </div>
   </div>
 
@@ -2857,11 +2952,14 @@
   <script>
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => { nav.classList.toggle('solid', window.scrollY > 64); }, { passive: true });
+
     const reveals = document.querySelectorAll('.reveal');
     const ro = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('up'); ro.unobserve(e.target); } });
     }, { threshold: 0.08, rootMargin: '0px 0px -48px 0px' });
     reveals.forEach(el => ro.observe(el));
+
+    // HERO CANVAS
     const canvas = document.getElementById('hero-canvas');
     const ctx = canvas.getContext('2d');
     const isDark = () => document.documentElement.getAttribute('data-theme') !== 'light';
@@ -2898,6 +2996,8 @@
     }
     window.addEventListener('resize', resize, {passive:true});
     resize(); frame();
+
+    // THEME
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon   = document.getElementById('theme-icon');
     const root        = document.documentElement;
@@ -2911,6 +3011,8 @@
     themeToggle.addEventListener('click', () => {
       applyTheme(root.getAttribute('data-theme')==='light' ? 'dark' : 'light');
     });
+
+    // SMOOTH SCROLL
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       const href = a.getAttribute('href');
       if (href==='#') return;
@@ -2919,6 +3021,110 @@
         if (target) { e.preventDefault(); target.scrollIntoView({behavior:'smooth',block:'start'}); }
       });
     });
+
+    // MOBILE CHAR SWIPE
+    const isTouchDevice = () => window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    document.querySelectorAll('.char-card').forEach(card => {
+      const dots = card.querySelectorAll('.char-art-dot');
+      let startX = 0;
+      let isMech = false;
+      function setMech(active) {
+        isMech = active;
+        card.classList.toggle('mech-active', active);
+        if (dots.length >= 2) {
+          dots[0].classList.toggle('active', !active);
+          dots[1].classList.toggle('active', active);
+        }
+      }
+      card.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+      card.addEventListener('touchend', e => {
+        if (!isTouchDevice()) return;
+        const dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) > 40) {
+          if (dx < 0 && !isMech) setMech(true);
+          else if (dx > 0 && isMech) setMech(false);
+        }
+      }, { passive: true });
+    });
+
+    // BGM PLAYER
+    const audio     = document.getElementById('battle-music');
+    const playBtn   = document.getElementById('music-play-btn');
+    const muteBtn   = document.getElementById('music-mute-btn');
+    const volSlider = document.getElementById('music-volume');
+    const volOuter  = document.getElementById('vol-outer');
+    const player    = document.getElementById('music-player');
+
+    if (audio && playBtn) {
+      audio.volume = volSlider ? parseFloat(volSlider.value) : 0.6;
+      let lastVolume = audio.volume;
+
+      function updatePlayIcon(playing) {
+        const poly = playBtn.querySelector('#play-icon');
+        if (!poly) return;
+        if (playing) {
+          poly.setAttribute('points','2,1 5,1 5,13 2,13');
+          let bar2 = playBtn.querySelector('#pause-bar2');
+          if (!bar2) {
+            bar2 = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+            bar2.setAttribute('id','pause-bar2');
+            bar2.setAttribute('points','7,1 10,1 10,13 7,13');
+            playBtn.querySelector('svg').appendChild(bar2);
+          }
+          bar2.style.display = 'block';
+        } else {
+          poly.setAttribute('points','0,0 12,7 0,14');
+          const bar2 = playBtn.querySelector('#pause-bar2');
+          if (bar2) bar2.style.display = 'none';
+        }
+        if (player) player.classList.toggle('playing', playing);
+      }
+
+      function updateVolumeIcon(muted) {
+        if (!volOuter) return;
+        volOuter.style.display = muted ? 'none' : 'block';
+      }
+
+      playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play().catch(() => { audio.load(); audio.play().catch(()=>{}); });
+          updatePlayIcon(true);
+        } else {
+          audio.pause();
+          updatePlayIcon(false);
+        }
+      });
+
+      // 스피커 클릭: 음소거 토글 + 슬라이더 동기화
+      if (muteBtn) {
+        muteBtn.addEventListener('click', () => {
+          if (audio.muted || audio.volume === 0) {
+            audio.muted = false;
+            audio.volume = lastVolume > 0 ? lastVolume : 0.6;
+            if (volSlider) volSlider.value = audio.volume;
+            updateVolumeIcon(false);
+          } else {
+            lastVolume = audio.volume;
+            audio.muted = true;
+            if (volSlider) volSlider.value = 0;
+            updateVolumeIcon(true);
+          }
+        });
+      }
+
+      // 볼륨 슬라이더: 드래그 시 음소거 상태 자동 반영
+      if (volSlider) {
+        volSlider.addEventListener('input', () => {
+          const v = parseFloat(volSlider.value);
+          audio.volume = v;
+          audio.muted = (v === 0);
+          if (v > 0) lastVolume = v;
+          updateVolumeIcon(v === 0);
+        });
+      }
+
+      audio.addEventListener('ended', () => updatePlayIcon(false));
+    }
   </script>
 </body>
 </html>
