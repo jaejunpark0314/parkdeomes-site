@@ -1137,6 +1137,8 @@
       overflow: hidden;
       transition: transform 0.3s ease, background 0.3s ease;
       cursor: default;
+      display: flex;
+      flex-direction: column;
     }
 
     .char-card.aurora { --accent: var(--aurora); --accent-dim: var(--aurora-dim); }
@@ -1187,7 +1189,7 @@
       font-size: 52px;
       color: var(--accent);
       line-height: 1;
-      margin-bottom: 6px;
+      margin-bottom: 2px;
       position: relative;
       z-index: 1;
     }
@@ -1199,7 +1201,7 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--txt-2);
-      margin-bottom: 24px;
+      margin-bottom: 12px;
       position: relative;
       z-index: 1;
     }
@@ -1222,7 +1224,8 @@
     }
 
     .char-data {
-      margin-top: 32px;
+      margin-top: auto;
+      padding-top: 24px;
       display: flex;
       flex-direction: column;
       gap: 11px;
@@ -1247,6 +1250,194 @@
     .char-row-val { color: var(--accent); }
 
 
+
+    /* ── World header layout: lore + music player side by side ── */
+    .world-header-inner {
+      display: flex;
+      gap: 48px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .world-lore-col {
+      flex: 1 1 320px;
+      min-width: 0;
+    }
+
+    .world-music-col {
+      flex: 0 0 auto;
+      min-width: 220px;
+      max-width: 280px;
+    }
+
+    @media (max-width: 720px) {
+      .world-header-inner { flex-direction: column; gap: 28px; }
+      .world-music-col { max-width: 100%; min-width: 0; width: 100%; }
+    }
+
+    /* ── Music player ── */
+    .music-player {
+      background: rgba(var(--accent-rgb), 0.06);
+      border: 1px solid rgba(var(--accent-rgb), 0.25);
+      border-radius: 2px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .music-player-label {
+      font-family: var(--f-ui);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .music-player-label::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    .music-player-title {
+      font-family: var(--f-ui);
+      font-size: 12px;
+      color: var(--txt-1);
+      font-style: italic;
+      letter-spacing: 0.04em;
+    }
+
+    .music-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .music-btn {
+      background: none;
+      border: 1px solid rgba(var(--accent-rgb), 0.3);
+      color: var(--accent);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
+      padding: 0;
+    }
+
+    .music-btn:hover {
+      background: rgba(var(--accent-rgb), 0.12);
+      border-color: var(--accent);
+    }
+
+    .music-mute-btn {
+      background: none;
+      border: none;
+      color: var(--txt-2);
+      cursor: pointer;
+      padding: 0;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .music-mute-btn:hover { color: var(--accent); }
+
+    .music-volume-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .music-volume {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 3px;
+      background: rgba(var(--accent-rgb), 0.2);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .music-volume::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+    }
+
+    .music-volume::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      cursor: pointer;
+    }
+
+    .music-time {
+      font-family: var(--f-body);
+      font-size: 11px;
+      color: var(--txt-2);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    /* EQ 파형 애니메이션 (재생 중) */
+    .music-eq {
+      display: none;
+      gap: 2px;
+      align-items: flex-end;
+      height: 14px;
+    }
+    .music-player.playing .music-eq { display: flex; }
+    .music-player.playing .music-player-label::before { animation: pulse 1.2s ease-in-out infinite; }
+
+    .music-eq span {
+      display: block;
+      width: 3px;
+      background: var(--accent);
+      border-radius: 1px;
+      opacity: 0.7;
+    }
+    .music-eq span:nth-child(1) { animation: eq 0.8s ease-in-out infinite; height: 8px; }
+    .music-eq span:nth-child(2) { animation: eq 0.6s ease-in-out 0.1s infinite; height: 12px; }
+    .music-eq span:nth-child(3) { animation: eq 1.0s ease-in-out 0.2s infinite; height: 6px; }
+    .music-eq span:nth-child(4) { animation: eq 0.7s ease-in-out 0.3s infinite; height: 10px; }
+
+    @keyframes eq {
+      0%, 100% { transform: scaleY(0.4); }
+      50%       { transform: scaleY(1); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50%       { opacity: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .music-eq span { animation: none !important; }
+      .music-player.playing .music-player-label::before { animation: none !important; }
+    }
+
     /* ── World section ── */
     #world {
       background: var(--bg-0);
@@ -1259,35 +1450,47 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding-top: 0;
+      justify-content: center;
       overflow: hidden;
     }
 
     .world-stage-bg {
       position: absolute;
       inset: 0;
-      background: url('assets/aurora_room.png') center/cover no-repeat;
-      opacity: 0.18;
+      background: url('assets/VOID-C.png') center 25%/cover no-repeat;
+      opacity: 0.45;
     }
 
     .world-stage-vignette {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 100% 60% at 50% 0%, transparent 30%, var(--bg-0) 100%),
-        linear-gradient(to top, var(--bg-0) 0%, transparent 50%),
-        linear-gradient(to right, var(--bg-0) 0%, transparent 30%),
-        linear-gradient(to left, var(--bg-0) 0%, transparent 30%);
+        linear-gradient(to bottom, var(--bg-0) 0%, transparent 20%, transparent 80%, var(--bg-0) 100%),
+        linear-gradient(to right, var(--bg-0) 0%, rgba(8,12,20,0.6) 40%, transparent 70%);
     }
 
     .world-header {
       position: relative;
       z-index: 2;
-      padding: 16px var(--pad-x) 20px;
+      padding: 40px var(--pad-x);
       max-width: var(--max-w);
       margin: 0 auto;
       width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .world-header-left {
+      /* 텍스트 영역 */
+    }
+    .world-header-right {
+      /* VOID-C 이미지가 배경에서 보이는 빈 공간 */
+      min-height: 360px;
+    }
+    @media (max-width: 768px) {
+      .world-header { grid-template-columns: 1fr; }
+      .world-header-right { display: none; }
     }
 
     .world-lore {
@@ -2079,7 +2282,7 @@
         <span class="eyebrow">Who We Are</span>
         <h2 class="display-lg" style="margin-bottom:28px">A Studio of One.<br>Building Worlds.</h2>
         <div class="body-copy">
-          <p>PARKDEOMES is an independent game development studio founded by JJ Park, a product marketing leader who has contributed to global launches of multiple AAA titles including Civilization and NBA 2K.</p>
+          <p>PARKDEOMES is an independent game development studio founded by JJ Park, a game marketing leader who previously worked on global franchises including Civilization and NBA 2K.</p>
           <p>The studio focuses on building original games through small, testable prototypes and iterative design. Rather than starting with large production pipelines, PARKDEOMES explores gameplay ideas through rapid experimentation, validating systems and player decisions before expanding development.</p>
           <p>The current project, <strong>JJ Park's: Subscriber Zero</strong>, is a deckbuilding roguelike set inside Korean streaming culture, exploring narrative-driven strategy systems and player choice. Currently experimenting with AI-assisted workflows and rapid prototyping tools to accelerate early development.</p>
           <p>PARKDEOMES is a small independent studio and may collaborate with external artists, composers, and developers as projects evolve.</p>
@@ -2299,42 +2502,79 @@
       <div class="world-stage-bg"></div>
       <div class="world-stage-vignette"></div>
       <div class="world-header reveal">
-        <span class="eyebrow">The Broadcast Zones</span>
-        <h2 class="display-lg">Five Zones.<br>No Signal.<br>No Way Back.</h2>
-        <p class="world-lore">Somewhere between Zone 1 and Zone 5, the legendary player V40 logged off and never returned. Every streamer who enters knows this. They enter anyway. The chat is always watching.</p>
+        <div class="world-header-left">
+          <span class="eyebrow">The Broadcast Zones</span>
+          <h2 class="display-lg">Five Zones.<br>No Signal.<br>No Way Back.</h2>
+          <div class="world-header-inner">
+            <div class="world-lore-col">
+              <p class="world-lore" style="margin-top:0;">Somewhere between Zone 1 and Zone 5, the legendary player V40 logged off and never returned. Every streamer who enters knows this. They enter anyway. The chat is always watching.</p>
+            </div>
+          <div class="world-music-col">
+            <div class="music-player" id="music-player">
+              <div class="music-player-label">
+                BGM
+                <div class="music-eq">
+                  <span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+              <p class="music-player-title">JJ Park's: Subscriber Zero Battle Music</p>
+              <div class="music-controls">
+                <button class="music-btn" id="music-play-btn" aria-label="재생/일시정지">
+                  <svg width="12" height="14" viewBox="0 0 12 14" fill="currentColor"><polygon points="0,0 12,7 0,14" id="play-icon"/></svg>
+                </button>
+                <span class="music-time" id="music-time">0:00</span>
+              </div>
+              <div class="music-volume-wrap">
+                <button class="music-mute-btn" id="music-mute-btn" aria-label="음소거">
+                  <svg width="16" height="14" viewBox="0 0 16 14" fill="currentColor" id="volume-icon">
+                    <path d="M2 4.5H0v5h2l4 3.5V1L2 4.5z"/>
+                    <path d="M10 2.5c1.7 1.2 2.5 2.8 2.5 4.5s-.8 3.3-2.5 4.5" stroke="currentColor" fill="none" stroke-width="1.2" stroke-linecap="round"/>
+                    <path d="M12.5.5c2.2 1.7 3.5 4 3.5 6.5s-1.3 4.8-3.5 6.5" stroke="currentColor" fill="none" stroke-width="1.2" stroke-linecap="round" id="vol-outer"/>
+                  </svg>
+                </button>
+                <input type="range" class="music-volume" id="music-volume" min="0" max="1" step="0.02" value="0.6" aria-label="볼륨">
+              </div>
+              <audio id="battle-music" preload="none" loop>
+                <source src="assets/battle_music.wav" type="audio/wav">
+              </audio>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="world-header-right" aria-hidden="true"></div>
       </div>
     </div>
     <div class="world-zones reveal">
       <div class="zone-card" style="--zone-color: #B8860B;">
-        <img src="assets/zone_enemies/zone1_wasteland_enforcer.png" alt="Zone 1 enemy" class="zone-enemy-art">
+        <img src="assets/zone1_wasteland_enforcer.png" alt="Zone 1 enemy" class="zone-enemy-art">
         <p class="zone-num">ZONE 01</p>
         <h3 class="zone-name">The Wasteland Signal</h3>
         <p class="zone-flavor">A graveyard of dead broadcasts. The first streamers who entered never made it past here. Their setups are still running.</p>
         <p class="zone-enemy-name">Wasteland Enforcer</p>
       </div>
       <div class="zone-card" style="--zone-color: #2D8B55;">
-        <img src="assets/zone_enemies/zone2_resonance_beast.png" alt="Zone 2 enemy" class="zone-enemy-art">
+        <img src="assets/zone2_resonance_beast.png" alt="Zone 2 enemy" class="zone-enemy-art">
         <p class="zone-num">ZONE 02</p>
         <h3 class="zone-name">The Cursed Forest Feed</h3>
         <p class="zone-flavor">The trees here move between frames. The chat logs show timestamps that don't exist. Something is routing the signal through the roots.</p>
         <p class="zone-enemy-name">Resonance Beast</p>
       </div>
       <div class="zone-card" style="--zone-color: #8338EC;">
-        <img src="assets/zone_enemies/zone3_void_stalker.png" alt="Zone 3 enemy" class="zone-enemy-art">
+        <img src="assets/zone3_void_stalker.png" alt="Zone 3 enemy" class="zone-enemy-art">
         <p class="zone-num">ZONE 03</p>
         <h3 class="zone-name">The Abyss Channel</h3>
         <p class="zone-flavor">Pressure starts behaving differently here. Viewers stop sending messages and start sending something else. The Stalker has been watching you since Zone 1.</p>
         <p class="zone-enemy-name">Void Stalker</p>
       </div>
       <div class="zone-card" style="--zone-color: #E63946;">
-        <img src="assets/zone_enemies/zone4_void_herald.png" alt="Zone 4 enemy" class="zone-enemy-art">
+        <img src="assets/zone4_void_herald.png" alt="Zone 4 enemy" class="zone-enemy-art">
         <p class="zone-num">ZONE 04</p>
         <h3 class="zone-name">The Corrupted Archive</h3>
         <p class="zone-flavor">V40's last broadcast originated here. The timestamp loops. Every streamer who watches the clip sees something different in the background. Nobody talks about what.</p>
         <p class="zone-enemy-name">Void Herald</p>
       </div>
       <div class="zone-card" style="--zone-color: #C8922A;">
-        <img src="assets/zone_enemies/zone5_broadcast_fragment.png" alt="Zone 5 enemy" class="zone-enemy-art">
+        <img src="assets/zone5_broadcast_fragment.png" alt="Zone 5 enemy" class="zone-enemy-art">
         <p class="zone-num">ZONE 05</p>
         <h3 class="zone-name">The Final Broadcast</h3>
         <p class="zone-flavor">The chat here is filled with names you recognize. Streamers who came before you. They are still typing. They never stopped.</p>
@@ -2540,7 +2780,7 @@
       <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:24px;">We collect limited personal information, such as your name and email address, only when you voluntarily contact us through email. This site does not use contact forms, analytics services, advertising trackers, or cookies beyond what is necessary for basic site functionality.</p>
 
       <h3 style="font-family:var(--f-ui);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--txt-0);margin-bottom:10px;">How We Use It</h3>
-      <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:24px;">Information submitted through email contact is used solely to respond to your inquiry. We do not sell, rent, or share your personal information with third parties.</p>
+      <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:24px;">Information submitted through email contact is used solely to respond to your inquiry. We do not sell, rent, or share your personal information with third parties. We retain email communications only as long as necessary to respond to inquiries.</p>
 
       <h3 style="font-family:var(--f-ui);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--txt-0);margin-bottom:10px;">Children</h3>
       <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:24px;">This website is intended for general audiences. We do not knowingly collect personal information from children under 13. If you believe a child has submitted information to us, please contact us and we will promptly delete it.</p>
@@ -2549,7 +2789,7 @@
       <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:24px;">All trademarks and game titles referenced on this site are the property of their respective owners and are used solely to describe prior professional experience. This site is not affiliated with or endorsed by any third-party trademark holder.</p>
 
       <h3 style="font-family:var(--f-ui);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--txt-0);margin-bottom:10px;">Contact</h3>
-      <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:0;">Questions about this policy? Contact us at <a href="mailto:jaejunpark0314@gmail.com" style="color:var(--accent);">jaejunpark0314@gmail.com</a></p>
+      <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:0;">Questions about this policy? Please contact us at <a href="mailto:jaejunpark0314@gmail.com" style="color:var(--accent);">jaejunpark0314@gmail.com</a>.</p>
     </div>
   </div>
 
