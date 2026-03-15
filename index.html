@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JJ Park's: Subscriber Zero | PARK-DEOMES STUDIOS</title>
-  <meta name="description" content="PARKDEOMES is an independent game studio founded by JJ Park, a product marketing leader behind global AAA launches including Civilization and NBA 2K. Currently developing JJ Park's: Subscriber Zero.">
+  <meta name="description" content="PARKDEOMES is an independent game studio founded by JJ Park, a product marketing leader who worked on global AAA franchises including Civilization and NBA 2K. Currently developing JJ Park's: Subscriber Zero.">
   <meta property="og:title" content="PARK-DEOMES STUDIOS">
   <meta property="og:description" content="Independent game studio. Currently developing JJ Park's: Subscriber Zero.">
   <meta property="og:type" content="website">
@@ -2886,6 +2886,7 @@
       </div>
     </div>
   </section>
+  <p style="font-family:var(--f-ui);font-size:11px;color:var(--txt-2);letter-spacing:0.06em;text-align:center;padding:0 var(--pad-x) 24px;max-width:900px;margin:0 auto;">Game footage and materials shown represent early prototypes and may change during development. All projects shown are independent works of PARKDEOMES LLC.</p>
 
   <!-- ============================================
        WRITING STYLE REFERENCE SECTION
@@ -2975,7 +2976,7 @@
       <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:24px;">We collect limited personal information, such as your name and email address, only when you voluntarily contact us through email. This site does not use contact forms, analytics services, advertising trackers, or cookies beyond what is necessary for basic site functionality.</p>
 
       <h3 style="font-family:var(--f-ui);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--txt-0);margin-bottom:10px;">How We Use It</h3>
-      <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:24px;">Information submitted through email contact is used solely to respond to your inquiry. We do not sell, rent, or share your personal information with third parties. We retain email communications only as long as necessary to respond to inquiries.</p>
+      <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:24px;">Information submitted through email contact is used solely to respond to your inquiry. We do not sell, rent, or share your personal information with third parties. We retain email communications only as long as necessary to respond to inquiries. By contacting us via email, you voluntarily provide your information for communication purposes only.</p>
 
       <h3 style="font-family:var(--f-ui);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--txt-0);margin-bottom:10px;">Children</h3>
       <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:24px;">This website is intended for general audiences. We do not knowingly collect personal information from children under 13. If you believe a child has submitted information to us, please contact us and we will promptly delete it.</p>
@@ -2984,7 +2985,7 @@
       <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:24px;">All trademarks and game titles referenced on this site are the property of their respective owners and are used solely to describe prior professional experience. This site is not affiliated with or endorsed by any third-party trademark holder.</p>
 
       <h3 style="font-family:var(--f-ui);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--txt-0);margin-bottom:10px;">Contact</h3>
-      <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:0;">Questions about this policy? Please contact us at <a data-email="jaejunpark0314" data-domain="gmail.com" style="color:var(--accent);" class="js-email">jaejunpark0314@gmail.com</a>.</p>
+      <p style="font-family:var(--f-barlow);font-size:14px;color:var(--txt-1);line-height:1.85;margin-bottom:0;">Questions about this policy? Please contact us at <a data-email="jaejunpark0314" data-domain="gmail.com" style="color:var(--accent);" class="js-email"><span class="__cf_email__" data-cfemail="fd979c989788938d9c8f96cdceccc9bd9a909c9491d39e9290">[email&#160;protected]</span></a>.</p>
     </div>
   </div>
 
@@ -3006,7 +3007,7 @@
     </div>
     <p class="footer-studio-line">Independent game studio founded by JJ Park.</p>
     <p class="footer-legal">
-      PARKDEOMES LLC, doing business as PARK-DEOMES STUDIOS. &nbsp;
+      PARKDEOMES LLC, doing business as PARK-DEOMES STUDIOS. PARKDEOMES LLC is an independent company and is not affiliated with, endorsed by, or connected to Take-Two Interactive, Firaxis Games, or any other company referenced on this website. &nbsp;
       All trademarks, game titles, and brand names mentioned on this site are the property of their respective owners and are referenced solely to describe prior professional experience. &nbsp;
       Visual concepts and art materials were produced using AI-assisted workflows; all creative direction and final selection were performed by the author. &nbsp;
       Proprietary internal materials from prior employers are not reproduced on this site. &nbsp;
@@ -3027,7 +3028,6 @@
     }, { threshold: 0.08, rootMargin: '0px 0px -48px 0px' });
     reveals.forEach(el => ro.observe(el));
 
-    // HERO CANVAS
     const canvas = document.getElementById('hero-canvas');
     const ctx = canvas.getContext('2d');
     const isDark = () => document.documentElement.getAttribute('data-theme') !== 'light';
@@ -3065,7 +3065,6 @@
     window.addEventListener('resize', resize, {passive:true});
     resize(); frame();
 
-    // THEME
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon   = document.getElementById('theme-icon');
     const root        = document.documentElement;
@@ -3080,7 +3079,6 @@
       applyTheme(root.getAttribute('data-theme')==='light' ? 'dark' : 'light');
     });
 
-    // SMOOTH SCROLL
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       const href = a.getAttribute('href');
       if (href==='#') return;
@@ -3090,40 +3088,30 @@
       });
     });
 
+    // EMAIL: Cloudflare 난독화 우회
+    document.querySelectorAll('.js-email').forEach(el => {
+      const user   = el.getAttribute('data-email');
+      const domain = el.getAttribute('data-domain');
+      if (user && domain) { el.href = 'mai' + 'lto:' + user + '@' + domain; }
+    });
+
     // MOBILE CHAR SWIPE
     const isTouchDevice = () => window.matchMedia('(hover: none) and (pointer: coarse)').matches;
     document.querySelectorAll('.char-card').forEach(card => {
       const dots = card.querySelectorAll('.char-art-dot');
-      let startX = 0;
-      let isMech = false;
+      let startX = 0, isMech = false;
       function setMech(active) {
         isMech = active;
         card.classList.toggle('mech-active', active);
-        if (dots.length >= 2) {
-          dots[0].classList.toggle('active', !active);
-          dots[1].classList.toggle('active', active);
-        }
+        if (dots.length >= 2) { dots[0].classList.toggle('active', !active); dots[1].classList.toggle('active', active); }
       }
       card.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
       card.addEventListener('touchend', e => {
         if (!isTouchDevice()) return;
         const dx = e.changedTouches[0].clientX - startX;
-        if (Math.abs(dx) > 40) {
-          if (dx < 0 && !isMech) setMech(true);
-          else if (dx > 0 && isMech) setMech(false);
-        }
+        if (Math.abs(dx) > 40) { if (dx < 0 && !isMech) setMech(true); else if (dx > 0 && isMech) setMech(false); }
       }, { passive: true });
     });
-
-    // EMAIL: Cloudflare 난독화 우회 — JS로 동적 복원
-    document.querySelectorAll('.js-email').forEach(el => {
-      const user   = el.getAttribute('data-email');
-      const domain = el.getAttribute('data-domain');
-      if (user && domain) {
-        el.href = 'mai' + 'lto:' + user + '@' + domain;
-      }
-    });
-
 
     // BGM PLAYER
     const audio     = document.getElementById('battle-music');
@@ -3145,8 +3133,7 @@
           let bar2 = playBtn.querySelector('#pause-bar2');
           if (!bar2) {
             bar2 = document.createElementNS('http://www.w3.org/2000/svg','polygon');
-            bar2.setAttribute('id','pause-bar2');
-            bar2.setAttribute('points','7,1 10,1 10,13 7,13');
+            bar2.setAttribute('id','pause-bar2'); bar2.setAttribute('points','7,1 10,1 10,13 7,13');
             playBtn.querySelector('svg').appendChild(bar2);
           }
           bar2.style.display = 'block';
@@ -3163,62 +3150,49 @@
         volOuter.style.display = muted ? 'none' : 'block';
       }
 
-      playBtn.addEventListener('click', () => {
-        if (audio.paused) {
-          audio.play().catch(() => { audio.load(); audio.play().catch(()=>{}); });
-          updatePlayIcon(true);
-        } else {
-          audio.pause();
-          updatePlayIcon(false);
-        }
-      });
-
-      // 스피커 클릭: 음소거 토글 + 슬라이더 동기화
-      if (muteBtn) {
-        muteBtn.addEventListener('click', () => {
-          if (audio.muted || audio.volume === 0) {
-            audio.muted = false;
-            audio.volume = lastVolume > 0 ? lastVolume : 0.6;
-            if (volSlider) { volSlider.value = audio.volume; }
-            updateVolumeIcon(false);
-            updateVolBar(audio.volume);
-          } else {
-            lastVolume = audio.volume;
-            audio.muted = true;
-            if (volSlider) volSlider.value = 0;
-            updateVolumeIcon(true);
-            updateVolBar(0);
-          }
-        });
-      }
-
-      // 볼륨 슬라이더: 드래그 시 음소거 상태 자동 반영
       function updateVolBar(v) {
         if (volSlider) volSlider.style.setProperty('--vol-pct', v * 100);
       }
       updateVolBar(audio.volume);
 
-      if (volSlider) {
-        volSlider.addEventListener('input', () => {
-          const v = parseFloat(volSlider.value);
-          audio.volume = v;
-          audio.muted = (v === 0);
-          if (v > 0) lastVolume = v;
-          updateVolumeIcon(v === 0);
-          updateVolBar(v);
+      playBtn.addEventListener('click', () => {
+        if (audio.paused) {
+          audio.play().catch(() => { audio.load(); audio.play().catch(()=>{}); });
+          updatePlayIcon(true);
+        } else { audio.pause(); updatePlayIcon(false); }
+      });
+
+      if (muteBtn) {
+        muteBtn.addEventListener('click', () => {
+          if (audio.muted || audio.volume === 0) {
+            audio.muted = false; audio.volume = lastVolume > 0 ? lastVolume : 0.6;
+            if (volSlider) volSlider.value = audio.volume;
+            updateVolumeIcon(false); updateVolBar(audio.volume);
+          } else {
+            lastVolume = audio.volume; audio.muted = true;
+            if (volSlider) volSlider.value = 0;
+            updateVolumeIcon(true); updateVolBar(0);
+          }
         });
       }
 
-      // Seek bar
+      if (volSlider) {
+        volSlider.addEventListener('input', () => {
+          const v = parseFloat(volSlider.value);
+          audio.volume = v; audio.muted = (v === 0);
+          if (v > 0) lastVolume = v;
+          updateVolumeIcon(v === 0); updateVolBar(v);
+        });
+      }
+
       const seekBar   = document.getElementById('music-seek');
       const timeEl    = document.getElementById('music-time');
       const timeEndEl = document.getElementById('music-time-end');
 
       function fmtTime(s) {
         if (isNaN(s)) return '0:00';
-        const m = Math.floor(s / 60);
-        const sec = Math.floor(s % 60);
-        return m + ':' + String(sec).padStart(2, '0');
+        const m = Math.floor(s/60), sec = Math.floor(s%60);
+        return m + ':' + String(sec).padStart(2,'0');
       }
 
       audio.addEventListener('loadedmetadata', () => {
@@ -3238,7 +3212,7 @@
         seekBar.addEventListener('touchstart', () => { seekBar._seeking = true; }, { passive: true });
         seekBar.addEventListener('input', () => {
           if (!audio.duration) return;
-          audio.currentTime = (parseFloat(seekBar.value) / 100) * audio.duration;
+          audio.currentTime = (parseFloat(seekBar.value)/100) * audio.duration;
           if (timeEl) timeEl.textContent = fmtTime(audio.currentTime);
         });
         seekBar.addEventListener('mouseup',  () => { seekBar._seeking = false; });
