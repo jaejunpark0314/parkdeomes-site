@@ -12,8 +12,8 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="assets/favicon.png" type="image/png">
-  <link rel="icon" href="assets/mouse.png" type="image/png">
-  <link rel="apple-touch-icon" href="assets/mouse.png">
+  <link rel="icon" href="assets/Mouse_transparent.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/Mouse_transparent.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Barlow:wght@400;700;900&display=swap" rel="stylesheet">
@@ -269,13 +269,14 @@
     .hero-mascot-wrap {
       position: relative;
       display: inline-block;
-      background: transparent;
+      background: radial-gradient(circle at 50% 55%, #1A1A2E 0%, #0C0D0F 65%, transparent 100%);
+      border-radius: 50%;
       width: 280px;
       height: 280px;
       opacity: 0;
       animation: mascotEntrance 1s cubic-bezier(0.34,1.2,0.64,1) 0.3s forwards,
                  mascotFloat 5s ease-in-out 1.3s infinite;
-      box-shadow: 0 0 60px rgba(var(--accent-rgb),0.18), 0 0 120px rgba(var(--accent-rgb),0.06);
+      box-shadow: 0 0 60px rgba(var(--accent-rgb),0.22), 0 0 120px rgba(var(--accent-rgb),0.08);
     }
 
     .hero-mascot {
@@ -323,6 +324,29 @@
     }
     [data-theme="light"] .hero-bg-room { opacity: 0 !important; animation: none; }
 
+
+    /* ── Mech hover overlay ── */
+    .char-mech-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.45s ease;
+      transform: scale(1.05);
+    }
+    .char-card:hover .char-mech-img { opacity: 1; }
+    .char-card:hover .char-body-img { opacity: 0; }
+
+    /* Mech-specific positioning */
+    .char-card.void   .char-mech-img { object-position: center 20%; transform: scale(1.1); }
+    .char-card.aurora .char-mech-img { object-position: center 15%; transform: scale(1.1); }
+    .char-card.scarlet .char-mech-img { object-position: center 10%; transform: scale(1.1); }
+    .char-card:hover .char-mech-img { opacity: 1; transform: scale(1.0); transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94); }
+
     /* ── Character art zone ── */
     .char-art {
       position: relative;
@@ -331,34 +355,42 @@
       margin: -48px -40px 32px;
       background: var(--bg-0);
     }
-    .char-card.aurora .char-art { background: #0a1020; }
+    .char-card.aurora .char-art { background: #08111E; }
     .char-card.scarlet .char-art { background: #120808; }
-    .char-card.scarlet .char-body-img {
-      object-fit: cover;
-      object-position: center top;
-      transform: scale(1.12) translateX(-3%);
-    }
 
+    /* Base char image */
     .char-body-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: top center;
+      object-position: center 8%;
       display: block;
       transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);
     }
+
+    /* VOID-B: portrait, face in upper portion — pull up slightly */
+    .char-card.void .char-body-img {
+      object-position: center 5%;
+      transform: scale(1.05);
+    }
+
+    /* AURORA-B: face is center of image, use center positioning */
     .char-card.aurora .char-body-img {
-      object-fit: cover;
-      object-position: top center;
-      transform: scale(1.18) translateY(4%);
-      opacity: 1;
+      object-position: center 22%;
+      transform: scale(1.45);
     }
-    .char-card.aurora .char-art {
-      background: #F5F4F2;
+
+    /* SCARLET-B: extreme close-up face — center it at same vertical level */
+    .char-card.scarlet .char-body-img {
+      object-position: center 5%;
+      transform: scale(1.05);
     }
-    .char-card:hover .char-body-img { transform: scale(1.06) translateY(-6px); }
-    .char-card.aurora:hover .char-body-img { transform: scale(1.25) translateY(2%); }
-    .char-card.scarlet:hover .char-body-img { transform: scale(1.18) translateX(-3%) translateY(-4%); }
+
+    /* Hover states */
+    .char-card:hover .char-body-img         { transform: scale(1.06) translateY(-4px); }
+    .char-card.void:hover .char-body-img    { transform: scale(1.10) translateY(-4px); }
+    .char-card.aurora:hover .char-body-img  { transform: scale(1.5) translateY(-2%); }
+    .char-card.scarlet:hover .char-body-img { transform: scale(1.10) translateY(-4px); }
 
     .char-art-fade {
       position: absolute;
@@ -406,6 +438,10 @@
       transition: transform 0.5s ease;
       filter: saturate(0.85) brightness(0.88);
     }
+    /* card_concept: show bottom-left card area */
+    .devlog-card:nth-child(2) .entry-thumb img {
+      object-position: left 65%;
+    }
     .devlog-card:hover .entry-thumb img {
       transform: scale(1.05);
       filter: saturate(1) brightness(0.95);
@@ -421,7 +457,7 @@
     .game-stage-photo {
       position: absolute;
       inset: 0;
-      background: url('assets/VOID-C.png') center 30%/cover no-repeat;
+      background: url('assets/main_menu_bg.png') center 40%/cover no-repeat;
       opacity: 0.28;
       transition: opacity 0.5s;
     }
@@ -788,6 +824,27 @@
       background: var(--bg-1);
       padding: var(--pad-y) var(--pad-x);
       border-top: 1px solid var(--line-0);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .studio-mech-bg {
+      position: absolute;
+      right: -6%;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 115%;
+      width: auto;
+      opacity: 0.18;
+      pointer-events: none;
+      filter: saturate(0.6) brightness(1.15) contrast(1.05);
+      z-index: 0;
+    }
+    .studio-wrap { position: relative; z-index: 1; }
+
+    [data-theme="light"] .studio-mech-bg {
+      opacity: 0.07;
+      filter: saturate(0.2) brightness(0.5) contrast(1.1);
     }
 
     .studio-wrap {
@@ -801,9 +858,15 @@
 
     .studio-stats {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
       gap: 1px;
       background: var(--line-0);
+    }
+    @media (max-width: 768px) {
+      .studio-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .studio-stats { grid-template-columns: repeat(2, 1fr); }
     }
 
     .stat-cell {
@@ -902,6 +965,7 @@
 
     .game-stage {
       position: relative;
+      background: var(--bg-0);
       min-height: 88vh;
       display: flex;
       align-items: flex-end;
@@ -913,8 +977,7 @@
       inset: 0;
       background:
         radial-gradient(ellipse 60% 70% at 80% 35%, rgba(76,201,240,0.07) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 60% at 20% 70%, rgba(131,56,236,0.06) 0%, transparent 55%),
-        var(--bg-0);
+        radial-gradient(ellipse 50% 60% at 20% 70%, rgba(131,56,236,0.06) 0%, transparent 55%);
     }
 
     .game-stage-grid {
@@ -1177,7 +1240,7 @@
     .world-stage-bg {
       position: absolute;
       inset: 0;
-      background: url('assets/AURORA-C.png') center/cover no-repeat;
+      background: url('assets/aurora_room.png') center/cover no-repeat;
       opacity: 0.18;
     }
 
@@ -1901,8 +1964,8 @@
   ============================================ -->
   <nav id="nav">
     <a href="#" class="nav-logo">
-      <img src="assets/logo-dark.png"  alt="PARK-DEOMES STUDIOS" class="logo-horiz logo-dark-mode">
-      <img src="assets/logo-light.png" alt="PARK-DEOMES STUDIOS" class="logo-horiz logo-light-mode">
+      <img src="assets/Logo_Black_Horizontal_Transparent.png"  alt="PARK-DEOMES STUDIOS" class="logo-horiz logo-dark-mode">
+      <img src="assets/Logo_White_Horizontal_Transparent.png" alt="PARK-DEOMES STUDIOS" class="logo-horiz logo-light-mode">
     </a>
     <ul class="nav-links">
       <li class="nav-p1"><a href="#games">Games</a></li>
@@ -1931,10 +1994,10 @@
     <div class="hero-bg-room" style="background-image:url('assets/scarlet_room.png')"></div>
     <canvas id="hero-canvas"></canvas>
     <div class="hero-inner">
-      <div class="hero-mascot-wrap"><img src="assets/mouse.png" alt="PARK-DEOMES STUDIOS mascot" class="hero-mascot"></div>
+      <div class="hero-mascot-wrap"><img src="assets/Mouse_transparent.png" alt="PARK-DEOMES STUDIOS mascot" class="hero-mascot"></div>
       <span class="hero-badge">Independent Game Studio &nbsp;&middot;&nbsp; Est. 2026</span>
-      <h1 class="hero-title" style="font-size:clamp(56px,9vw,128px);">PARK-DEOMES<br><span style="font-size:0.48em;font-family:var(--f-barlow);font-weight:900;letter-spacing:0.32em;color:var(--txt-2);">STUDIOS</span></h1>
-      <p class="hero-tagline">Built by a marketing leader behind AAA launches. Now building something original.</p>
+      <h1 class="hero-title" style="font-size:clamp(56px,9vw,128px);line-height:0.85;">PARK-DEOMES<br><span style="font-size:0.48em;font-family:var(--f-barlow);font-weight:900;letter-spacing:0.32em;color:var(--txt-2);display:block;margin-top:-0.08em;">STUDIOS</span></h1>
+      <p class="hero-tagline">Built by a marketing leader behind AAA launches.<br>Now building something original.</p>
       <p class="hero-byline">Founded by <strong>JJ Park</strong> &mdash; Product Marketing Leader &nbsp;(<em>Civilization, NBA 2K</em>)</p>
       <div class="hero-actions">
         <a href="#games" class="btn btn-fill">See Our Work</a>
@@ -1959,6 +2022,7 @@
        STUDIO INTRO
   ============================================ -->
   <section id="studio">
+    <img src="assets/aurora_mech.png" alt="" class="studio-mech-bg" aria-hidden="true">
     <div class="studio-wrap">
       <div class="reveal">
         <span class="eyebrow">Who We Are</span>
@@ -1980,11 +2044,11 @@
           <div class="stat-label">Playable Characters</div>
         </div>
         <div class="stat-cell">
-          <div class="stat-n">277</div>
+          <div class="stat-n">270<span style="font-size:0.5em;vertical-align:super;color:var(--txt-1)">+</span></div>
           <div class="stat-label">Cards Designed</div>
         </div>
         <div class="stat-cell">
-          <div class="stat-n">05</div>
+          <div class="stat-n" style="font-size:clamp(28px,3.5vw,52px);line-height:1;white-space:nowrap;">05<span style="color:var(--txt-2);font-size:0.6em;margin:0 0.15em">&amp;</span>10<span style="font-size:0.45em;vertical-align:super;color:var(--txt-1)">+</span></div>
           <div class="stat-label">Zones &amp; Bosses</div>
         </div>
       </div>
@@ -2016,7 +2080,7 @@
         </div>
         <div class="dev-cell">
           <p class="dev-cell-label">Platform</p>
-          <p class="dev-cell-value">PC via Steam</p>
+          <p class="dev-cell-value">PC via Steam<br><span style="font-size:0.8em;color:var(--txt-2);font-weight:400;">(Console: Exploring)</span></p>
         </div>
         <div class="dev-cell">
           <p class="dev-cell-label">Team</p>
@@ -2027,7 +2091,7 @@
           <p class="dev-cell-value highlight">Vertical Slice Prototype</p>
         </div>
       </div>
-      <p class="dev-status-note reveal">A playable prototype is currently in development, focused on validating the core gameplay loop and combat pacing. Early prototype footage will be shared during development milestones. The initial release target is PC via Steam, with potential expansion to console platforms depending on development progress.</p>
+      <p class="dev-status-note reveal">A playable prototype is currently in development, focused on validating the core gameplay loop and combat pacing. Early prototype footage will be shared during development milestones. The initial release target is PC via Steam. Console platform expansion is being explored depending on development progress.</p>
     </div>
   </section>
 
@@ -2036,8 +2100,8 @@
   ============================================ -->
   <section id="games">
     <div class="game-stage">
-      <div class="game-stage-photo"></div>
       <div class="game-stage-bg"></div>
+      <div class="game-stage-photo"></div>
       <div class="game-stage-grid"></div>
       <div class="game-stage-content reveal">
         <div class="game-status">
@@ -2081,6 +2145,7 @@
         <div class="char-card void">
           <div class="char-art">
             <img src="assets/VOID-B.png" alt="VOID" class="char-body-img">
+            <img src="assets/void_mech.png" alt="VOID mech" class="char-mech-img">
             <div class="char-art-fade"></div>
           </div>
           <div class="char-header">
@@ -2112,6 +2177,7 @@
         <div class="char-card aurora">
           <div class="char-art">
             <img src="assets/AURORA-B.png" alt="AURORA" class="char-body-img">
+            <img src="assets/aurora_mech.png" alt="AURORA mech" class="char-mech-img">
             <div class="char-art-fade"></div>
           </div>
           <div class="char-header">
@@ -2143,6 +2209,7 @@
         <div class="char-card scarlet">
           <div class="char-art">
             <img src="assets/SCARLET-B.png" alt="SCARLET" class="char-body-img">
+            <img src="assets/scarlet_mech.png" alt="SCARLET mech" class="char-mech-img">
             <div class="char-art-fade"></div>
           </div>
           <div class="char-header">
@@ -2232,7 +2299,7 @@
   <section id="founder">
     <div class="founder-wrap">
       <div class="founder-img reveal">
-        <img src="assets/headshot.jpg" alt="JJ Park" style="width:100%;height:100%;object-fit:cover;object-position:top center;">
+        <img src="assets/headshot.JPG" alt="JJ Park" style="width:100%;height:100%;object-fit:cover;object-position:top center;">
       </div>
       <div class="reveal">
         <span class="eyebrow">The Founder</span>
@@ -2280,7 +2347,7 @@
         <!-- Entry 001 -->
         <a href="#" class="devlog-card">
           <div class="entry-thumb">
-            <img src="assets/SCARLET-C.png" alt="Scarlet action">
+            <img src="assets/SCARLET-B.png" alt="Scarlet action">
             <div class="entry-thumb-overlay"></div>
           </div>
           <div class="entry-num">001</div>
@@ -2298,7 +2365,7 @@
         <!-- Entry 002 -->
         <a href="#" class="devlog-card">
           <div class="entry-thumb">
-            <img src="assets/FERRO-C.png" alt="Ferro in the dungeon">
+            <img src="assets/card_concept.png" alt="Ferro in the dungeon">
             <div class="entry-thumb-overlay"></div>
           </div>
           <div class="entry-num">002</div>
@@ -2316,7 +2383,7 @@
         <!-- Entry 003 -->
         <a href="#" class="devlog-card">
           <div class="entry-thumb">
-            <img src="assets/LUMEN-C.png" alt="Lumen with lantern">
+            <img src="assets/concept_artworks.png" alt="Lumen with lantern">
             <div class="entry-thumb-overlay"></div>
           </div>
           <div class="entry-num">003</div>
@@ -2376,7 +2443,7 @@
         <span class="eyebrow">Get in Touch</span>
         <h2 class="display-lg">Let's Talk</h2>
         <p class="body-copy" style="margin-top:20px">For press inquiries, collaboration proposals, or genuine conversation about games - I read every message personally.</p>
-        <a href="mailto:jaejunpark0314@gmail.com" class="contact-email">jaejunpark0314@gmail.com</a>
+        <a href="mailto:jaejunpark0314@gmail.com" class="contact-email"><span class="__cf_email__" data-cfemail="a1cbc0c4cbd4cfd1c0d3ca91929095e1c6ccc0c8cd8fc2cecc">[email&#160;protected]</span></a>
         <div class="link-list">
           <a href="https://twitter.com/parkdeomes" class="link-item" target="_blank" rel="noopener">
             <span class="link-name">Twitter / X</span>
@@ -2415,9 +2482,8 @@
   ============================================ -->
   <footer>
     <div class="footer-top">
-      <a href="#" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
-        <img src="assets/logo-dark.png" alt="PARK-DEOMES STUDIOS" class="logo-dark-mode" style="height:34px;width:auto;object-fit:contain;">
-        <img src="assets/logo-light.png" alt="PARK-DEOMES STUDIOS" class="logo-light-mode" style="height:34px;width:auto;object-fit:contain;">
+      <a href="#" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <img src="assets/Mouse_transparent.png" alt="PARK-DEOMES STUDIOS" style="height:40px;width:40px;object-fit:contain;mix-blend-mode:screen;">
         <span class="footer-brand">PARK-DEOMES STUDIOS &nbsp;&middot;&nbsp; &copy; 2026 PARKDEOMES LLC</span>
       </a>
       <div class="footer-links">
@@ -2441,8 +2507,9 @@
   <script>
     // NAV scroll state
     const nav = document.getElementById('nav');
-    const onScroll = () => nav.classList.toggle('solid', window.scrollY > 64);
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('solid', window.scrollY > 64);
+    }, { passive: true });
 
     // REVEAL on scroll
     const reveals = document.querySelectorAll('.reveal');
@@ -2456,25 +2523,13 @@
     }, { threshold: 0.08, rootMargin: '0px 0px -48px 0px' });
     reveals.forEach(el => ro.observe(el));
 
-    // HERO CANVAS - broadcast signal particles
+    // HERO CANVAS — broadcast signal particles
     const canvas = document.getElementById('hero-canvas');
     const ctx = canvas.getContext('2d');
-
     const isDark = () => document.documentElement.getAttribute('data-theme') !== 'light';
-    const COLORS_DARK = [
-      [200, 146,  42],  // mascot gold
-      [232, 184,  75],  // gold light
-      [168, 181, 196],  // mascot gray
-      [232, 192, 184],  // mascot pink
-    ];
-    const COLORS_LIGHT = [
-      [160, 110,  26],  // gold dark
-      [200, 146,  42],  // gold base
-      [107, 122, 141],  // gray dark
-      [168, 140, 120],  // warm brown
-    ];
-    const COLORS = COLORS_DARK;
 
+    const COLORS_DARK  = [[200,146,42],[232,184,75],[168,181,196],[232,192,184]];
+    const COLORS_LIGHT = [[160,110,26],[200,146,42],[107,122,141],[168,140,120]];
     let W, H, pts;
 
     function resize() {
@@ -2489,10 +2544,11 @@
     }
 
     function mkPt() {
-      const c = COLORS[Math.floor(Math.random() * COLORS.length)];
+      const colors = isDark() ? COLORS_DARK : COLORS_LIGHT;
+      const c = colors[Math.floor(Math.random() * colors.length)];
       return {
-        x:  Math.random() * W,
-        y:  H + Math.random() * 40,
+        x: Math.random() * W,
+        y: H + Math.random() * 40,
         vx: (Math.random() - 0.5) * 0.28,
         vy: -(Math.random() * 0.45 + 0.08),
         r:  Math.random() * 1.4 + 0.2,
@@ -2506,7 +2562,6 @@
     function frame() {
       ctx.clearRect(0, 0, W, H);
 
-      // Subtle grid
       ctx.strokeStyle = 'rgba(30,43,62,0.35)';
       ctx.lineWidth = 0.4;
       const step = 60;
@@ -2517,31 +2572,26 @@
         ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
       }
 
-      // Radial glow center
-      const grd = ctx.createRadialGradient(W * 0.5, H * 0.55, 0, W * 0.5, H * 0.55, H * 0.7);
-      const r = isDark() ? 200 : 160, g = isDark() ? 146 : 110, b = isDark() ? 42 : 26;
-      grd.addColorStop(0,   `rgba(${r},${g},${b},0.07)`);
-      grd.addColorStop(0.4, `rgba(${r},${g},${b},0.03)`);
+      const ri = isDark() ? 200 : 160, gi = isDark() ? 146 : 110, bi = isDark() ? 42 : 26;
+      const grd = ctx.createRadialGradient(W*0.5, H*0.55, 0, W*0.5, H*0.55, H*0.7);
+      grd.addColorStop(0,   `rgba(${ri},${gi},${bi},0.07)`);
+      grd.addColorStop(0.4, `rgba(${ri},${gi},${bi},0.03)`);
       grd.addColorStop(1,   'rgba(0,0,0,0)');
       ctx.fillStyle = grd;
       ctx.fillRect(0, 0, W, H);
 
       pts.forEach((p, i) => {
         p.life += 0.006;
-        if (p.life >= p.maxLife || p.y < -12) {
-          pts[i] = mkPt(); return;
-        }
+        if (p.life >= p.maxLife || p.y < -12) { pts[i] = mkPt(); return; }
         const t = p.life / p.maxLife;
         const fade = Math.sin(t * Math.PI) * p.a;
         const [r, g, b] = p.c;
 
-        // Particle dot
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${r},${g},${b},${fade})`;
         ctx.fill();
 
-        // Short trail
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
         ctx.lineTo(p.x + p.vx * 10, p.y + p.vy * 10);
@@ -2561,33 +2611,34 @@
     frame();
 
     // THEME TOGGLE
-    const themeToggle  = document.getElementById('theme-toggle');
-    const themeIcon    = document.getElementById('theme-icon');
-    const root         = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon   = document.getElementById('theme-icon');
+    const root        = document.documentElement;
 
     function applyTheme(mode) {
       if (mode === 'light') {
         root.setAttribute('data-theme', 'light');
-        themeIcon.innerHTML = '&#9788;'; // sun
+        themeIcon.innerHTML = '&#9788;';
         localStorage.setItem('pd-theme', 'light');
       } else {
         root.removeAttribute('data-theme');
-        themeIcon.innerHTML = '&#9790;'; // moon
+        themeIcon.innerHTML = '&#9790;';
         localStorage.setItem('pd-theme', 'dark');
       }
     }
 
-    // Restore saved preference
     const saved = localStorage.getItem('pd-theme');
-    if (saved) applyTheme(saved);
-    else if (window.matchMedia('(prefers-color-scheme: light)').matches) applyTheme('light');
+    if (saved) {
+      applyTheme(saved);
+    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+      applyTheme('light');
+    }
 
     themeToggle.addEventListener('click', () => {
-      const isLight = root.getAttribute('data-theme') === 'light';
-      applyTheme(isLight ? 'dark' : 'light');
+      applyTheme(root.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
     });
 
-    // Smooth scroll for anchor links
+    // SMOOTH SCROLL
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       const href = a.getAttribute('href');
       if (href === '#') return;
