@@ -1,11 +1,11 @@
 [
   {
     "num": "001",
-    "file": "posts/001-the-wrong-question.md",
+    "file": "/posts/001-the-wrong-question.md",
     "title": "The Wrong Question",
     "date": "March 2026",
     "tag": "Origins",
     "excerpt": "I spent years asking the wrong question. The right one was simpler, and scarier.",
-    "image": "assets/VOID-C.png"
+    "image": "/assets/VOID-C.png"
   }
 ]
