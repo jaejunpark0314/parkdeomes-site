@@ -1404,7 +1404,13 @@
       color: var(--accent);
       display: flex;
       align-items: center;
-      gap: 7px;
+      flex-direction: row;
+    }
+    .music-label-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex: 1;
     }
 
     .music-player-label::before {
@@ -1425,10 +1431,62 @@
       letter-spacing: 0.04em;
     }
 
+
+    .music-player-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .music-seek-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .music-seek {
+      -webkit-appearance: none;
+      appearance: none;
+      flex: 1;
+      height: 3px;
+      background: rgba(var(--accent-rgb), 0.2);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .music-seek::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+    }
+
+    .music-seek::-moz-range-thumb {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: none;
+      cursor: pointer;
+    }
+
+    .music-time-end {
+      font-family: var(--f-body);
+      font-size: 11px;
+      color: var(--txt-2);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
     .music-controls {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      width: 100%;
     }
 
     .music-btn {
@@ -1469,39 +1527,39 @@
     .music-mute-btn:hover { color: var(--accent); }
 
     .music-volume-wrap {
-      flex: 1;
+      flex: 0 0 auto;
+      width: 80px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .music-volume {
       -webkit-appearance: none;
       appearance: none;
       width: 100%;
-      height: 3px;
-      background: rgba(var(--accent-rgb), 0.2);
+      height: 4px;
       border-radius: 2px;
       outline: none;
       cursor: pointer;
+      background: linear-gradient(
+        to right,
+        var(--accent) 0%,
+        var(--accent) calc(var(--vol-pct, 60%) * 1%),
+        rgba(var(--accent-rgb), 0.2) calc(var(--vol-pct, 60%) * 1%),
+        rgba(var(--accent-rgb), 0.2) 100%
+      );
     }
-
     .music-volume::-webkit-slider-thumb {
       -webkit-appearance: none;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--accent);
-      cursor: pointer;
+      width: 0;
+      height: 0;
     }
-
     .music-volume::-moz-range-thumb {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--accent);
+      width: 0;
+      height: 0;
       border: none;
-      cursor: pointer;
+      background: transparent;
     }
 
     .music-time {
@@ -2639,27 +2697,37 @@
           <div class="world-music-col">
             <div class="music-player" id="music-player">
               <div class="music-player-label">
-                BGM
-                <div class="music-eq">
-                  <span></span><span></span><span></span><span></span>
+                <div class="music-label-left">
+                  BGM
+                  <div class="music-eq">
+                    <span></span><span></span><span></span><span></span>
+                  </div>
+                </div>
+                <div class="music-volume-wrap">
+                  <button class="music-mute-btn" id="music-mute-btn" aria-label="음소거">
+                    <svg width="14" height="12" viewBox="0 0 16 14" fill="currentColor" id="volume-icon">
+                      <path d="M2 4.5H0v5h2l4 3.5V1L2 4.5z"/>
+                      <path d="M10 2.5c1.7 1.2 2.5 2.8 2.5 4.5s-.8 3.3-2.5 4.5" stroke="currentColor" fill="none" stroke-width="1.2" stroke-linecap="round"/>
+                      <path d="M12.5.5c2.2 1.7 3.5 4 3.5 6.5s-1.3 4.8-3.5 6.5" stroke="currentColor" fill="none" stroke-width="1.2" stroke-linecap="round" id="vol-outer"/>
+                    </svg>
+                  </button>
+                  <input type="range" class="music-volume" id="music-volume" min="0" max="1" step="0.02" value="0.6" style="--vol-pct:60" aria-label="볼륨">
                 </div>
               </div>
-              <p class="music-player-title">JJ Park's: Subscriber Zero Battle Music</p>
+              <!-- 타이틀 -->
+              <div class="music-player-top">
+                <p class="music-player-title">JJ Park's: Subscriber Zero Battle Music</p>
+              </div>
+              <!-- 하단: 재생(좌) + 구간 바 -->
               <div class="music-controls">
                 <button class="music-btn" id="music-play-btn" aria-label="재생/일시정지">
                   <svg width="12" height="14" viewBox="0 0 12 14" fill="currentColor"><polygon points="0,0 12,7 0,14" id="play-icon"/></svg>
                 </button>
-                <span class="music-time" id="music-time">0:00</span>
-              </div>
-              <div class="music-volume-wrap">
-                <button class="music-mute-btn" id="music-mute-btn" aria-label="음소거">
-                  <svg width="16" height="14" viewBox="0 0 16 14" fill="currentColor" id="volume-icon">
-                    <path d="M2 4.5H0v5h2l4 3.5V1L2 4.5z"/>
-                    <path d="M10 2.5c1.7 1.2 2.5 2.8 2.5 4.5s-.8 3.3-2.5 4.5" stroke="currentColor" fill="none" stroke-width="1.2" stroke-linecap="round"/>
-                    <path d="M12.5.5c2.2 1.7 3.5 4 3.5 6.5s-1.3 4.8-3.5 6.5" stroke="currentColor" fill="none" stroke-width="1.2" stroke-linecap="round" id="vol-outer"/>
-                  </svg>
-                </button>
-                <input type="range" class="music-volume" id="music-volume" min="0" max="1" step="0.02" value="0.6" aria-label="볼륨">
+                <div class="music-seek-wrap">
+                  <span class="music-time" id="music-time">0:00</span>
+                  <input type="range" class="music-seek" id="music-seek" min="0" max="100" step="0.1" value="0" aria-label="구간">
+                  <span class="music-time-end" id="music-time-end">0:00</span>
+                </div>
               </div>
               <audio id="battle-music" preload="metadata" loop>
                 <source src="assets/battle_music.wav" type="audio/wav">
@@ -3101,18 +3169,25 @@
           if (audio.muted || audio.volume === 0) {
             audio.muted = false;
             audio.volume = lastVolume > 0 ? lastVolume : 0.6;
-            if (volSlider) volSlider.value = audio.volume;
+            if (volSlider) { volSlider.value = audio.volume; }
             updateVolumeIcon(false);
+            updateVolBar(audio.volume);
           } else {
             lastVolume = audio.volume;
             audio.muted = true;
             if (volSlider) volSlider.value = 0;
             updateVolumeIcon(true);
+            updateVolBar(0);
           }
         });
       }
 
       // 볼륨 슬라이더: 드래그 시 음소거 상태 자동 반영
+      function updateVolBar(v) {
+        if (volSlider) volSlider.style.setProperty('--vol-pct', v * 100);
+      }
+      updateVolBar(audio.volume);
+
       if (volSlider) {
         volSlider.addEventListener('input', () => {
           const v = parseFloat(volSlider.value);
@@ -3120,7 +3195,44 @@
           audio.muted = (v === 0);
           if (v > 0) lastVolume = v;
           updateVolumeIcon(v === 0);
+          updateVolBar(v);
         });
+      }
+
+      // Seek bar
+      const seekBar   = document.getElementById('music-seek');
+      const timeEl    = document.getElementById('music-time');
+      const timeEndEl = document.getElementById('music-time-end');
+
+      function fmtTime(s) {
+        if (isNaN(s)) return '0:00';
+        const m = Math.floor(s / 60);
+        const sec = Math.floor(s % 60);
+        return m + ':' + String(sec).padStart(2, '0');
+      }
+
+      audio.addEventListener('loadedmetadata', () => {
+        if (seekBar) { seekBar.max = 100; seekBar.value = 0; }
+        if (timeEndEl) timeEndEl.textContent = fmtTime(audio.duration);
+      });
+
+      audio.addEventListener('timeupdate', () => {
+        if (!audio.duration) return;
+        const pct = (audio.currentTime / audio.duration) * 100;
+        if (seekBar && !seekBar._seeking) seekBar.value = pct;
+        if (timeEl) timeEl.textContent = fmtTime(audio.currentTime);
+      });
+
+      if (seekBar) {
+        seekBar.addEventListener('mousedown',  () => { seekBar._seeking = true; });
+        seekBar.addEventListener('touchstart', () => { seekBar._seeking = true; }, { passive: true });
+        seekBar.addEventListener('input', () => {
+          if (!audio.duration) return;
+          audio.currentTime = (parseFloat(seekBar.value) / 100) * audio.duration;
+          if (timeEl) timeEl.textContent = fmtTime(audio.currentTime);
+        });
+        seekBar.addEventListener('mouseup',  () => { seekBar._seeking = false; });
+        seekBar.addEventListener('touchend', () => { seekBar._seeking = false; }, { passive: true });
       }
 
       audio.addEventListener('ended', () => updatePlayIcon(false));
