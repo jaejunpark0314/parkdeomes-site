@@ -38,5 +38,15 @@
     "tag": "Building",
     "excerpt": "The code was correct. The file loaded. The player was active. The music wasn't playing.",
     "image": "/assets/AURORA-C.png"
+  },
+  {
+    "num": "005",
+    "file": "/posts/005-why-i-chose-the-streaming-angle.md",
+    "title": "Why I Chose the Streaming Angle",
+    "date": "March 2026",
+    "published": "2026-03-17",
+    "tag": "Design",
+    "excerpt": "Before there was a game, there was a chat window. The genre came later.",
+    "image": "/assets/RELAY-C.png"
   }
 ]
