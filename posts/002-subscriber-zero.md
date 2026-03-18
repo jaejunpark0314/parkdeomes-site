@@ -21,7 +21,7 @@ I read it twice. Then I closed the tab and started building the story around the
 
 ---
 
-This is probably backwards. Most developers start with a world, then find a title. I started with a title and reverse-engineered everything else. The lore, the narrator, the mechanic where your viewer count functions as a secondary resource — all of it grew out of two words that an AI generated in about four seconds.
+This is probably backwards. Most developers start with a world, then find a title. I started with a title and reverse-engineered everything else. The lore, the narrator, the mechanic where your viewer count functions as a secondary resource. All of it grew out of two words that an AI generated in about four seconds.
 
 I am not sure what that says about me. I am not sure what it says about AI. I am choosing not to think about it too hard.
 
@@ -29,7 +29,7 @@ What I do know is that the name worked. And the reason it worked is something I 
 
 ---
 
-There is a character in the game called V40. He was the fortieth member of a forty-person raid — the largest organized expedition ever to enter the portal — and he never came back. He was also the most famous streamer in the game's world, with 3.2 million subscribers, and in his final broadcast, just before descending into the fourth zone alone, he said something.
+There is a character in the game called V40. He was the fortieth member of a forty-person raid, the largest organized expedition ever to enter the portal, and he never came back. He was also the most famous streamer in the game's world, with 3.2 million subscribers, and in his final broadcast, just before descending into the fourth zone alone, he said something.
 
 *"If I broadcast this, I'll probably lose all my subscribers. Subscriber Zero. That's where I'll be."*
 
@@ -41,7 +41,7 @@ The second thing I felt was that it was exactly right.
 
 ---
 
-Streaming culture has a specific pathology that I find fascinating and a little disturbing. The logic of the platform — maximize engagement, grow the number, protect the algorithm — quietly shapes what creators will and won't say. Most people don't notice it happening. The pressure is ambient. It doesn't announce itself.
+Streaming culture has a specific pathology that I find fascinating and a little disturbing. The logic of the platform, maximize engagement, grow the number, protect the algorithm, quietly shapes what creators will and won't say. Most people don't notice it happening. The pressure is ambient. It doesn't announce itself.
 
 V40's declaration is a refusal of that logic. He is choosing the truth over the number. He is choosing zero over growth.
 
@@ -57,7 +57,7 @@ They won't be wrong. But they also won't have the full picture.
 
 The full picture arrives at the end, in a cutscene, in a line of dialogue spoken by someone who made a choice before the game's story began. When that line lands, the title shifts. It stops being atmospheric and becomes specific. The two words mean something different than they did on the store page.
 
-That's the game I want to make. The core loop is simple and satisfying — card drafting, pressure management, enemy patterns to learn. The story runs underneath it, quiet and strange, dropping small pieces in places you almost miss. And then at the end, the pieces lock together.
+That's the game I want to make. The core loop is simple and satisfying. Card drafting, pressure management, enemy patterns to learn. The story runs underneath it, quiet and strange, dropping small pieces in places you almost miss. And then at the end, the pieces lock together.
 
 Undertale did this. The moment you understand what "Determination" actually means is different from every other moment in the game. It reframes the whole thing.
 
