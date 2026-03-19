@@ -1,79 +1,79 @@
-# AAA가 가르쳐준 것과 버려야 했던 것
+# What AAA Taught Me to Unlearn
 
 ---
 
 ## I.
 
-무언가를 세상에 내놓고 그것이 착지하는 걸 지켜볼 때 오는 특유의 감각이 있다.
+There is a specific kind of feeling that comes from putting something into the world and watching it land.
 
-완성의 감각이 아니다. 완성은 그 자체의 것이다. 안쪽으로 무너지는 종류의 안도감. 내가 말하는 건 다른 감각이다. 한 번도 만난 적 없는 누군가가 내가 만든 것과 처음 만나 반응하는 순간. 그 도파민은 직업적 삶에서 다른 거의 모든 것과 다르다. 그게 수십 년의 긴 야근과 조직의 혼돈, 런칭 2주 전에 취소되는 프로젝트를 겪으면서도 사람들이 이 업계에 남게 만드는 것이다.
+Not the feeling of finishing. Finishing is its own thing, a kind of relief that collapses inward. I mean the other feeling. The moment a real person, someone you have never met, encounters something you made and reacts to it. The dopamine of that is different from almost anything else in professional life. It is the thing that makes people stay in this industry across decades of long hours and organizational chaos and projects that get cancelled two weeks before launch.
 
-나는 그 감각을 오랫동안 느끼지 못했다.
+I had not felt it in a long time.
 
-이걸 제대로 깨달은 건, 새벽 1시에 Godot 앞에 앉아 게임의 약 8퍼센트쯤 되는 프로토타입을 누군가에게 보여줬을 때였다. 포커스 그룹이 아니었다. 이해관계자도 아니었다. 그냥 한 사람이었다. 그 사람이 몸을 앞으로 기울였다.
+I did not fully realize this until I was sitting in front of Godot at one in the morning with a prototype that was approximately eight percent of a game, and I showed it to someone. Not a focus group. Not a stakeholder. A person. And they leaned forward.
 
-그 순간, 내가 무엇을 놓치고 있었는지 이해했다. 그리고 동시에, AAA에서 보낸 세월이 나를 얼마나 철저하게 그 감각을 불신하도록 훈련시켰는지도.
+That was the moment I understood what I had been missing. And it was also the moment I understood how badly my AAA years had trained me to distrust that feeling entirely.
 
 ---
 
 ## II.
 
-대형 게임 조직에서 만들어지는 습관들은 우연이 아니다. 적응이다. 수백 명이 함께 일하고, 예산이 8자리 숫자로 측정되고, 런칭 윈도우가 18개월 전에 확정된 프로젝트에서 일하면, 아주 빠르게 배운다. 감각은 신뢰할 수 있는 입력값이 아니다. 데이터가 신뢰할 수 있는 입력값이다. 프로세스가. 팀 전체의 정렬이.
+The habits that get built in large game organizations are not accidents. They are adaptations. When you are working on a project with hundreds of people, a budget measured in eight figures, and a launch window that was locked in eighteen months ago, you learn very quickly that feelings are not a reliable input. Data is. Process is. Alignment across teams is.
 
-규모로 생각하는 게 습관이 됐다. 철학이 아니라 반사 반응으로. 만 명의 플레이어를 즐겁게 할 기능은, 게임에 오백만 명이 있다면 흥미롭지 않다. 인디 런칭에서는 분명히 효과가 있을 마케팅 이니셔티브도 AAA 캠페인에서는 노이즈다. 질문은 항상 같다. 지금 우리가 운영하는 규모에서 이게 의미 있나?
+I learned to think in scale. Not as a philosophy, but as a reflex. A feature that would delight ten thousand players is not interesting if the game has five million. A marketing initiative that would move the needle for an indie launch is noise in an AAA campaign. The question is always: does this matter at the size we are operating at?
 
-데이터와 함께 움직이는 것도 배웠다. 데이터 이후가 아니라, 함께. 캠페인 방향이 맞는 것 같다는 느낌으로 승인하지 않는다. 테스트한다. 숫자를 본다. 조정한다. 좋은 직감이더라도 직감으로 행동하려는 본능은 수년에 걸쳐 체계적으로 억제된다. 직감은 규모에서 프로젝트가 틀어지는 방식이니까.
+I also learned to move with data. Not after the data. With it. You do not greenlight a campaign direction because it feels right. You test it. You look at the numbers. You adjust. The instinct to act on a hunch, even a good hunch, gets systematically suppressed over years because hunches are how projects go off-course at scale.
 
-이것들은 발달한 맥락 안에서는 나쁜 습관이 아니다. 정확히 맞는 습관이다. 문제는 끄는 스위치가 없다는 것이다.
+These are not bad habits in the context where they developed. They are exactly the right habits. The problem is that they do not come with an off switch.
 
 ---
 
 ## III.
 
-이 습관들이 문제가 된 순간은 극적이지 않았다. 스스로를 알리지도 않았다.
+The moment they became a problem was not dramatic. It did not announce itself.
 
-그냥 계속 아무것도 만들지 못했다.
+I just kept not making things.
 
-아이디어가 있었다. 디자인 감각도, 장르 지식도, 세계관 개념도 있었다. 없었던 건 데이터였다. 검증된 시장 신호가 없었다. 시간 투자를 정당화하는 비교 타이틀의 특정 성과 기준도 없었다. 나 자신을 승인할 수가 없었다. 통과할 승인 구조가 없었으니까.
+I had the idea for this game. I had the design instinct, the genre knowledge, the world concept. What I did not have was data. I did not have a validated market signal. I did not have comparable titles performing at a specific threshold that justified the investment of time. I could not greenlight myself because I had no approval structure to greenlight through.
 
-그래서 분석했다. 문서를 만들었다. 경쟁사를 조사했다. 무언가를 만들기로 하는 결정을 대형 캠페인 투자와 동일한 수준의 엄밀함이 필요한 결정으로 다뤘다.
+And so I analyzed. I built documents. I researched competitors. I treated the decision to make something as a decision that required the same rigor as a major campaign investment.
 
-이게 이 블로그 첫 편에서 설명한 함정이다. 개인적인 질문 대신 시장조사 질문. 하지만 지금은 더 깊은 메커니즘을 이름 붙이고 싶다. 왜냐면 이걸 이해하는 데는 틀린 질문을 하고 있다는 걸 깨닫는 것 이상이 필요했기 때문이다. 왜 내가 계속 그 질문을 먼저 집어들었는지를 이해해야 했다.
+This is the trap I described in the first entry of this blog. The market research question instead of the personal one. But I want to name the deeper mechanism now, because understanding it required more than recognizing that I was asking the wrong question. It required understanding why I kept reaching for that question in the first place.
 
-규모 반사 반응이 작음을 의미 없음으로 만들어버렸다. 일정 수의 플레이어, 일정한 매출 결과, 일정한 시장 포지션을 예측할 수 없으면, 전체가 의미 없는 것처럼 느껴졌다. 누군가 프로토타입 앞에서 몸을 기울이는 것은 신호로 읽히지 않았다. 일화로 읽혔다.
+The scale reflex had made small feel meaningless. If I could not project a certain number of players, a certain revenue outcome, a certain market position, the whole thing felt like it did not matter. One person leaning forward over a prototype did not register as signal. It registered as anecdote.
 
-아무것도 만들지 않는 데 매우 효과적인 방법이다.
+That is a very effective way to never make anything.
 
 ---
 
 ## IV.
 
-예상하지 못했던 것은 이것이다.
+Here is what I did not expect.
 
-그 습관들을 만든 것과 같은 세월이, 실제로 쓸모 있는 것들도 만들어놨다. "전문 스킬이 이전됐다"는 식이 아니다. 나를 놀라게 한 방식으로.
+The same years that built those habits also built things that turned out to be genuinely useful. Not in a "I had transferable skills" way. In a way that surprised me.
 
-런칭 전략이 본능으로 돌아왔다. 게임이 플레이어에게 어떻게 닿는지, 윈도우가 어떻게 생겼는지, 출시 전 정보를 어떤 순서로 내보내야 하는지, 수년을 생각해온 것들이다. 이걸 처음부터 배울 필요가 없었다. JJ Park's: Subscriber Zero™를 어떻게 포지셔닝할지, 누구를 위한 게임인지, 어떻게 이야기될지 생각할 때, 쌓는 데 몇 년이 걸린 프레임워크가 있다. 대부분의 첫 개발자들은 게임을 만들면서 동시에 이걸 배운다. 나는 그렇지 않다.
+Launch strategy came back as instinct. I have spent years thinking about how games reach players, what the window looks like, how to sequence information in the lead-up to release. I did not have to learn any of that from scratch. When I think about how JJ Park's: Subscriber Zero™ will be positioned, who it is for, how it will be talked about, I have a framework that took years to build. Most first-time developers are figuring this out at the same time they are building the game. I am not.
 
-대형 프로젝트 구조를 읽는 시야도 이전됐다. 이 게임의 아키텍처를 볼 때, 전체의 형태를 보면서 어디에 빈틈이 있는지 추적할 수 있다. 어떤 시스템이 기둥이고 어떤 게 장식인지 안다. 대략 무엇이 남아 있고 그게 얼마나 걸릴지 안다. 이런 구조적 가시성은 대부분의 솔로 개발자들이 여러 프로젝트를 거치면서 천천히 얻는 것이다. 나는 첫날부터 그 버전을 갖고 있었다. 대형 프로덕션이 움직이는 걸 수년간 지켜본 것에서 빌린 것으로.
+The ability to read large project structures also transferred. When I look at this game's architecture, I can see the shape of it as a whole and track where the gaps are. I know which systems are load-bearing and which are decoration. I know roughly what is left and what it will take. This kind of structural visibility is something most solo developers acquire slowly, over multiple projects. I had a version of it from day one, borrowed from years of watching large productions move.
 
-그리고 시장에 대한 현실 감각. "만들면 사람들이 찾아줄 거야"라는 막연한 믿음은 애초에 내 선택지에 없었다. 게임이 실제로 어떻게 사람들에게 닿는지 너무 잘 알았으니까. 그게 때로는 불안의 원천이다. 하지만 명료함의 원천이기도 하다. 2026년 스팀에서 발견이 어떻게 작동하는지에 대한 환상 없이 만들고 있다. 계획을 갖고 만들고 있다.
+And the market realism. The vague belief that if you build it they will come was never available to me. I knew too much about how games actually reach people. That is sometimes a source of anxiety. But it is also a source of clarity. I am not building with illusions about what discovery looks like on Steam in 2026. I am building with a plan.
 
 ---
 
 ## V.
 
-프로토타입은 더 이상 게임의 8퍼센트가 아니다.
+The prototype is not eight percent of a game anymore.
 
-몸을 기울였던 그 사람은 결정을 내릴 때마다 머릿속에 있다. 데이터 포인트로서가 아니라. 내가 만든 것에 반응한 한 인간으로. 오랫동안 느끼지 못했던 그 감각이, 내가 가진 가장 중요한 입력값인 것으로 드러났다.
+The person who leaned forward is still in my head when I am making decisions. Not as a data point. As a human being who reacted to something I made. That feeling, the one I had not felt in a long time, turns out to be the most important input I have.
 
-규모 반사 반응은 아직 있다. 가끔 잡힌다. 이 단계에서는 필요 없는 검증을 위해 없는 수치를 찾으려는 손이 뻗을 때. 잡힐 때마다 다른 질문을 해보려 한다. "규모에서 이게 의미 있나"가 아니라 "누군가에게 이게 의미 있나".
+The scale reflex is still there. I catch it sometimes, reaching for a projection I cannot produce, trying to validate something that does not need validation at this stage. When I catch it I try to ask a different question. Not "does this matter at scale" but "does this matter to someone."
 
-한 사람이 몸을 기울이는 것으로 충분하다. 충분해야 한다.
+One person leaning forward is enough. It has to be.
 
-마케팅 뇌와 메이커 뇌는 더 이상 싸우지 않는다. 둘을 동시에 돌리는 법을 배우고 있다. 전자가 계획을 만든다. 후자가 그 계획이 왜 존재하는지를 상기시킨다.
+The marketing brain and the maker brain are not at war anymore. I am learning to run them in parallel. The first builds the plan. The second reminds me why the plan exists.
 
-둘 다 같은 곳에서 왔다. 그걸 갖고 무엇을 할지는 아직 배우는 중이다.
+Both of them came from the same place. I am still figuring out what to do with that.
 
 ---
 
-*본 글에서 언급된 모든 상표권은 각 소유권자에게 있으며, 논평 및 참조 목적으로만 사용되었습니다.*
+*All trademarks referenced are the property of their respective owners and are used for commentary purposes only.*

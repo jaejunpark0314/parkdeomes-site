@@ -96,6 +96,14 @@
       .posts-grid { grid-template-columns: 1fr; }
       .page-header h1 { font-size: 52px; }
     }
+
+    /* PAGINATION */
+    .pagination { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 48px 0 0; flex-wrap: wrap; }
+    .pg-btn { font-family: var(--f-ui); font-size: 12px; font-weight: 700; letter-spacing: .08em; min-width: 36px; height: 36px; padding: 0 10px; border: 1px solid var(--line-1); border-radius: 4px; background: none; color: var(--txt-1); cursor: pointer; transition: all .2s; display: flex; align-items: center; justify-content: center; }
+    .pg-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .pg-btn.active { border-color: var(--accent); background: var(--accent); color: var(--bg-0); }
+    .pg-btn:disabled { opacity: .3; cursor: default; pointer-events: none; }
+    .pg-sep { font-family: var(--f-ui); font-size: 12px; color: var(--txt-2); padding: 0 4px; }
   </style>
 </head>
 <body>
@@ -131,6 +139,7 @@
 
   <div class="posts-wrap">
     <div class="posts-grid" id="posts-grid"></div>
+    <div class="pagination" id="pagination"></div>
   </div>
 
   <footer>
@@ -168,8 +177,11 @@
       return Math.floor(diff/86400/365) + ' yr ago';
     }
 
+    const PER_PAGE = 6;
     let allPosts = [];
+    let filteredPosts = [];
     let currentFilter = 'all';
+    let currentPage = 1;
 
     function buildCard(post) {
       const ago = post.published ? timeAgo(post.published) : '';
@@ -197,24 +209,77 @@
       return card;
     }
 
-    function renderPosts(posts) {
+    function renderPagination(totalPages) {
+      const pg = document.getElementById('pagination');
+      pg.innerHTML = '';
+      if (totalPages <= 1) return;
+
+      function btn(label, page, isActive, isDisabled) {
+        const b = document.createElement('button');
+        b.className = 'pg-btn' + (isActive ? ' active' : '');
+        b.textContent = label;
+        b.disabled = isDisabled;
+        if (!isDisabled) b.addEventListener('click', () => goToPage(page));
+        return b;
+      }
+      function sep() {
+        const s = document.createElement('span');
+        s.className = 'pg-sep';
+        s.textContent = '...';
+        return s;
+      }
+
+      // Prev arrow
+      pg.appendChild(btn('←', currentPage - 1, false, currentPage === 1));
+
+      // First page always
+      pg.appendChild(btn('1', 1, currentPage === 1, false));
+
+      // Sep if needed
+      if (currentPage > 3) pg.appendChild(sep());
+
+      // Middle pages
+      for (let p = Math.max(2, currentPage - 1); p <= Math.min(totalPages - 1, currentPage + 1); p++) {
+        pg.appendChild(btn(String(p), p, currentPage === p, false));
+      }
+
+      // Sep if needed
+      if (currentPage < totalPages - 2) pg.appendChild(sep());
+
+      // Last page always (if more than 1)
+      if (totalPages > 1) pg.appendChild(btn(String(totalPages), totalPages, currentPage === totalPages, false));
+
+      // Next arrow
+      pg.appendChild(btn('→', currentPage + 1, false, currentPage === totalPages));
+    }
+
+    function goToPage(page) {
+      currentPage = page;
       const grid = document.getElementById('posts-grid');
       const count = document.getElementById('post-count');
+      const start = (page - 1) * PER_PAGE;
+      const slice = filteredPosts.slice(start, start + PER_PAGE);
       grid.innerHTML = '';
-      if (!posts.length) {
-        grid.innerHTML = '<div class="empty-state">No entries yet.</div>';
-        count.textContent = '';
-        return;
-      }
-      posts.forEach(p => grid.appendChild(buildCard(p)));
-      count.textContent = posts.length + ' ' + (posts.length === 1 ? 'entry' : 'entries');
+      slice.forEach(p => grid.appendChild(buildCard(p)));
+      const totalPages = Math.ceil(filteredPosts.length / PER_PAGE);
+      renderPagination(totalPages);
+      count.textContent = filteredPosts.length + ' ' + (filteredPosts.length === 1 ? 'entry' : 'entries');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function applyFilter(tag) {
       currentFilter = tag;
+      currentPage = 1;
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === tag));
-      const filtered = tag === 'all' ? allPosts : allPosts.filter(p => p.tag.toLowerCase() === tag.toLowerCase());
-      renderPosts(filtered);
+      filteredPosts = tag === 'all' ? allPosts.slice().reverse() : allPosts.slice().reverse().filter(p => p.tag.toLowerCase() === tag.toLowerCase());
+      const grid = document.getElementById('posts-grid');
+      if (!filteredPosts.length) {
+        grid.innerHTML = '<div class="empty-state">No entries yet.</div>';
+        document.getElementById('post-count').textContent = '';
+        document.getElementById('pagination').innerHTML = '';
+        return;
+      }
+      goToPage(1);
     }
 
     document.querySelectorAll('.filter-btn').forEach(b => {

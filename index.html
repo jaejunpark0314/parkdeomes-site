@@ -3268,7 +3268,8 @@
         if (!res.ok) throw new Error('index.json not found');
         const posts = await res.json();
         DEVLOG_GRID.innerHTML = '';
-        posts.forEach(post => DEVLOG_GRID.appendChild(buildCard(post)));
+        const latest = posts.slice().reverse().slice(0, 3);
+        latest.forEach(post => DEVLOG_GRID.appendChild(buildCard(post)));
 
         // re-trigger reveal observer for newly added cards
         DEVLOG_GRID.querySelectorAll('.devlog-card').forEach(el => {
