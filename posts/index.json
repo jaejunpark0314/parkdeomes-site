@@ -58,5 +58,15 @@
     "tag": "Origins",
     "excerpt": "I hadn't felt the dopamine of shipping something in a long time. I didn't realize how much that had cost me until a stranger leaned forward.",
     "image": "/assets/neutral_consecutive_strike.png"
+  },
+  {
+    "num": "007",
+    "file": "/posts/007-the-character-who-plays-itself.md",
+    "title": "The Character Who Plays Itself",
+    "date": "March 2026",
+    "published": "2026-03-20",
+    "tag": "World",
+    "excerpt": "Three characters. One dungeon. And a mechanic that says AURORA is strongest when no one is watching.",
+    "image": "/assets/zone2_merchant.png"
   }
 ]
